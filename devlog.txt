@@ -4,5 +4,8 @@ Creation of submodule
 alanC, angelaY, juliusF, stephanieY -- 2017-05-10
 Work on design doc
 
-angelaY -- 2017-05-12
+angelaY -- 2017-05-11
 Devlog
+
+stephanieY -- 2017-05-11
+Created files/directories
