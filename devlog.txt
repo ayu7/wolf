@@ -9,3 +9,4 @@ Devlog
 
 stephanieY -- 2017-05-11
 Created files/directories
+Started writing a list operations to make in math.py in comments
