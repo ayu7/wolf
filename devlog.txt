@@ -10,3 +10,44 @@ Devlog
 stephanieY -- 2017-05-11
 Created files/directories
 Started writing a list operations to make in math.py in comments
+
+stephanieY -- 2017-05-14
+Operations Included:
+- vector addition
+- vector subraction
+- multiplication of a vector by a scalar
+- matrix addition
+- matrix subtraction
+- multiplication of a matrix by a scalar
+- dot product
+- row slice
+- column slice
+- number of rows
+- number of columns
+- matrix multiplication
+- trace
+- transpose
+- vector Euclidean norm
+- complex conjugate of a number
+- complex conjugate of a vector
+- complex conjugate of a matrix
+- conjugate transpose
+- Frobenius norm (ie, matrix Euclidean norm)
+- first minor of a square matrix
+- cofactor of a square matrix
+- determinant of a square matrix
+- cofactor matrix
+- adjoint of a square matrix
+- inverse of a square matrix
+- identity matrix of size n
+- power of a matrix
+- system of linear equations solver
+
+Operations Checklist:
+- cross product of vectors in 3-space???
+- Gaussian elimination
+- rank
+- eigenvalues, eigenvectors
+- Cholesky decomposition
+- check for invertibility
+- check for full rank
