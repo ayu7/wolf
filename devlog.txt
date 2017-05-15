@@ -51,3 +51,16 @@ Operations Checklist:
 - Cholesky decomposition
 - check for invertibility
 - check for full rank
+
+freyraJ -- 2017-05-14
+Basic redirection in app.py
+- Need more clarification on how input from html will be to create
+  submission functions
+- Will look at image submission work from previous projects for help
+
+Basic Mathpix API call in mathpix.py
+- Need to figure out standard for LaTex conversion
+
+Finished Matrix/Vector Conversion
+- Converts LaTex matrices to 2D arrays
+- Converts LaTex vectors to arrays
