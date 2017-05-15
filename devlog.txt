@@ -65,7 +65,12 @@ Finished Matrix/Vector Conversion
 - Converts LaTex matrices to 2D arrays
 - Converts LaTex vectors to arrays
 
+alanC -- 2017-05-14
+- Set up basic HTML templates (home.html, type.html)
+- Discussed upload methods for upload.html
+
 angelaY -- 2017-05-15
 - Began work on draw.js & added things in draw.html in order to test
 - Adapted work from canvas, concept: animate while mousedown then stop when mouse up
 - Does not work :(
+
