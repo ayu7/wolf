@@ -36,12 +36,29 @@ def matrixConvert(latex):
         split = latex.split(r"\\\\")
         return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
 
-# Broken ATM but on the right track
+# Works
+# problems of note:
+#  - amount of backslashes is variable, find a way to standardize
+#  - different latex syntax is given from mathpix than recent update
+#     - Mathpix: r"\\begin{array} ... \\end{array}"
+#     - Everyone else: r"\begin{bmatrix} ... \end{bmatrix}"
+#  - sanitation of content of an array:
+#     - This is an array:     r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"
+#     - This is not an array: r"\\left[ \\begin{array} not correct content \\end{array} \\right]"
+#     - Current parser cannot tell the difference
+# possible solutions:
+#     - Sanitize/standardize then parse
+#     - Visitor object/function: google this
+#     - Two different functions for mathpix parsing and everyone else parsing
+
 def matrixFilter(string):
     try:
-        return [string[string.index(r"\\begin{array}"):string.index(r"\\end{array}")],matrixFilter(string[string.index(r"\\end{array}"):])]
+        if(len(string)):
+            return [string[string.index(r"\\begin{array}"):string.index(r"\\end{array}")]] + matrixFilter(string[string.index(r"\\end{array}")+12:])
+        else:
+            return []
     except:
-        return
+        return [] # concatenating a None to a list will nullify the list wtf
    
 def latexConvert(latex,op):
     string = latex
@@ -50,5 +67,5 @@ def latexConvert(latex,op):
     # cases include different combinations of inputs
     return parsed
 
-string = matrixFilter(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right] \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]")
+string = matrixFilter(r"\\begin{array} \\end{array}")
 print string
