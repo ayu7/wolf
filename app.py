@@ -5,6 +5,7 @@ import json
 app = Flask(__name__)
 
 @app.route("/")
+@app.route("/home")
 def index():
     return render_template("home.html")
 
@@ -19,6 +20,10 @@ def type():
 @app.route("/upload")
 def upload():
     return render_template("upload.html")
+
+@app.route("/operations")
+def operations():
+    return render_template("operations.html")
 
 # Turn off before release
 if __name__ == "__main__":
