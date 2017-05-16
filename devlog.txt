@@ -85,3 +85,7 @@ stephanieY -- 2017-05-15
 juliusF -- 2017-05-15
 - Working on matrix filter
 - Retroactive devlog fix
+
+angelaY -- 2017-05-15
+- functional drag and draw but there are gaps if you go to fast
+- attempting to fix by keeping track of prevX and prevY
