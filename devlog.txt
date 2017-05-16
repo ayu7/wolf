@@ -79,4 +79,4 @@ stephanieY -- 2017-05-15
 - Rewrote home.html to use bootstrap, modified content.
 - Need to make another page to list out operations.
 - Added basic.html (that way the other templates can extend basic.html)
-- Wrote operations.html (a page that informs the user what operations are supported by wolframBeta)
+- Wrote operations.html with sample text (a page that informs the user what operations are supported by wolframBeta) but need to actually edit content later.
