@@ -23,15 +23,23 @@ var animate=function(e){
   var draw= function(){
     console.log(requestID);
     
-    while(x!=prevX){
-	prevX++;
-	 boxy.fillRect(prevX,y,5,5);
-    boxy.fill();
+    while(x!=prevX || y!=prevY){
+	if (prevX>x){
+	    prevX--;}
+	else
+	    prevX++;
+
+	if (prevY>y){
+	    prevY--;}
+	else
+	    prevY++;
+	
+	boxy.fillRect(prevX,prevY,5,5);
+	boxy.fill();
     }
     
-    boxy.fillRect(x,y,5,5);
-    boxy.fill();
-   
+   boxy.fillRect(x,y,5,5);
+   boxy.fill();
      
     requestID=window.requestAnimationFrame(draw);
     };
