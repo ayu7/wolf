@@ -27,16 +27,28 @@ def matrixConvert(latex):
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
     # example vector
     # \\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]
-    
+   
     # if contains '\\\\': matrix else vector
 
     if r"\\\\" not in latex:
-        return [int(x) for x in latex if isInt(x)] 
+        return [int(x) for x in latex if isInt(x)]
     else:
         split = latex.split(r"\\\\")
         return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
 
-    
-def latexConvert(latex):
+# Broken ATM but on the right track
+def matrixFilter(string):
+    try:
+        return [string[string.index(r"\\begin{array}"):string.index(r"\\end{array}")],matrixFilter(string[string.index(r"\\end{array}"):])]
+    except:
+        return
+   
+def latexConvert(latex,op):
+    string = latex
     parsed = ""
+    # utilize switch for operations
+    # cases include different combinations of inputs
     return parsed
+
+string = matrixFilter(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right] \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]")
+print string

@@ -2,50 +2,42 @@ var box= document.getElementById("box");
 var boxy=box.getContext("2d");
 var clear=document.getElementById("button");
 var stop=document.getElementById("stop");
-var requestID;
+var intervalID;
 boxy.fillStyle="black";
 
 var x,y;
-var prevX,prevY=0;
+var prevX=0;
+var prevY=0;
 
 var updateMouse=function(e){
-    prevX=x;
-    prevY=y;
+  //  prevX=x;
+   // prevY=y;
     x = e.pageX-this.offsetLeft;
     y = e.pageY- this.offsetTop;
+//    console.log(x);
+   // console.log(y);
 }
 
 
 var animate=function(e){
 
-  window.cancelAnimationFrame(requestID);
+  clearInterval(intervalID);
 
-  var draw= function(){
-    console.log(requestID);
-    
-    while(x!=prevX){
-	prevX++;
-	 boxy.fillRect(prevX,y,5,5);
-    boxy.fill();
-    }
-    
-    boxy.fillRect(x,y,5,5);
-    boxy.fill();
-   
+  var draw= function(){    
+   boxy.fillRect(x,y,5,5);
+   boxy.fill();
      
-    requestID=window.requestAnimationFrame(draw);
     };
 
-    draw();
+    intervalID=window.setInterval(draw,.0000001);
 };
 
 var stopIt=function(){
-    console.log(requestID);
-    window.cancelAnimationFrame(requestID);
+   clearInterval(intervalID);
 };
 
 var clearIt= function(e){
-  stopIt();
+  stopIt;
   e.preventDefault();
   boxy.clearRect(0,0,box.width, box.height);
   boxy.beginPath();
