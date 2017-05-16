@@ -1,25 +1,7 @@
-<!--<!DOCTYPE html>
-    <html>
-
-      <head>
-        <title> wolframBeta </title>
-      </head>
-
-      <body>
-        <center>
-          <h2> Type in your matrix below! </h2>
-
-          <form action="/" method="POST">
-	    <input type="text" name="input_matrix">
-	    <br>
-	    <input type="submit" value="Submit">
-        </center>
-      </body>
-
-    </html>-->
 {% extends "basic.html" %}
 {% block body %}
 <div class="row">
+
   <center>
     <div class="col-lg-4">
       <div class="dropdown">
@@ -28,16 +10,18 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
+	    <li>Add Vectors</li>
+	    <li>Subtract Vectors</li>
+            <li role="separator" class="divider"></li>
+	    <li>Add Matrix</li>
+	    <li>Subtract Matrix</li>
+	    <li>Dot Product</li>
+	    <li>Cross Product</li>
+	    <li>Scale Matrix</li>
+	    <li>Scale Vectors</li
         </ul>
       </div>
     </div>
   </center>
 </div>
-{% endblock %}
-
-
+{% endblock %} 
