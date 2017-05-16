@@ -81,3 +81,7 @@ stephanieY -- 2017-05-15
 - Added basic.html (that way the other templates can extend basic.html)
 - Wrote operations.html with sample text (a page that informs the user what operations are supported by wolframBeta) but need to actually edit content later.
 - working on type.html
+
+juliusF -- 2017-05-15
+- Working on matrix filter
+- Retroactive devlog fix
