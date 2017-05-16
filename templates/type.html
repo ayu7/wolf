@@ -1,26 +1,43 @@
 <!--<!DOCTYPE html>
-<html>
+    <html>
 
-  <head>
-    <title> wolframBeta </title>
-  </head>
+      <head>
+        <title> wolframBeta </title>
+      </head>
 
-  <body>
-    <center>
-      <h2> Type in your matrix below! </h2>
+      <body>
+        <center>
+          <h2> Type in your matrix below! </h2>
 
-      <form action="/" method="POST">
-	<input type="text" name="input_matrix">
-	<br>
-	<input type="submit" value="Submit">
-    </center>
-  </body>
+          <form action="/" method="POST">
+	    <input type="text" name="input_matrix">
+	    <br>
+	    <input type="submit" value="Submit">
+        </center>
+      </body>
 
-</html>-->
+    </html>-->
 {% extends "basic.html" %}
 {% block body %}
 <div class="row">
-  
+  <center>
+    <div class="col-lg-4">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Dropdown
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+    </div>
+  </center>
+</div>
 {% endblock %}
 
 
