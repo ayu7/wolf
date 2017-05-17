@@ -89,3 +89,6 @@ juliusF -- 2017-05-15
 angelaY -- 2017-05-15
 - functional drag and draw but there are gaps if you go to fast
 - attempting to fix by keeping track of prevX and prevY
+
+stephanieY -- 2017-05-16
+- Finished Gaussian elimination, rank, invertibility, and check for Hermitian matrix! Feeling good about this. The rest of the operations are optional!

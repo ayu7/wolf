@@ -1,5 +1,5 @@
 #import math
-#import cmath
+import cmath
 from collections import Iterable
 '''
 Operations Included:
@@ -10,37 +10,29 @@ Operations Included:
 - matrix subtraction
 - multiplication of a matrix by a scalar
 - dot product
-- row slice
-- column slice
-- number of rows
-- number of columns
 - matrix multiplication
 - trace
 - transpose
 - vector Euclidean norm
-- complex conjugate of a number
 - complex conjugate of a vector
 - complex conjugate of a matrix
 - conjugate transpose
 - Frobenius norm (ie, matrix Euclidean norm)
-- first minor of a square matrix
-- cofactor of a square matrix
 - determinant of a square matrix
 - cofactor matrix
 - adjoint of a square matrix
 - inverse of a square matrix
-- identity matrix of size n
 - power of a matrix
 - system of linear equations solver
+- Gaussian elimination
+- rank
+- check for invertibility
+- check for Hermitian matrix
 
 Operations Checklist:
 - cross product of vectors in 3-space???
-- Gaussian elimination
-- rank
 - eigenvalues, eigenvectors
 - Cholesky decomposition
-- check for invertibility
-- check for full rank
 
 A vector in n-space will be represented as a list of length n of numbers.
 A matrix in nxm-space will be represented as a list of length n of lists (each of length m) of numbers. Therefore, the matrix will have n rows and m columns.
@@ -175,9 +167,21 @@ def cofactor_matrix(A):
 def adjoint(A):
     return transpose(cofactor_matrix(A))
 
+# is_invertible: Returns true if given square matrix is invertible (boolean).
+def is_invertible(A):
+    return det(A) != 0 if num_rows(A) == num_cols(A) else "Matrix isn't square"
+
+# is_right_invertible: Returns true if a given matrix has a right inverse (boolean).
+def is_right_invertible(A):
+    return rank(A) == num_rows(A)
+
+# is_left_invertible: Returns true if a given matrix has a left inverse (boolean).
+def is_left_invertible(A):
+    return rank(A) == num_cols(A)
+
 # inverse: Returns the inverse of a square matrix (matrix).
 def inverse(A):
-    return m_scalar_mult((det(A))**(-1), adjoint(A)) #if isInvertible(A) else "Matrix isn't invertible."
+    return m_scalar_mult((det(A))**(-1), adjoint(A)) if is_invertible(A) else "Matrix isn't invertible."
 
 # matrix: Converts a vector into a form that can be multiplied by a matrix
 def matrix(v):
@@ -189,17 +193,104 @@ def vector(m):
 
 # system_solver: Solves Ax=b, where A is a matrix, x is the solution vector, and b is a vector. Returns the solution vector for a system of equations (vector)
 def system_solver(A, b):
-    return vector(m_mult(inverse(A), matrix(b))) #if isInvertible(A) and fullrank(A) else "Can't solve"
+    return vector(m_mult(inverse(A), matrix(b))) if is_invertible(A) else "Can't solve"
     # should replace with Cholesky decomposition?
 
 
+# argmax: Returns the index of the maximum element in an iterable, checking from indices k to m, f being the function that determines the function to apply to each element.
+def argmax(iterable, k, m, f):
+   return iterable.index(max(iterable[k:m], key=f))
 
+# swap: Given a matrix and two rows, swaps two rows in the matrix. Returns the matrix.
+def swap(A, r1, r2):
+    temp = A[r2]
+    A[r2] = A[r1][:]
+    A[r1] = temp[:]
+    return A
 
+# gauss: Gaussian elimination algorithm. Reduces a matrix to row echelon form. Returns the matrix.
+def gauss(A):
+    m = num_rows(A)
+    n = num_cols(A)
+    for k in range(min(m,n)): # going through columns, unless there aren't enough rows.
+        # checking to make sure that there isn't a whole column of zeroes
+        #print A
+        c = col(k,A)
+        #print "c: " + str(c)
+        imax = argmax(c, k, m, abs)
+        #print "imax: " + str(imax)
+        if A[imax][k] == 0:
+            #print A
+            #print "s"
+            return A
+        swap(A, k, imax) # to make sure that in the column and row we want there's a non-zero value
+        #print A
+        if A[k][k] < 0:
+            A[k] = v_scalar_mult(-1, A[k])
+        d = 1 / float(A[k][k])
+        A[k] = v_scalar_mult(d, A[k]) # now we have our 1
+        # iterate through the other rows to cancel out the numbers in the kth column
+        for j in range(m):
+            if j != k:
+                A[j] = v_add(A[j], v_scalar_mult(-A[j][k], A[k]))
+    return A
 
+# zero_rows: Given a row of a matrix, returns true if all of the elements are zero (boolean).
+def is_zero_row(r):
+    return len(list(filter(lambda x:x!=0, r))) == 0
+
+# rank: Given a matrix, returns its rank (the number of non-zero rows in reduce row echelon form) (number).
+def rank(A):
+    a = gauss(A)
+    return num_rows(a) - len(list(filter(is_zero_row, a)))
+
+# full_rank: Given a matrix, returns true if it has full rank (rank = 0) (boolean).
+def full_rank(A):
+    return rank(A) == 0
+
+# is_hermitian: Returns true if a given matrix is Hermitian (boolean).
+def is_hermitian(A):
+    return A == conjugate_transpose(A) if num_rows(A) == num_cols(A) else "Matrix not square"
 
 #################### TESTING FUNCTIONS ####################
 
 '''
+x1 = 2+1j
+x2 = 2-1j
+x3 = 1j
+x4 = -1j
+a = [[2, x1, 4],[x2, 3, x3,],[4, x4, 1]]
+print a
+print is_hermitian(a)
+
+print is_zero_row([0,0,0,0])
+print is_zero_row([0,1,0,0])
+a = [[1,3,1,9],[1,1,-1,1],[3,11,5,35]]
+print rank(a)
+
+
+a = [[1,3,1,9],[1,1,-1,1],[3,11,5,35]]
+gauss(a)
+#print a
+
+m =  num_rows(a)
+n = num_cols(a)
+print m
+print n
+k = 0
+c= col(k,a)
+print c
+imax = argmax(c, k, m, abs)
+print imax
+a = swap(a, k, imax)
+print a
+f = float(a[k+1][k])/a[k][k]
+print f
+a[k+1][k+1] = a[k+1][k+1] - a[k][k+1] * f
+print a
+
+#print gauss(a) # should return [[1,0,-2,-3],[0,1,1,4],[0,0,0,0]]
+
 print v_add([1,2,3], [4,5,6]) # should return [5,7,9]
 
 print v_scalar_mult(2.5, [1,2,3]) # should return [2.5, 5.0, 7.5]
@@ -277,6 +368,10 @@ print inverse([[1,-2,3],[5,8,-1],[2,1,1]]) # should return [[-0.9, 0.5, 2.2],[0.
 
 print system_solver([[1,-2,3],[5,8,-1],[2,1,1]], [9,-5,3]) # should return [1,-1,2]
 
+l = [1,2,-3,-4]
+print argmax(l, 1, 4, abs)
+
 '''
-a = [[1,3,1,9],[1,1,-1,1],[3,11,5,35]]
-#print gauss(a) # should return [[1,0,-2,-3],[0,1,1,4],[0,0,0,0]]
+
+
+
