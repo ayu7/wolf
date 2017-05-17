@@ -51,15 +51,23 @@ def matrixConvert(latex):
 #     - Visitor object/function: google this
 #     - Two different functions for mathpix parsing and everyone else parsing
 
-def matrixFilter(string):
+# Takes string of LaTex matrix or vector, outputs list of matrices in 
+def matrixFilter(string,lType):
+    if lType == 1:
+        begin = r"\\begin{array}"
+        end = r"\\end{array}"
+    else:
+        begin = r"\begin{bmatrix}"
+        end = r"\end{bmatrix}"
     try:
         if(len(string)):
-            return [string[string.index(r"\\begin{array}"):string.index(r"\\end{array}")]] + matrixFilter(string[string.index(r"\\end{array}")+12:])
+            return [string[string.index(begin):string.index(end)]] + matrixFilter(string[string.index(end)+len(end):])
         else:
             return []
     except:
         return [] # concatenating a None to a list will nullify the list wtf
-   
+
+# deprecated atm
 def latexConvert(latex,op):
     string = latex
     parsed = ""
@@ -69,3 +77,4 @@ def latexConvert(latex,op):
 
 string = matrixFilter(r"\\begin{array} \\end{array}")
 print string
+
