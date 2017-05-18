@@ -14,6 +14,7 @@ def query(image):
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
 
+################################################
 # Checks/Returns if 'a' is convertible to int
 def isInt(a):
     try:
@@ -35,7 +36,29 @@ def matrixConvert(latex):
     else:
         split = latex.split(r"\\\\")
         return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
+################################################
 
+################################################
+# finds matrix closest to the beginning of the string
+# returns tuple of strings to look for/slice with
+def findLType(string):
+    closestArr = 9999
+    ret = None
+    lTypeSet = [(r"\\begin{array}",r"\\end{array}"),
+                (r"\begin{bmatrix}",r"\end{bmatrix}"),
+                (r"\begin{vmatrix}",r"\end{vmatrix}"),
+                (r"\begin{Vmatrix}",r"\end{Vmatrix}")]
+
+    for i in lTypeSet:
+        try:
+            curInd = string.index(i[0])
+            if curInd < closestArr and curInd > 0:
+                print i
+                closestArr = string.index(r"\\begin{array}")
+                ret = i
+        except:
+            pass
+    return ret
 # Works
 # problems of note:
 #  - amount of backslashes is variable, find a way to standardize
@@ -52,7 +75,8 @@ def matrixConvert(latex):
 #     - Two different functions for mathpix parsing and everyone else parsing
 
 # Takes string of LaTex matrix or vector, outputs list of matrices in 
-def matrixFilter(string,lType):
+def matrixFilter(string):
+    lType = findLType(string)
     if lType == 1:
         begin = r"\\begin{array}"
         end = r"\\end{array}"
@@ -75,6 +99,8 @@ def latexConvert(latex,op):
     # cases include different combinations of inputs
     return parsed
 
-string = matrixFilter(r"\\begin{array} \\end{array}")
-print string
+string = findLType(r"\\begin{array}  asdsddgsdfg \\end{array}")
+asdf = r"\\begin{array} mroe stwusdf"
+print asdf.index(r"\\begin{array}")
+#print string
 
