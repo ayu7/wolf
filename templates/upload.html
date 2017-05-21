@@ -1,34 +1,57 @@
-<!DOCTYPE html>
-<html>
+{% extends "basic.html" %}
+{% block body %}
+<head>
+  <title> wolframBeta </title>
+</head>
 
-  <head>
-    <title> wolframBeta </title>
-  </head>
-
-  <body>
-    <center>
+<body>
+  <center>
+    <form action="/" method="post">
       <h2> Upload your input below! </h2>
 
-  	<select id="operationList">
-	  <option value="addvector">Add Vectors</option>
-	  <option value="subvector">Subtract Vectors</option>
-	  <option value="addmatrix">Add Matrices</option>
-	  <option value="submatrix">Subtract Matrices</option>
-	  <option value="dot">Dot Product</option>
-	  <!-- <option value="cross">Cross Product</option> -->
-	  <option value="scalvector">Multiply Vector By A Scalar</option>
-	  <option value="scalmatrix">Multiply Matrix By A Scalar</option>
-	</select>
+      <div class="col-lg-12">
+	<div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Choose Operation
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li>Add Vectors</li>
+	    <li>Subtract Vectors</li>
+            <li role="separator" class="divider"></li>
+	    <li>Add Matrix</li>
+	    <li>Subtract Matrix</li>
+            <li role="separator" class="divider"></li>
+	    <li>Dot Product</li>
+	    <li>Cross Product</li>
+            <li role="separator" class="divider"></li>
+	    <li>Scale Matrix</li>
+	    <li>Scale Vectors</li>
+	  </ul>
+	</div>
+      </div>
+      
+      <br><br>
 
-	<br><br>
+      <input type="file" name="input1">
+      <input type="file" name="input2">
+      <input type="submit" name="Submit">
+      
+    </form>
+  </center>
+</body>
 
-	<input type="file" name="input1"></input>
-   
-   	<input type="file" name="input2"></input>
-   
-    </center>
-  </body>
+{% endblock %}
 
-</html>
-
-
+<!-- OLD DROPDOWN MENU
+     <select id="operationList">
+       <option value="addvector">Add Vectors</option>
+       <option value="subvector">Subtract Vectors</option>
+       <option value="addmatrix">Add Matrices</option>
+       <option value="submatrix">Subtract Matrices</option>
+       <option value="dot">Dot Product</option>
+       <option value="cross">Cross Product</option> 
+       <option value="scalvector">Multiply Vector By A Scalar</option>
+       <option value="scalmatrix">Multiply Matrix By A Scalar</option>
+     </select> 
+     -->
