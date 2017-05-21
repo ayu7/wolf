@@ -10,26 +10,24 @@ var prevX=0;
 var prevY=0;
 
 var updateMouse=function(e){
-  //  prevX=x;
-   // prevY=y;
     x = e.pageX-this.offsetLeft;
     y = e.pageY- this.offsetTop;
-//    console.log(x);
-   // console.log(y);
 }
 
 
 var animate=function(e){
 
   clearInterval(intervalID);
+  boxy.moveTo(x,y) //iniating so that it doesnt start from 0,0
 
-  var draw= function(){    
-   boxy.fillRect(x,y,5,5);
-   boxy.fill();
-     
-    };
+  var draw= function(){
+    boxy.lineWidth=5;
+    boxy.lineTo(x,y);
+    boxy.stroke();
+};
 
-    intervalID=window.setInterval(draw,.0000001);
+
+    intervalID=window.setInterval(draw,1);
 };
 
 var stopIt=function(){
@@ -44,7 +42,6 @@ var clearIt= function(e){
 };
 
 clear.addEventListener("click", clearIt);
-stop.addEventListener("click", stopIt);
 box.addEventListener("mousedown", animate);
 box.addEventListener("mouseup", stopIt);
 box.addEventListener("mousemove", updateMouse);
