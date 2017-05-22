@@ -1,7 +1,7 @@
 var hide=function(){
   var label= document.getElementById("label");
   label.setAttribute("hidden", true);
-  var input= document.getElementByName("input2");
+  var input= document.getElementById("input2");
   input.setAttribute("hidden", true);
   console.log("hide");
 };
@@ -9,7 +9,7 @@ var hide=function(){
 var show=function(){
   var label= document.getElementById("label");
   label.removeAttribute("hidden");
-  var input= document.getElementByName("input2");
+  var input= document.getElementById("input2");
   input.removeAttribute("hidden");
   console.log("show");
 };
