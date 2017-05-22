@@ -1,12 +1,12 @@
 var hide=function(){
-  box1.setAttribute("hidden", true);
-  clear1.setAttribute("hidden", true);
+  var input=document.getElementById("input2");
+  input.setAttribute("hidden", true);
   console.log("hide");
 };
 
 var show=function(){
-  box1.removeAttribute("hidden")
-  clear1.removeAttribute("hidden");
+  var input=document.getElementById("input2");
+  input.removeAttribute("hidden");
   console.log("show");
 };
 
