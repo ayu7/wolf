@@ -4,38 +4,51 @@
 
   <center>
     <h3> Please enter LaTeX code into the input fields! </h1> <br>
-    <form action="/" method="post">
+<form action="/" method="post">
 
-      <div class="col-lg-4">
-	First Input:
-	<input type="text" id="input1">
-      </div>
+  <div class="col-lg-4">
+    First Input:
+    <input type="text" id="input1">
+  </div>
 
-      <div class="col-lg-4">
-	<div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Choose Operation
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-	    <li>Add Vectors</li>
-	    <li>Subtract Vectors</li>
-	    <li>Add Matrix</li>
-	    <li>Subtract Matrix</li>
-	    <li>Dot Product</li>
-	    <li>Scale Matrix</li>
-	    <li>Scale Vectors</li>
-	  </ul>
-	</div>
-      </div>
+  <div class="col-lg-4">
+    <select id="operation">
+      <option value="addvector">Add Vectors</option>
+      <option value="subvector">Subtract Vectors</option>
+      <option value="addmatrix">Add Matrices</option>
+      <option value="submatrix">Subtract Matrices</option>
+      <option value="dot">Dot Product</option>
+      <option value="cross">Cross Product</option> 
+      <option value="scalvector">Multiply Vector By A Scalar</option>
+      <option value="scalmatrix">Multiply Matrix By A Scalar</option>
+    </select> 
+  </div>
 
-      <div class="col-lg-4">
-	Second Input:
-	<input type="text" id="input2">
-	<input type="submit" value="Submit">
-      </div>
+  <div class="col-lg-4">
+    Second Input:
+    <input type="text" id="input2">
+    <input type="submit" value="Submit">
+  </div>
 
-    </form>
-  </center>
+</form>
+</center>
 </div>
 {% endblock %}
+
+<!-- BROKEN BOOTSTRAP DROPDOWN
+     <div class="dropdown">
+       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         Choose Operation
+         <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	 <li>Add Vectors</li>
+	 <li>Subtract Vectors</li>
+	 <li>Add Matrix</li>
+	 <li>Subtract Matrix</li>
+	 <li>Dot Product</li>
+	 <li>Scale Matrix</li>
+	 <li>Scale Vectors</li>
+       </ul>
+     </div>
+     -->
