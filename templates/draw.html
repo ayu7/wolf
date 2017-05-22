@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <h1>Draw Your Input </h1>
-  </head>
-
+{% extends "basic.html" %}
+{% block body %}
   <body>
     <canvas height="500" width="500" id="box" style="border:1px solid"> </canvas>
 
@@ -32,4 +28,4 @@
     <script src="../static/js/draw.js"></script>
 
   </body>
-</html>
+{% endblock %}

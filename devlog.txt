@@ -110,3 +110,8 @@ stephanieY -- 2017-05-21
 angelaY -- 2017-05-21
 - implemented second input canvas
 - finished javascript for hiding/displaying two canvases
+
+alanC --2017-05-21
+- Revert to working dropdown menu (need to fix bootstrap version)
+- Update name attribute in input tags - request.form working properly
+
