@@ -12,7 +12,7 @@
   </div>
 
   <div class="col-lg-4">
-    <select name="operation">
+    <select name="operation" onchange="change();">
       <option value="addvector" class="2">Add Vectors</option>
       <option value="subvector" class="2">Subtract Vectors</option>
       <option value="addmatrix" class="2">Add Matrices</option>
@@ -29,14 +29,16 @@
   </div>
 
   <div class="col-lg-4">
-    Second Input:
-    <input type="text" name="input2">
+    <p id="label" hidden>Second Input:</p>
+    <input type="text" name="input2" hidden>
     <input type="submit" value="Submit">
   </div>
 
 </form>
 </center>
 </div>
+
+<script src="../static/js/type.js"></script>
 {% endblock %}
 
 <!-- BROKEN BOOTSTRAP DROPDOWN
