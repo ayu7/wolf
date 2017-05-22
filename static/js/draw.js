@@ -67,10 +67,11 @@ var show=function(){
   console.log("show");
 };
 
-for (i=0; i<one.length;i++){
-  one[i].addEventListener("click", hide);
-};
-
-for (i=0; i<two.length;i++){
-  two[i].addEventListener("click", show);
+var change=function(){
+  var selectBox = document.getElementById("operation");
+  var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute("class");
+  if (selectedValue==1)
+    hide();
+  else
+    show();
 };
