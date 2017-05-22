@@ -103,3 +103,6 @@ angelaY -- 2017-05-20
 alanC -- 2017-05-20
 - Finish templating (type.html, operations.html, upload.html)
 - Update list of operations in operations.html
+
+stephanieY -- 2017-05-21
+- basis of a rowspace/columnspace of a matrix, nullity, nullspace (for square matrix)

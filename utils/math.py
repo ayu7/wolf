@@ -28,16 +28,41 @@ Operations Included:
 - rank
 - check for invertibility
 - check for Hermitian matrix
+- nullity of a matrix
+- basis of a rowspace of a matrix
+- basis of a columnspace of a matrix
+- basis of a nullspace of a matrix
 
 Operations Checklist:
-- cross product of vectors in 3-space???
+- linear independence of matrix
 - eigenvalues, eigenvectors
-- Cholesky decomposition
+- characteristic polynomial
+- diagonalize a matrix
+- LU decomposition
+- SVD 
 
 A vector in n-space will be represented as a list of length n of numbers.
 A matrix in nxm-space will be represented as a list of length n of lists (each of length m) of numbers. Therefore, the matrix will have n rows and m columns.
 A vector is also a column matrix. A matrix with only one row is called a row matrix, and the transpose of a row matrix is a vector. Note that we will not be representing the matrices this way.
 '''
+
+# nullity: Returns the nullity of a matrix (number).
+def nullity(A):
+    return num_cols(A) - rank(A)
+
+# basis_rowspace: Returns the basis of a rowspace of a matrix (matrix -- note: each of the rows in the returned matrix represent the vectors in the set of vectors that is the basis).
+def basis_rowspace(A):
+    B = gauss(A)
+    return [x for x in A if !(is_zero_row(x))]
+
+# basis_columnspace: Returns the basis of a columnspace of a matrix (matrix -- note: each of the rows in the returned matrix represent the vectors in the set of vectors that is the basis).
+def basis_columnspace(A):
+    return basis_rowspace(transpose(A))
+
+# basis_nullspace: Returns the basis of the nullspace of a matrix (matrix -- note: each of the rows in the returned matrix represent the vectors in the set of vectors that is the basis).
+def basis_nullspace(A):
+    b = [0 for x in A]
+    return system_solver(A, b)
 
 # complex_conjugate: Returns the complex conjugate of a number (number).
 def complex_conjugate(z):
@@ -193,8 +218,7 @@ def vector(m):
 
 # system_solver: Solves Ax=b, where A is a matrix, x is the solution vector, and b is a vector. Returns the solution vector for a system of equations (vector)
 def system_solver(A, b):
-    return vector(m_mult(inverse(A), matrix(b))) if is_invertible(A) else "Can't solve"
-    # should replace with Cholesky decomposition?
+    return vector(m_mult(inverse(A), matrix(b))) if is_invertible(A) else "No unique solution"
 
 
 # argmax: Returns the index of the maximum element in an iterable, checking from indices k to m, f being the function that determines the function to apply to each element.
