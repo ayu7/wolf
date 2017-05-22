@@ -10,26 +10,20 @@
     <button id="clear"> Clear </button>
 
     <div class="col-lg-4">
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Choose Operation
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li class="2">Add Vectors</li>
-    <li class="2">Subtract Vectors</li>
-    <li class="2">Add Matrix</li>
-    <li class="2">Subtract Matrix</li>
-    <li class="2">Dot Product</li>
-    <li class="2">Scale Matrix</li>
-    <li class="2">Scale Vectors</li>
-    <li class="1">Trace</li>
-    <li class="1">Transpose</li>
-    <li class="1">Vector Euclidean norm </li>
-    <li class="1">Complex conjugate of a vector</li>
-    <li class="1">Complex conjugate of a matrix </li>
-    </ul>
-    </div>
+      <select id="operation">
+        <option value="addvector" class="2">Add Vectors</option>
+        <option value="subvector" class="2">Subtract Vectors</option>
+        <option value="addmatrix" class="2">Add Matrices</option>
+        <option value="submatrix" class="2">Subtract Matrices</option>
+        <option value="dot" class="2">Dot Product</option>
+        <option value="scalvector" class="2">Multiply Vector By A Scalar</option>
+        <option value="scalmatrix" class="2">Multiply Matrix By A Scalar</option>
+        <option value="trace" class="1">Trace</option>
+        <option value="transpose" class="1">Transpose</option>
+        <option value="v_euclidean" class="1">Vector Euclidean norm </option>
+        <option value="v_conjugate" class="1">Complex conjugate of a vector</option>
+        <option value="m_conjugate" class="1">Complex conjugate of a matrix </option>
+      </select>
     </div>
 
     <canvas hidden height="500" width="500" id="box1" style="border:1px solid"> </canvas>
