@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <h1>Draw Your Matrices </h1>
+    <h1>Draw Your Input </h1>
+    <script src="../static/js/draw.js"></script>
   </head>
 
   <body>
     <canvas height="500" width="500" id="box" style="border:1px solid"> </canvas>
 
-    <button id="button"> Clear </button>
+    <button id="clear"> Clear </button>
 
-    <script src="../static/js/draw.js"></script>
+    <div class="col-lg-4">
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Choose Operation
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li>Add Vectors</li>
+    <li>Subtract Vectors</li>
+    <li>Add Matrix</li>
+    <li>Subtract Matrix</li>
+    <li>Dot Product</li>
+    <li>Scale Matrix</li>
+    <li>Scale Vectors</li>
+    </ul>
+    </div>
+    </div>
+
+    <canvas height="500" width="500" id="box1" style="border:1px solid"> </canvas>
+
+    <button id="clear1"> Clear </button>
 
   </body>
 </html>

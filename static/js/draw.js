@@ -1,6 +1,6 @@
 var box= document.getElementById("box");
 var boxy=box.getContext("2d");
-var clear=document.getElementById("button");
+var clear=document.getElementById("clear");
 var stop=document.getElementById("stop");
 var intervalID;
 boxy.fillStyle="black";
@@ -10,8 +10,8 @@ var prevX=0;
 var prevY=0;
 
 var updateMouse=function(e){
-    x = e.pageX-this.offsetLeft;
-    y = e.pageY- this.offsetTop;
+    x = e.offsetX;
+    y = e.offsetY;
 }
 
 
