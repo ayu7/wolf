@@ -1,0 +1,43 @@
+{% extends "basic.html" %}
+{% block body %}
+<div class="row">
+
+  <center>
+    <h3> Please enter LaTeX code into the input fields! </h1> <br>
+<form action="/parse" method="post">
+
+      <div class="col-lg-4">
+	First Input:
+	<input type="text" id="input1">
+	<input type="submit" value="Submit">
+      </div>
+
+</form>
+
+      <div class="col-lg-4">
+	<div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Choose Operation
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li>Add Vectors</li>
+	    <li>Subtract Vectors</li>
+	    <li>Add Matrix</li>
+	    <li>Subtract Matrix</li>
+	    <li>Dot Product</li>
+	    <li>Scale Matrix</li>
+	    <li>Scale Vectors</li>
+	  </ul>
+	</div>
+      </div>
+
+      <div class="col-lg-4">
+	Second Input:
+	<input type="text" id="input2">
+	<input type="submit" value="Submit2">
+      </div>
+      
+  </center>
+</div>
+{% endblock %}

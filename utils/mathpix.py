@@ -52,10 +52,10 @@ def findLType(string):
     for i in lTypeSet:
         try:
             curInd = string.index(i[0])
-            if curInd < closestArr and curInd > 0:
-                print i
-                closestArr = string.index(r"\\begin{array}")
+            if curInd < closestArr and curInd >= 0:
+                closestArr = string.index(i[0])
                 ret = i
+                #print ret
         except:
             pass
     return ret
@@ -76,16 +76,10 @@ def findLType(string):
 
 # Takes string of LaTex matrix or vector, outputs list of matrices in 
 def matrixFilter(string):
-    lType = findLType(string)
-    if lType == 1:
-        begin = r"\\begin{array}"
-        end = r"\\end{array}"
-    else:
-        begin = r"\begin{bmatrix}"
-        end = r"\end{bmatrix}"
+    lType = findLType(string) # returns a begin and end string depending on matrix closest to beginning of string
     try:
         if(len(string)):
-            return [string[string.index(begin):string.index(end)]] + matrixFilter(string[string.index(end)+len(end):])
+            return [string[string.index(lType[0]):string.index(lType[1])]] + matrixFilter(string[string.index(lType[1])+len(lType[1]):])
         else:
             return []
     except:
@@ -94,13 +88,12 @@ def matrixFilter(string):
 # deprecated atm
 def latexConvert(latex,op):
     string = latex
-    parsed = ""
+    for i in matrixFilter(string):
+        pass
     # utilize switch for operations
     # cases include different combinations of inputs
     return parsed
 
-string = findLType(r"\\begin{array}  asdsddgsdfg \\end{array}")
-asdf = r"\\begin{array} mroe stwusdf"
-print asdf.index(r"\\begin{array}")
-#print string
+# string = matrixFilter(r"\\begin{bmatrix}  asdsddgsdfg \\end{bmatrix} \\begin{Vmatrix}  second matrix \\end{Vmatrix}")
+# print string
 

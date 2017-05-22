@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-#from utils import mathpix, math
+from utils import mathpix#, math
 import json
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def draw():
 
 @app.route("/type")
 def type():
-    return render_template("type.html")
+    return render_template("test.html")
 
 @app.route("/upload")
 def upload():
@@ -24,6 +24,12 @@ def upload():
 @app.route("/operations")
 def operations():
     return render_template("operations.html")
+
+@app.route("/parse", methods=['POST'])
+def parse():
+    data = request.args
+    print data#mathpix.matrixFilter(data)
+    return redirect("/")
 
 # Turn off before release
 if __name__ == "__main__":
