@@ -27,8 +27,9 @@ def operations():
 
 @app.route("/parse", methods=['POST'])
 def parse():
-    data = request.args
-    print data#mathpix.matrixFilter(data)
+    data = request.form
+    print data
+    #mathpix.matrixFilter(data)
     return redirect("/")
 
 # Turn off before release
