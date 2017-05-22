@@ -115,3 +115,6 @@ alanC --2017-05-21
 - Revert to working dropdown menu (need to fix bootstrap version)
 - Update name attribute in input tags - request.form working properly
 
+angelaY -- 2017-05-22
+- changed javascript to fit the new dropdown menu
+- integrated javascript for upload.html and type.html so the number of inputs changes
