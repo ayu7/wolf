@@ -118,3 +118,10 @@ alanC --2017-05-21
 angelaY -- 2017-05-22
 - changed javascript to fit the new dropdown menu
 - integrated javascript for upload.html and type.html so the number of inputs changes
+
+juliusF -- 2017-05-22
+- retroactive devlog updates
+  - just worked on the matrix filter the whole time
+- created basic connection from front end to back end through type.html
+  - must check amount of arguments given
+  - currently only works with \\begin{array} format due to inflexibility of matrixConvert() in mathpix.py
