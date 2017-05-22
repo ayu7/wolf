@@ -23,6 +23,7 @@ def isInt(a):
     except:
         return False
 
+# must be flexible enough to parse other input types
 def matrixConvert(latex):
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
@@ -85,14 +86,15 @@ def matrixFilter(string):
     except:
         return [] # concatenating a None to a list will nullify the list wtf
 
-# deprecated atm
-def latexConvert(latex,op):
+# only works with \\begin{array}
+def latexConvert(latex):
     string = latex
+    matrices = []
     for i in matrixFilter(string):
-        pass
+        matrices.append(matrixConvert(i))
     # utilize switch for operations
     # cases include different combinations of inputs
-    return parsed
+    return matrices
 
 # string = matrixFilter(r"\\begin{bmatrix}  asdsddgsdfg \\end{bmatrix} \\begin{Vmatrix}  second matrix \\end{Vmatrix}")
 # print string

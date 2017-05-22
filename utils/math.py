@@ -53,7 +53,7 @@ def nullity(A):
 # basis_rowspace: Returns the basis of a rowspace of a matrix (matrix -- note: each of the rows in the returned matrix represent the vectors in the set of vectors that is the basis).
 def basis_rowspace(A):
     B = gauss(A)
-    return [x for x in A if !(is_zero_row(x))]
+    return [x for x in A if not(is_zero_row(x))]
 
 # basis_columnspace: Returns the basis of a columnspace of a matrix (matrix -- note: each of the rows in the returned matrix represent the vectors in the set of vectors that is the basis).
 def basis_columnspace(A):
