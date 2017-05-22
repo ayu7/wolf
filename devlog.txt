@@ -106,3 +106,7 @@ alanC -- 2017-05-20
 
 stephanieY -- 2017-05-21
 - basis of a rowspace/columnspace of a matrix, nullity, nullspace (for square matrix)
+
+angelaY -- 2017-05-21
+- implemented second input canvas
+- finished javascript for hiding/displaying two canvases

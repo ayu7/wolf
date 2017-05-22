@@ -2,7 +2,6 @@
 <html>
   <head>
     <h1>Draw Your Input </h1>
-    <script src="../static/js/draw.js"></script>
   </head>
 
   <body>
@@ -17,20 +16,26 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li>Add Vectors</li>
-    <li>Subtract Vectors</li>
-    <li>Add Matrix</li>
-    <li>Subtract Matrix</li>
-    <li>Dot Product</li>
-    <li>Scale Matrix</li>
-    <li>Scale Vectors</li>
+    <li class="2">Add Vectors</li>
+    <li class="2">Subtract Vectors</li>
+    <li class="2">Add Matrix</li>
+    <li class="2">Subtract Matrix</li>
+    <li class="2">Dot Product</li>
+    <li class="2">Scale Matrix</li>
+    <li class="2">Scale Vectors</li>
+    <li class="1">Trace</li>
+    <li class="1">Transpose</li>
+    <li class="1">Vector Euclidean norm </li>
+    <li class="1">Complex conjugate of a vector</li>
+    <li class="1">Complex conjugate of a matrix </li>
     </ul>
     </div>
     </div>
 
-    <canvas height="500" width="500" id="box1" style="border:1px solid"> </canvas>
+    <canvas hidden height="500" width="500" id="box1" style="border:1px solid"> </canvas>
 
-    <button id="clear1"> Clear </button>
+    <button hidden id="clear1"> Clear </button>
+    <script src="../static/js/draw.js"></script>
 
   </body>
 </html>
