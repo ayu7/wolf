@@ -86,7 +86,7 @@ def matrixFilter(string):
     except:
         return [] # concatenating a None to a list will nullify the list wtf
 
-# only works with \\begin{array}
+# deprecated
 def latexConvert(latex):
     string = latex
     matrices = []

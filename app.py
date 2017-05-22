@@ -30,8 +30,8 @@ def operations():
 
 @app.route("/parse", methods=['POST'])
 def parse():
-    input1 = mathpix.latexConvert(request.form.get("input1"))
-    input2 = mathpix.latexConvert(request.form.get("input2"))
+    input1 = mathpix.matrixConvert(request.form.get("input1"))
+    input2 = mathpix.matrixConvert(request.form.get("input2"))
     op = request.form.get("operation")
     print mathOps[op](input1,input2)
     #print data
