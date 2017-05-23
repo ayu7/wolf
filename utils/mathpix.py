@@ -46,16 +46,16 @@ def matrixConvert(latex):
     # if contains '\\\\': matrix else vector
     lType = findLType(latex)
     if "\\begin{array}" in latex:
-        if r"\\\\" not in latex[lType[0]:lType[1]]:
+        if r"\\\\" not in latex:
             return [int(x) for x in latex if isInt(x)]
         else:
-            split = latex[lType[0]:lType[1]].split(r"\\\\")
+            split = latex.split(r"\\\\")
             return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
     else:
-        if r"\\" not in latex[lType[0]:Type[1]:
+        if r"\\" not in latex:
             return [int(x) for x in latex if isInt(x)]
         else:
-            split = latex[lType[0]:lType[1]].split(r"\\")
+            split = latex.split(r"\\")
             return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
 ################################################
 
@@ -66,12 +66,12 @@ def matrixConvert(latex):
 # def findLType(string):
 #     closestArr = 9999
 #     ret = None
-#     lTypeSet = [(r"\\begin{array}",r"\\end{array}"),
+#     TypeSet = [(r"\\begin{array}",r"\\end{array}"),
 #                 (r"\begin{bmatrix}",r"\end{bmatrix}"),
 #                 (r"\begin{vmatrix}",r"\end{vmatrix}"),
 #                 (r"\begin{Vmatrix}",r"\end{Vmatrix}")]
 
-#     for i in lTypeSet:
+#     for i in TypeSet:
 #         try:
 #             curInd = string.index(i[0])
 #             if curInd < closestArr and curInd >= 0:
@@ -101,10 +101,10 @@ def matrixConvert(latex):
 
 # # Takes string of LaTex matrix or vector, outputs list of matrices in 
 # def matrixFilter(string):
-#     lType = findLType(string) # returns a begin and end string depending on matrix closest to beginning of string
+#     Type = findLType(string) # returns a begin and end string depending on matrix closest to beginning of string
 #     try:
 #         if(len(string)):
-#             return [string[string.index(lType[0]):string.index(lType[1])]] + matrixFilter(string[string.index(lType[1])+len(lType[1]):])
+#             return [string[string.index(Type[0]):string.index(Type[1])]] + matrixFilter(string[string.index(Type[1])+len(Type[1]):])
 #         else:
 #             return []
 #     except:
