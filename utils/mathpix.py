@@ -52,7 +52,7 @@ def matrixConvert(latex):
             split = latex[lType[0]:lType[1]].split(r"\\\\")
             return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
     else:
-        if r"\\" not in latex[lType[0]:lType[1]]:
+        if r"\\" not in latex[lType[0]:Type[1]:
             return [int(x) for x in latex if isInt(x)]
         else:
             split = latex[lType[0]:lType[1]].split(r"\\")
