@@ -130,9 +130,14 @@ juliusF -- 2017-05-22
   - must check amount of arguments given
   - currently only works with \\begin{array} format due to inflexibility of matrixConvert() in mathpix.py
 
+alanC -- 2017-05-22
+- add hyperlinks to operations.html
+
 juliusF -- 2017-05-23
 - expanded operations type.html can pass through to backend
 - generalized matrix converter
 - must sanitize/check input
   - input is actually matrix syntax
   - input is in the correct spot/field
+  
+  
