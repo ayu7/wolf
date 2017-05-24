@@ -140,4 +140,8 @@ juliusF -- 2017-05-23
   - input is actually matrix syntax
   - input is in the correct spot/field
   
-  
+alanC -- 2017-05-23
+- add todo.txt to keep track of needed fixes
+- adjust textbox size in type.html
+- integrate bootstrap into upload.html/draw.html
+
