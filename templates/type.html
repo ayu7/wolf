@@ -4,15 +4,18 @@
 
   <center>
     <h3> Please enter LaTeX code into the input fields! </h1> <br>
+
 <form action="/parse" method="post">
 
   <div class="col-lg-4">
     <p>First Input:</p>
-    <input type="text" name="input1">
+    <textarea style="height: 300px;" class="form-control input-lg" name="input1"></textarea>
+    <!--<input type="text" class="form-control input-lg" name="input1">-->
   </div>
 
   <div class="col-lg-4">
-    <select id="operation" name="operation" onchange="change();">
+    <select id="operation" class="form-control" name="operation" onchange="change();"> 
+      <option value="default" class="1">Select Operation</option>
       <option value="addvector" class="2">Add Vectors</option>
       <option value="subvector" class="2">Subtract Vectors</option>
       <option value="addmatrix" class="2">Add Matrices</option>
@@ -22,7 +25,7 @@
       <option value="scalmatrix" class="2">Multiply Matrix By A Scalar</option>
       <option value="trace" class="1">Trace</option>
       <option value="transpose" class="1">Transpose</option>
-      <option value="v_euclidean" class="1">Vector Euclidean norm </option>
+      <option value="v_euclidean" class="1">Vector Euclidean Norm </option>
       <option value="v_conjugate" class="1">Complex conjugate of a vector</option>
       <option value="m_conjugate" class="1">Complex conjugate of a matrix </option>
     </select>
@@ -30,10 +33,15 @@
 
   <div class="col-lg-4">
     <p id="label" hidden>Second Input:</p>
-    <input type="text" id="input2" name="input2" hidden>
-    <input type="submit" value="Submit">
+    <!--<input type="text" id="input2" name="input2" hidden>-->
+    
+    <!-- ISSUE: TEXTAREA NOT HIDDEN WITH BOOTSTRAP -->
+    <textarea style="height: 300px; width: 360px;" id="input2" name="input2" hidden></textarea>
+    <!-- ISSUE: TEXTAREA NOT HIDDEN WITH BOOTSTRAP -->
+
+    <input type="submit" class="form-control input-sm" value="Submit">
   </div>
-<script src="../static/js/type.js"></script>
+  <script src="../static/js/type.js"></script>
 </form>
 </center>
 </div>

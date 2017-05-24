@@ -9,9 +9,11 @@
     <form action="/" method="post">
       <h2> Upload your input below! </h2>
 
-      <div class="col-lg-12">
-        <select id="operation" onchange="change();">
-          <option value="addvector" class="2">Add Vectors</option>
+      <div class="form-group">
+	<div class="col-lg-5"></div>
+        <select id="operation" class="col-lg-2" onchange="change();">
+	  <option value="default" class="1">Select Operation</option>
+	  <option value="addvector" class="2">Add Vectors</option>
           <option value="subvector" class="2">Subtract Vectors</option>
           <option value="addmatrix" class="2">Add Matrices</option>
           <option value="submatrix" class="2">Subtract Matrices</option>
@@ -24,15 +26,17 @@
           <option value="v_conjugate" class="1">Complex conjugate of a vector</option>
           <option value="m_conjugate" class="1">Complex conjugate of a matrix </option>
         </select>
+	<div class="col-lg-5"></div> <!-- HOW TO CENTER WITH LESS JANK?? - alan 2017-05-23 -->
       </div>
 
-
       <br><br>
-
       <input type="file" name="input1">
+      
       <input type="file" name="input2" id="input2" hidden>
-      <input type="submit" value="Submit">
 
+      <div class="form-group">
+	<input type="submit" class="btn btn-primary btn-sm" value="Submit">
+      </div>
     </form>
   </center>
 
@@ -55,24 +59,24 @@
      -->
 
 <!-- BROKEN BOOTSTRAP DROPDOWN
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	Choose Operation
-	<span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-	<li>Add Vectors</li>
-	<li>Subtract Vectors</li>
-	<li role="separator" class="divider"></li>
-	<li>Add Matrix</li>
-	<li>Subtract Matrix</li>
-	<li role="separator" class="divider"></li>
-	<li>Dot Product</li>
-	<li>Cross Product</li>
-	<li role="separator" class="divider"></li>
-	<li>Scale Matrix</li>
-	<li>Scale Vectors</li>
-      </ul>
-    </div>
+     <div class="dropdown">
+       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	 Choose Operation
+	 <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	 <li>Add Vectors</li>
+	 <li>Subtract Vectors</li>
+	 <li role="separator" class="divider"></li>
+	 <li>Add Matrix</li>
+	 <li>Subtract Matrix</li>
+	 <li role="separator" class="divider"></li>
+	 <li>Dot Product</li>
+	 <li>Cross Product</li>
+	 <li role="separator" class="divider"></li>
+	 <li>Scale Matrix</li>
+	 <li>Scale Vectors</li>
+       </ul>
+     </div>
 
-    -->
+     -->
