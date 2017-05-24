@@ -3,6 +3,7 @@
 import base64
 import requests
 import json
+from collections import Iterable
 
 # submits a query to Mathpix
 # takes argument image which is a filepath
@@ -57,6 +58,34 @@ def matrixConvert(latex):
         else:
             split = latex.split(r"\\")
             return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
+
+def strConv(arr):
+    return [str(i) for i in arr]
+
+def matToLatex(mat):
+    # ret += " { "+"} & { ".join(strConv(i))
+    return 0
+
+def vecToLatex(vec):
+    return 0
+
+# [1,2,3]
+# [[1,2,3],[4,5,6]]
+def arrToLatex(matVec):
+    arr = matVec
+    ret = r"\begin{bmatrix} "
+    rlen = len(arr)
+    mat = False
+    if isinstance(arr[0],Iterable):
+        mat = True
+        rlen = len(arr[0])
+    ret += "{"+" l"*rlen+" }"
+    if mat:
+        matToLatex()
+    return ret
+
+print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]"))
+    
 ################################################
 
 
