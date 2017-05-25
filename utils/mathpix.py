@@ -3,15 +3,22 @@
 import base64
 import requests
 import json
-import math
+import linalg
 from collections import Iterable
 
 # submits a query to Mathpix
 # takes argument image which is a filepath
-def query(image):
+def queryFPath(image):
     image_uri = "data:image/jpg;base64," + base64.b64encode(open(image, "rb").read())
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image_uri}),
+                      headers={"app_id": "test", "app_key": "thisisnotourkey",
+                               "Content-type": "application/json"})
+    return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
+
+def queryURI(image):
+    r = requests.post("https://api.mathpix.com/v3/latex",
+                      data=json.dumps({'url': image}),
                       headers={"app_id": "test", "app_key": "thisisnotourkey",
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
@@ -73,7 +80,7 @@ def aToLHelp(arr,morv):
     mat = []
     tempArr = []
     if not morv:
-        mat.append(arr)
+        mat = linalg.matrix(arr)
     else:
         mat = arr
     for i in mat:
@@ -102,7 +109,7 @@ def arrToLatex(matVec):
     string = string[:16]+"{"+" l"*rlen+" }"+string[16:]
     return string
 
-#print arrToMathJax(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]"))
+print arrToMathJax(matrixConvert(r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"))
 
 ################################################
 
