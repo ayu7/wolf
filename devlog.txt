@@ -151,3 +151,7 @@ angelaY -- 2017-05-24
 Debugging of Front end
 - removed bootstrap class of button from draw.html, instead it is dynamically added in draw.js
 - not sure why input type="file" does not hide with hidden attribute, used style display instead (it works but the issue is perplexing)
+
+juliusF -- 2017-05-25
+- sidetracked/set aside sanitization/input verification/checks
+- finished array to latex array to mathjax converters
