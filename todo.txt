@@ -11,15 +11,5 @@
 
 ===== FIXES NEEDED =====
 - upload.html
-  -> input2 does not hide if type="file" (hides if type="text")
   -> center dropdown menu with less jank (how to manipulate columns
      so the menu doesnt span the whole width)
-
-- type.html
-  -> input2 does not hide if bootstrap class is added
-     (works rn, does not work with "class=form-control input-lg")
-
-
-- draw.html
-  -> clear1 does not hide if bootstrap class is added
-     (does not hide if class="btn btn-primary btn-sm" is added)
