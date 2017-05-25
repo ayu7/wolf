@@ -148,3 +148,5 @@ alanC -- 2017-05-23
 angelaY -- 2017-05-24
 - working on passing canvas content into flask app
 - converted into URL but not sure what's happening??
+Debugging of Front end
+- removed bootstrap class of button from draw.html, instead it is dynamically added in draw.js

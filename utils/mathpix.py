@@ -80,8 +80,8 @@ def arrToLatex(matVec):
         mat = True
         rlen = len(arr[0])
     ret += "{"+" l"*rlen+" }"
-    if mat:
-        matToLatex()
+    #if mat:
+    #    matToLatex()
     return ret
 
 print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]"))

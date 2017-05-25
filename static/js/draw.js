@@ -63,12 +63,14 @@ box1.addEventListener("mousemove", updateMouse);
 var hide=function(){
   box1.setAttribute("hidden", true);
   clear1.setAttribute("hidden", true);
+  clear1.removeAttribute("class");
   console.log("hide");
 };
 
 var show=function(){
-  box1.removeAttribute("hidden")
+  box1.removeAttribute("hidden");
   clear1.removeAttribute("hidden");
+  clear1.setAttribute("class", "btn btn-primary btn-sm");
   console.log("show");
 };
 
