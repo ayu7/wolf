@@ -64,15 +64,15 @@ def parse():
     print op
 
     if op in reqScalar:
-        print mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
+        return render_template("results.html", latex=mathOps[op](input2[0],input1)) # should specify order of inputs (scalar,matrix/vector)
     if op in req1Vec:
-        print mathOps[op](input1)
+        return render_template("results.html", latex=mathOps[op](input1))
     if op in req2Vec:
-        print mathOps[op](input1,input2)
+        return render_template("results.html", latex=mathOps[op](input1,input2))
     if op in req1Mat:
-        print mathOps[op](input1)
+        return render_template("results.html", latex=mathOps[op](input1))
     if op in req2Mat:
-        print mathOps[op](input1,input2)
+        return render_template("results.html", latex=mathOps[op](input1,input2))
 
     #print data
     #print mathpix.latexConvert(data)
