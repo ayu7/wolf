@@ -210,11 +210,11 @@ def inverse(A):
 
 # matrix: Converts a vector into a form that can be multiplied by a matrix
 def matrix(v):
-    return [[v[0]], [v[1]], [v[2]]]
+    return [[x] for x in v]
 
 # vector: Converts a nx1 matrix back into a vector form
 def vector(m):
-    return [m[0][0], m[1][0], m[2][0]]
+    return [x[0] for x in m]
 
 # system_solver: Solves Ax=b, where A is a matrix, x is the solution vector, and b is a vector. Returns the solution vector for a system of equations (vector)
 def system_solver(A, b):

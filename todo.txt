@@ -14,7 +14,13 @@
 
 - draw.html and upload.html need to hide elements correctly
 
+- mathpix.py needs to parse complex numbers. in python, they are represented as follows: 1+3j
 
+- some of the operations return true or false. Make sure that those work wend rendering results.html
+
+- test the operations
+
+- update README (include packages to pip install)
 
 ===== FIXES NEEDED =====
 - upload.html

@@ -1,5 +1,7 @@
 LaTeX Vector:
 
+[1,2,3] =>
+
 \begin{bmatrix}
 {1} \\
 {2} \\
@@ -8,10 +10,282 @@ LaTeX Vector:
 
 LaTeX Matrix:
 
+[[1,2],[3,4]] =>
+
 \begin{bmatrix}
 {1} & {2} \\
 {3} & {4}
 \end{bmatrix}
 
 Operations to Check:
+Vector addition: adds two vectors of the same size, returns a vector
 
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+Vector subtraction: subtracts two vectors of the same size, returns a vector
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+\begin{bmatrix}
+{1} \\
+{0} \\
+{1} \\
+\end{bmatrix}
+
+Matrix addition: adds two matrices of the same size, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Matrix subtraction: subtracts two matrices of the same size, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+\begin{bmatrix}
+{1} & {0} \\
+{0} & {1}
+\end{bmatrix}
+
+Multiplication of a vector by a scalar: multiplies the vector by a scalar, returns a vector
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+5
+
+Multiplication of a matrix by a scalar: multiplies the matrix by the scalar, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+3
+
+Dot product: finds the dot product of two vectors of the same size, returns a scalar
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+Matrix multiplication: multiplies two matrices where the number of columns in the first matrix equals the number of rows in the second, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Trace: finds the trace of a square matrix, returns a scalar
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Transpose: finds the transpose of a matrix, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Vector Euclidean norm: finds the norm of a vector, returns a scalar
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+Complex conjugate of a vector: finds the complex conjugate of a vector, returns a vector
+
+\begin{bmatrix}
+{1+i} \\
+{2+i} \\
+{3} \\
+\end{bmatrix}
+
+Complex conjugate of a matrix: finds the complex conjugate of a marix, returns a matrix
+
+\begin{bmatrix}
+{1+i} & {2+i} \\
+{3+i} & {4}
+\end{bmatrix}
+
+Conjugate transpose: finds the conjugate transpose of a matrix, returns a matrix
+
+\begin{bmatrix}
+{1+i} & {2+i} \\
+{3+i} & {4}
+\end{bmatrix}
+
+Frobenius norm: finds the norm of a matrix, returns a number
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Determinant: finds the determinant of a square matrix, returns a number
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Adjoint: finds the adjoint of a square matrix, returns a matrix.
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Inverse: finds the inverse of a square invertible matrix, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} & {3} \\
+{0} & {1} & {4} \\
+{5} & {6} & {0}
+\end{bmatrix}
+
+Power: finds the nth power of a square matrix, returns a matrix
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+3
+
+System of linear equations solver: Solves Ax=b, where A is a matrix, x is the solution vector, and b is a vector. Returns the solution vector for a system of equations.
+
+\begin{bmatrix}
+{1} & {-2} & {3} \\
+{5} & {8} & {-1} \\
+{2} & {1} & {1}
+\end{bmatrix}
+
+\begin{bmatrix}
+{9} \\
+{-5} \\
+{3}
+\end{bmatrix}
+
+Gaussian elimination: reduces a matrix to row echelon form, returns a matrix
+
+\begin{bmatrix}
+{1} & {3} & {1} & {9} \\
+{1} & {1} & {-1} & {1} \\
+{3} & {11} & {5} & {35}
+\end{bmatrix}
+
+Rank: returns the rank of a matrix, returns a scalar
+
+\begin{bmatrix}
+{1} & {3} & {1} & {9} \\
+{1} & {1} & {-1} & {1} \\
+{3} & {11} & {5} & {35}
+\end{bmatrix}
+
+Nullity: finds the nullity of a matrix, returns a scalar
+
+\begin{bmatrix}
+{1} & {3} & {1} & {9} \\
+{1} & {1} & {-1} & {1} \\
+{3} & {11} & {5} & {35}
+\end{bmatrix}
+
+Check Invertibility: returns true if a given matrix is invertible false otherwise.
+
+\begin{bmatrix}
+{1} & {2} & {3} \\
+{0} & {1} & {4} \\
+{5} & {6} & {0}
+\end{bmatrix}
+
+Check Right Invertibility: returns true if a given matrix is right invertible false otherwise.
+
+\begin{bmatrix}
+{1} & {2} & {3} \\
+{0} & {1} & {4} \\
+{5} & {6} & {0}
+\end{bmatrix}
+
+Check Left Invertibility: returns true if a given matrix is left invertible false otherwise.
+
+\begin{bmatrix}
+{1} & {2} & {3} \\
+{0} & {1} & {4} \\
+{5} & {6} & {0}
+\end{bmatrix}
+
+Check for Hermitian: returns true if a given matrix is Hermitian false otherwise
+
+\begin{bmatrix}
+{1} & {0} \\
+{0} & {1} \\
+\end{bmatrix}
+
+Basis of a rowspace: finds the basis of a rowspace of a matrix, returns a list of vectors
+
+\begin{bmatrix}
+{1} & {3} & {1} & {9} \\
+{1} & {1} & {-1} & {1} \\
+{3} & {11} & {5} & {35}
+\end{bmatrix}
+
+Basis of a columnspace: finds the basis of a columnspace of a matrix, returns a list of vectors
+
+\begin{bmatrix}
+{1} & {3} & {1} & {9} \\
+{1} & {1} & {-1} & {1} \\
+{3} & {11} & {5} & {35}
+\end{bmatrix}
+
+(Basis of a nullspace of a matrix): finds the basis of a columnspace of a matrix, returns a list of vectors
+
+\begin{bmatrix}
+{1} & {2} & {3} \\
+{0} & {1} & {4} \\
+{5} & {6} & {0}
+\end{bmatrix}

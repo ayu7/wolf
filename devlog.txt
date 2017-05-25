@@ -155,3 +155,9 @@ Debugging of Front end
 juliusF -- 2017-05-25
 - sidetracked/set aside sanitization/input verification/checks
 - finished array to latex array to mathjax converters
+
+stephanieY -- 2017-05-25
+- fixed vector() and matrix()
+- wrote up test_input.txt
+- wrote up todo.txt
+- renamed math.py as linalg.py
