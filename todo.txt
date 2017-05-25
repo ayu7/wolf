@@ -1,12 +1,19 @@
 ===== TO DO =====
 
 - basic results.html
+  - render input and output
+  - show/hide latex
 
 - jinja for results.html
   -> how to pass "print mathOps()" to html
      -> how to parse passed data and make pretty
 
 - custom.css needed
+
+- submit button for draw.html needs to pass form input to backend properly
+
+- draw.html and upload.html need to hide elements correctly
+
 
 
 ===== FIXES NEEDED =====
