@@ -3,6 +3,7 @@
 import base64
 import requests
 import json
+import math
 from collections import Iterable
 
 # submits a query to Mathpix
@@ -24,6 +25,7 @@ def isInt(a):
     except:
         return False
 
+# finds and returns the type of matrix/vector
 def findLType(string):
     lTypeSet = [(r"\\begin{array}",r"\\end{array}"),
                 (r"\begin{bmatrix}",r"\end{bmatrix}"),
@@ -38,13 +40,15 @@ def findLType(string):
     return None
 
 # must be flexible enough to parse other input types
+# should work with incorrect input
+# - "\\\\" in arrays with "\begin{bmatrix}"
+# - nonnumerical matrix values
 def matrixConvert(latex):
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
     # example vector
     # \\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]
 
-    # if contains '\\\\': matrix else vector
     lType = findLType(latex)
     if "\\begin{array}" in latex:
         if r"\\\\" not in latex:
@@ -59,18 +63,26 @@ def matrixConvert(latex):
             split = latex.split(r"\\")
             return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
 
+# takes an array of elements and returns array of strings of those elements
 def strConv(arr):
     return [str(i) for i in arr]
 
-def matToLatex(mat):
-    # ret += " { "+"} & { ".join(strConv(i))
-    return 0
-
-def vecToLatex(vec):
-    return 0
+# helper to convert a matrix/vector to a string
+# specifically the values into proper formatted string
+def aToLHelp(arr,morv):
+    mat = []
+    tempArr = []
+    if not morv:
+        mat.append(arr)
+    else:
+        mat = arr
+    for i in mat:
+        tempArr.append(" { "+"} & { ".join(strConv(i)))
+    return r"} \\".join(tempArr)+"} \end{bmatrix}"
 
 # [1,2,3]
 # [[1,2,3],[4,5,6]]
+# converts matrix/vector into formatted string
 def arrToLatex(matVec):
     arr = matVec
     ret = r"\begin{bmatrix} "
@@ -80,11 +92,10 @@ def arrToLatex(matVec):
         mat = True
         rlen = len(arr[0])
     ret += "{"+" l"*rlen+" }"
-    #if mat:
-    #    matToLatex()
+    ret += aToLHelp(arr,mat)
     return ret
 
-print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]"))
+print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"))
 
 ################################################
 
