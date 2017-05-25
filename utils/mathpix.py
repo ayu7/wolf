@@ -36,14 +36,14 @@ def findLType(string):
         except:
             pass
     return None
-    
+
 # must be flexible enough to parse other input types
 def matrixConvert(latex):
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
     # example vector
     # \\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]
-   
+
     # if contains '\\\\': matrix else vector
     lType = findLType(latex)
     if "\\begin{array}" in latex:
@@ -85,7 +85,7 @@ def arrToLatex(matVec):
     return ret
 
 print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]"))
-    
+
 ################################################
 
 
@@ -128,7 +128,7 @@ print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\
 # #     - Visitor object/function: google this
 # #     - Two different functions for mathpix parsing and everyone else parsing
 
-# # Takes string of LaTex matrix or vector, outputs list of matrices in 
+# # Takes string of LaTex matrix or vector, outputs list of matrices in
 # def matrixFilter(string):
 #     Type = findLType(string) # returns a begin and end string depending on matrix closest to beginning of string
 #     try:
@@ -151,4 +151,3 @@ print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\
 
 # # string = matrixFilter(r"\\begin{bmatrix}  asdsddgsdfg \\end{bmatrix} \\begin{Vmatrix}  second matrix \\end{Vmatrix}")
 # # print string
-

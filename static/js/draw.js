@@ -1,8 +1,10 @@
 var box= document.getElementById("box");
 var boxy=box.getContext("2d");
+var boxContent=document.getElementById("boxContent");
 var clear=document.getElementById("clear");
 var box1= document.getElementById("box1");
 var boxy1=box1.getContext("2d");
+var box1Content=document.getElementById("box1Content");
 var clear1=document.getElementById("clear1");
 var intervalID;
 var one=document.getElementsByClassName("1");
@@ -30,6 +32,9 @@ var animate=function(){
 
 var stopIt=function(){
    clearInterval(intervalID);
+   boxContent.setAttribute("value", box.toDataURL());
+   box1Content.setAttribute("value", box1.toDataURL());
+
 };
 
 var clearIt= function(e){

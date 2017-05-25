@@ -73,10 +73,15 @@ def parse():
         print mathOps[op](input1)
     if op in req2Mat:
         print mathOps[op](input1,input2)
-    
+
     #print data
     #print mathpix.latexConvert(data)
     return redirect("/")
+
+@app.route("/imgProcess", methods=['POST'])
+def imgProcess():
+    print request.form.get("boxContent")
+    return True
 
 # Turn off before release
 if __name__ == "__main__":

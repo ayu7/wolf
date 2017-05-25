@@ -139,9 +139,12 @@ juliusF -- 2017-05-23
 - must sanitize/check input
   - input is actually matrix syntax
   - input is in the correct spot/field
-  
+
 alanC -- 2017-05-23
 - add todo.txt to keep track of needed fixes
 - adjust textbox size in type.html
 - integrate bootstrap into upload.html/draw.html
 
+angelaY -- 2017-05-24
+- working on passing canvas content into flask app
+- converted into URL but not sure what's happening??
