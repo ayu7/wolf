@@ -1,12 +1,12 @@
 var hide=function(){
   var input=document.getElementById("input2");
-  input.setAttribute("hidden", true);
+  input.setAttribute("style", "display:none");
   console.log("hide");
 };
 
 var show=function(){
   var input=document.getElementById("input2");
-  input.removeAttribute("hidden");
+  input.removeAttribute("style");
   console.log("show");
 };
 
