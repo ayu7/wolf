@@ -80,22 +80,29 @@ def aToLHelp(arr,morv):
         tempArr.append(" { "+"} & { ".join(strConv(i)))
     return r"} \\".join(tempArr)+"} \end{bmatrix}"
 
-# [1,2,3]
-# [[1,2,3],[4,5,6]]
-# converts matrix/vector into formatted string
-def arrToLatex(matVec):
+# converts matrix/vector into formatted string for mathjax input
+def arrToMathJax(matVec):
     arr = matVec
     ret = r"\begin{bmatrix} "
-    rlen = len(arr)
+    
     mat = False
     if isinstance(arr[0],Iterable):
         mat = True
-        rlen = len(arr[0])
-    ret += "{"+" l"*rlen+" }"
+
     ret += aToLHelp(arr,mat)
     return ret
 
-print arrToLatex(matrixConvert(r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"))
+# converts matrix/vector into formatted string for latex
+def arrToLatex(matVec):
+    arr = matVec
+    rlen = len(arr)
+    if isinstance(arr[0],Iterable):
+        rlen = len(arr[0])
+    string = arrToMathJax(arr)
+    string = string[:16]+"{"+" l"*rlen+" }"+string[16:]
+    return string
+
+#print arrToMathJax(matrixConvert(r"\\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]"))
 
 ################################################
 
