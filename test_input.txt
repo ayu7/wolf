@@ -1,0 +1,17 @@
+LaTeX Vector:
+
+\begin{bmatrix}
+{1} \\
+{2} \\
+{3} \\
+\end{bmatrix}
+
+LaTeX Matrix:
+
+\begin{bmatrix}
+{1} & {2} \\
+{3} & {4}
+\end{bmatrix}
+
+Operations to Check:
+
