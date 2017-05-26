@@ -9,7 +9,7 @@ var hide=function(){
 };
 
 //shows second input field & the text
-var show=function(){}
+var show=function(){
   label.removeAttribute("hidden");
   input.removeAttribute("hidden");
   console.log("show");

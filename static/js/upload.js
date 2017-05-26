@@ -7,7 +7,7 @@ var hide=function(){
 };
 
 //shows second upload button
-var show=function(){}
+var show=function(){
   input.removeAttribute("style");
   console.log("show");
 };
