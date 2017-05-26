@@ -5,23 +5,38 @@ import json
 app = Flask(__name__)
 
 # will add all math.py ops later
-mathOps = {"addvector" : linalg.v_add,         #         v_add: sum of two vectors (vector)
-           "subvector" : linalg.v_subtract,    #    v_subtract: difference between two vectors (vector)
-           "addmatrix" : linalg.m_add,         #         m_add: sum of two matrices of the same size (matrix)
-           "submatrix" : linalg.m_subtract,    #    m_subtract: difference between two matrices (matrix)
+mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (vector)
+           "v_subtract" : linalg.v_subtract,    #    v_subtract: difference between two vectors (vector)
+           "m_add" : linalg.m_add,         #         m_add: sum of two matrices of the same size (matrix)
+           "m_subtract" : linalg.m_subtract,    #    m_subtract: difference between two matrices (matrix)
            "dot"       : linalg.dot,           #           dot: dot product of two vectors (number)
-           "scalvector": linalg.v_scalar_mult, # v_scalar_mult: product of vector and scalar (vector)
-           "scalmatrix": linalg.m_scalar_mult, # m_scalar_mult: product of matrix and scalar (matrix)
+           "v_scalar_mult": linalg.v_scalar_mult, # v_scalar_mult: product of vector and scalar (vector)
+           "m_scalar_mult": linalg.m_scalar_mult, # m_scalar_mult: product of matrix and scalar (matrix)
            "trace"     : linalg.trace,         #         trace: trace of a square matrix (number).
            "transpose" : linalg.transpose,     #     transpose: Returns the transpose of a matrix (matrix).
-           "v_euclidean": linalg.v_euclidean_norm,    # v_norm: Euclidean norm of a vector (number)
-           "v_conjugate": linalg.v_conjugate}    # v_conjugate: complex conjugate of a vector (vector)
+           "v_euclidean_norm": linalg.v_euclidean_norm,    # v_norm: Euclidean norm of a vector (number)
+           "v_conjugate": linalg.v_conjugate    # v_conjugate: complex conjugate of a vector (vector)
+           "m_conjugate": linalg.m_conjugate
+           "conjugate_transpose": linalg.conjugate_transpose
+           "frobenius": linalg.frobenius
+           "det": linalg.det
+           "cofactor_matrix": linalg.cofactor_matrix
+           "adjoint": linalg.adjoint
+           "inverse": linalg.inverse
+           "power": linalg.power
+           "system_solver": linalg.system_solver
+           "gauss": linalg.gauss
+           "rank": linalg.rank
+           "is_left_invertible": linalg.is_left_invertible
+           "is_right_invertible": linalg.is_right_invertible
+           "is_hermitian": linalg.is_hermitian
+           }
 
-reqScalar = ["scalvector","scalmatrix"]
-req1Vec = ["v_euclidean","v_conjugate"]
-req2Vec = ["addvector","subvector","dot"]
+reqScalar = ["v_scalar_mult","m_scalar_mult"]
+req1Vec = ["v_euclidean_norm","v_conjugate"]
+req2Vec = ["v_add","v_subtract","dot"]
 req1Mat = ["trace","transpose"]
-req2Mat = ["addmatrix","submatrix"]
+req2Mat = ["m_add","m_subtract"]
 
 @app.route("/")
 @app.route("/home")
