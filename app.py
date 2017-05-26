@@ -13,7 +13,7 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            "v_scalar_mult": linalg.v_scalar_mult, # v_scalar_mult: product of vector and scalar (vector)
            "m_scalar_mult": linalg.m_scalar_mult, # m_scalar_mult: product of matrix and scalar (matrix)
            "trace"     : linalg.trace,         #         trace: trace of a square matrix (number).
-           "transpose" : linalg.transpose,     #     transpose: Returns the transpose of a matrix (matrix).
+           "transpose" : linalg.transpose,     #     transpose: Returns the transpose of a matrix (matrix)
            "v_euclidean_norm": linalg.v_euclidean_norm,    # v_norm: Euclidean norm of a vector (number)
            "v_conjugate": linalg.v_conjugate,   # v_conjugate: complex conjugate of a vector (vector)
            "m_conjugate": linalg.m_conjugate,

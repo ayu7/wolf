@@ -41,35 +41,72 @@ def findLType(string):
 
     for i in lTypeSet:
         try:
-            return (string.index(i[0]),string.index(i[1]))
+            return (string.index(i[0])+len(i[0]),string.index(i[1]))
         except:
             pass
     raise Exception('no matrix/vector here')
 
+# finds length of each row of a matrix or vector based on the row length indicator
+def findRLen(string,lType):
+    rLenIndic = string[string.index("{"):string.index("}")+1]
+    unusedChar = ["{","}"," "]
+    count = 0
+    checkFor = ""
+    checkInit = False
+    for i in rLenIndic:
+        if i not in unusedChar:
+            if checkFor == "":
+                checkFor = i
+            elif not i == checkFor:
+                raise Exception("improper formatting, row length indicators must be uniform")
+            count += 1
+    print count
+
+# checks if each row matches given row length
+def rLenCheck(rLen,mat):
+    for i in mat:
+        print i
+        print len(i)
+        #if not len(i) == rLen:
+            #raise Exception("improper row length, one of inputs is not numerical or row length indicator is incorrect")
+    return True
+    
 # must be flexible enough to parse other input types
 # should work with incorrect input
 # - "\\\\" in arrays with "\begin{bmatrix}"
 # - nonnumerical matrix values
-def matrixConvert(latex):
+def matrixConvert(string):
+    ret = []
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
     # example vector
     # \\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]
 
-    lType = findLType(latex)
+    lType = findLType(string)
+    latex = string[lType[0]:lType[1]]
+    print latex
+    rLen = findRLen(latex,lType)
     if "\\begin{array}" in latex:
         if r"\\\\" not in latex:
-            return [int(x) for x in latex if isInt(x)]
+            ret = [int(x) for x in latex if isInt(x)]
         else:
             split = latex.split(r"\\\\")
-            return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
+            ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
     else:
+        if r"\\\\" in latex:
+            raise Exception('improperly formatted latex, check backslashes/numerical input!')
         if r"\\" not in latex:
-            return [int(x) for x in latex if isInt(x)]
+            ret = [int(x) for x in latex if isInt(x)]
         else:
             split = latex.split(r"\\")
-            return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
-    raise Exception('improperly formatted latex, check backslashes!')
+            ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
+    if len(ret):
+        print ret
+        rLenCheck(rLen,ret)
+        return ret
+    raise Exception('improperly formatted latex, check backslashes/numerical input!')
+
+matrixConvert(r"\\left[ \begin{bmatrix} { lll } { 1} & { 2} & { 3} \\ { 1} & { 2} & { 3} \end{bmatrix} \\right]")
 
 # takes an array of elements and returns array of strings of those elements
 def strConv(arr):
