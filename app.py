@@ -15,20 +15,20 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            "trace"     : linalg.trace,         #         trace: trace of a square matrix (number).
            "transpose" : linalg.transpose,     #     transpose: Returns the transpose of a matrix (matrix).
            "v_euclidean_norm": linalg.v_euclidean_norm,    # v_norm: Euclidean norm of a vector (number)
-           "v_conjugate": linalg.v_conjugate    # v_conjugate: complex conjugate of a vector (vector)
-           "m_conjugate": linalg.m_conjugate
-           "conjugate_transpose": linalg.conjugate_transpose
-           "frobenius": linalg.frobenius
-           "det": linalg.det
-           "cofactor_matrix": linalg.cofactor_matrix
-           "adjoint": linalg.adjoint
-           "inverse": linalg.inverse
-           "power": linalg.power
-           "system_solver": linalg.system_solver
-           "gauss": linalg.gauss
-           "rank": linalg.rank
-           "is_left_invertible": linalg.is_left_invertible
-           "is_right_invertible": linalg.is_right_invertible
+           "v_conjugate": linalg.v_conjugate,   # v_conjugate: complex conjugate of a vector (vector)
+           "m_conjugate": linalg.m_conjugate,
+           "conjugate_transpose": linalg.conjugate_transpose,
+           "frobenius": linalg.frobenius,
+           "det": linalg.det,
+           "cofactor_matrix": linalg.cofactor_matrix,
+           "adjoint": linalg.adjoint,
+           "inverse": linalg.inverse,
+           "power": linalg.power,
+           "system_solver": linalg.system_solver,
+           "gauss": linalg.gauss,
+           "rank": linalg.rank,
+           "is_left_invertible": linalg.is_left_invertible,
+           "is_right_invertible": linalg.is_right_invertible,
            "is_hermitian": linalg.is_hermitian
            }
 
