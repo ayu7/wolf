@@ -19,7 +19,7 @@ def queryFPath(image):
 def queryURI(image):
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image}),
-                      headers={"app_id": "test", "app_key": "thisisnotourkey",
+                      headers={"app_id": "efrey", "app_key": "5f578f9e0320da38afcf226cd61b6513",
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
 
@@ -44,7 +44,7 @@ def findLType(string):
             return (string.index(i[0]),string.index(i[1]))
         except:
             pass
-    return None
+    raise Exception('no matrix/vector here')
 
 # must be flexible enough to parse other input types
 # should work with incorrect input
@@ -69,6 +69,7 @@ def matrixConvert(latex):
         else:
             split = latex.split(r"\\")
             return [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
+    raise Exception('improperly formatted latex, check backslashes!')
 
 # takes an array of elements and returns array of strings of those elements
 def strConv(arr):
@@ -109,7 +110,18 @@ def arrToLatex(matVec):
     string = string[:16]+"{"+" l"*rlen+" }"+string[16:]
     return string
 
-print arrToMathJax(matrixConvert(r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"))
+#print arrToMathJax(matrixConvert(r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"))
+
+# unfinished
+def processBasic(test):
+    try:
+        matrixConvert(test)
+    except:
+        return False 
+    
+
+def check(cType,input1,input2):
+    return 0
 
 ################################################
 

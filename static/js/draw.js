@@ -36,7 +36,13 @@ var animate=function(){
 
 var stopIt=function(){
    clearInterval(intervalID);
-   boxContent.setAttribute("value", box.toDataURL()); //updates dataURL info everytime mouse up
+   var con1 = box.toDataURL('image/jpg', 1.0);
+   var con2 = box1.toDataURL('image/jpg', 1.0);
+   console.log("entered");
+   console.log(con1);
+   boxContent.setAttribute("value", con1); //updates dataURL info everytime mouse up
+   box1Content.setAttribute("value", con2);
+   boxContent.setAttribute("value", box.toDataURL());
    box1Content.setAttribute("value", box1.toDataURL());
 };
 
