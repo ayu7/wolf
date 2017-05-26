@@ -7,13 +7,26 @@
 
 <form action="/parse" method="post">
 
-  <div class="col-lg-4">
+  <div class="col-lg-6 col-lg-offset-3" id="col1">
     <p>First Input:</p>
-    <textarea style="height: 300px;" class="form-control input-lg" name="input1"></textarea>
+    <textarea style="height: 300px; width: 400px" class="form-control input-lg" name="input1"></textarea>
     <!--<input type="text" class="form-control input-lg" name="input1">-->
   </div>
 
-  <div class="col-lg-4">
+  <div class="col-lg-6">
+    <p id="label" hidden>Second Input:</p>
+    <textarea style="height: 300px; width: 400px;" id="input2" name="input2" hidden></textarea>
+    
+  </div>
+  <script src="../static/js/type.js"></script>
+</form>
+</center>
+</div>
+
+<br><br><br>
+<div class="row">
+ 
+  <div class="col-lg-4 col-lg-offset-4">
     <select id="operation" class="form-control" name="operation" onchange="change();">
       <option value="default" class="1">Select Operation</option>
       <option value="v_add" class="2">Add Vectors</option>
@@ -44,23 +57,10 @@
       <option value="is_hermitian" class="1">Hermitian Matrix Check</option>
 
     </select>
-  </div>
-
-  <div class="col-lg-4">
-    <p id="label" hidden>Second Input:</p>
-    <!--<input type="text" id="input2" name="input2" hidden>-->
-
-    <!-- ISSUE: TEXTAREA NOT HIDDEN WITH BOOTSTRAP -->
-    <textarea style="height: 300px; width: 360px;" id="input2" name="input2" hidden></textarea>
-    <!-- ISSUE: TEXTAREA NOT HIDDEN WITH BOOTSTRAP -->
-
+    <br>
     <input type="submit" class="form-control input-sm" value="Submit">
   </div>
-  <script src="../static/js/type.js"></script>
-</form>
-</center>
 </div>
-
 {% endblock %}
 
 <!-- BROKEN BOOTSTRAP DROPDOWN
