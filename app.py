@@ -74,15 +74,20 @@ def parse():
     result = None
 
     if op in reqScalar:
-        result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
+        if mathpix.check(op,input1,input2):
+            result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
     if op in req1Vec:
-        result = mathOps[op](input1)
+        if mathpix.check("req1Vec",input1,input2):
+            result = mathOps[op](input1)
     if op in req2Vec:
-        result = mathOps[op](input1,input2)
+        if mathpix.check("req2Vec",input1,input2):
+            result = mathOps[op](input1,input2)
     if op in req1Mat:
-        result = mathOps[op](input1)
+        if mathpix.check("req1Mat",input1,input2):
+            result = mathOps[op](input1)
     if op in req2Mat:
-        result = mathOps[op](input1,input2)
+        if mathpix.check("req2Mat",input1,input2):
+            result = mathOps[op](input1,input2)
 
     resultMJx = arrToMathJax(result)
     print resultMJx
@@ -95,9 +100,16 @@ def parse():
     #print mathpix.latexConvert(data)
     return redirect("/")
 
+# not working, must convert into jpg not png
+# mathpix cant read this?
 @app.route("/imgProcess", methods=['POST', 'GET'])
 def imgProcess():
     content= request.form.get("boxContent")
+    content =  content.replace("png","jpeg",1)
+    retJSON = mathpix.queryURI(content)
+    print retJSON
+    #latex = retJSON['latex']
+    #result = matrixConvert(latex)
     return render_template("results.html", latex=content)
 
 # Turn off before release
