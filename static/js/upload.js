@@ -1,15 +1,18 @@
+var input=document.getElementById("input2");
+
+//hides second upload button
 var hide=function(){
-  var input=document.getElementById("input2");
   input.setAttribute("style", "display:none");
   console.log("hide");
 };
 
-var show=function(){
-  var input=document.getElementById("input2");
+//shows second upload button
+var show=function(){}
   input.removeAttribute("style");
   console.log("show");
 };
 
+//changes page dynamically
 var change=function(){
   var selectBox = document.getElementById("operation");
   var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute("class");
