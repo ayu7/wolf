@@ -88,17 +88,17 @@ def parse():
     print resultMJx
     resultLtX = arrToLatex(result)
     print resultLtX
-        
+
     return render_template("results.html", latex = result)
 
     #print data
     #print mathpix.latexConvert(data)
     return redirect("/")
 
-@app.route("/imgProcess", methods=['POST'])
+@app.route("/imgProcess", methods=['POST', 'GET'])
 def imgProcess():
-    print request.form.get("boxContent")
-    return True
+    content= request.form.get("boxContent")
+    return render_template("results.html", latex=content)
 
 # Turn off before release
 if __name__ == "__main__":
