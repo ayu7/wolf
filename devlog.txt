@@ -167,3 +167,6 @@ angelaY -- 2017-05-25
 - fixed canvas data URI passage to Flask
 - added all operations to dropdown menu
 - fixed function name inconsistency through files
+
+juliusF -- 2017-05-23
+- completed basic checking
