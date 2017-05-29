@@ -120,7 +120,7 @@ def parse():
 @app.route("/imgProcess", methods=['POST', 'GET'])
 def imgProcess():
     content= request.form.get("boxContent")
-    content =  content.replace("png","jpeg",1)
+    content =  content.replace("png","jpg",1)
     retJSON = mathpix.queryURI(content)
     print retJSON
     #latex = retJSON['latex']

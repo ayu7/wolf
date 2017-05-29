@@ -10,11 +10,14 @@ from collections import Iterable
 # takes argument image which is a filepath
 def queryFPath(image):
     image_uri = "data:image/jpg;base64," + base64.b64encode(open(image, "rb").read())
+    print image_uri
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image_uri}),
-                      headers={"app_id": "test", "app_key": "thisisnotourkey",
+                      headers={"app_id": "efrey", "app_key": "5f578f9e0320da38afcf226cd61b6513",
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
+
+#queryFPath("testImages/vec1.jpg")
 
 def queryURI(image):
     r = requests.post("https://api.mathpix.com/v3/latex",
@@ -60,16 +63,16 @@ def findRLen(string,lType):
             elif not i == checkFor:
                 raise Exception("improper formatting, row length indicators must be uniform")
             count += 1
-    print count
+    return count
 
 # checks if each row matches given row length
-def rLenCheck(rLen,mat):
+def rLenCheck(rlen,mat):
+    rLen = rlen
+    if len(mat[0]) == 1: # necessary for horizontal to vertical conversion of vectors
+        rLen = 1
     for i in mat:
-        print i
-        print len(i)
-        #if not len(i) == rLen:
-            #raise Exception("improper row length, one of inputs is not numerical or row length indicator is incorrect")
-    return True
+        if not len(i) == rLen:
+            raise Exception("improper row length, one of inputs is not numerical or row length indicator is incorrect")
     
 # must be flexible enough to parse other input types
 # should work with incorrect input
@@ -84,11 +87,11 @@ def matrixConvert(string):
 
     lType = findLType(string)
     latex = string[lType[0]:lType[1]]
-    print latex
+    #print latex
     rLen = findRLen(latex,lType)
     if "\\begin{array}" in latex:
         if r"\\\\" not in latex:
-            ret = [int(x) for x in latex if isInt(x)]
+            ret = [[int(x)] for x in latex if isInt(x)]
         else:
             split = latex.split(r"\\\\")
             ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
@@ -96,17 +99,16 @@ def matrixConvert(string):
         if r"\\\\" in latex:
             raise Exception('improperly formatted latex, check backslashes/numerical input!')
         if r"\\" not in latex:
-            ret = [int(x) for x in latex if isInt(x)]
+            ret = [[int(x)] for x in latex if isInt(x)]
         else:
             split = latex.split(r"\\")
             ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
     if len(ret):
-        print ret
         rLenCheck(rLen,ret)
         return ret
     raise Exception('improperly formatted latex, check backslashes/numerical input!')
 
-matrixConvert(r"\\left[ \begin{bmatrix} { lll } { 1} & { 2} & { 3} \\ { 1} & { 2} & { 3} \end{bmatrix} \\right]")
+#matrixConvert(r"\\left[ \begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix} \\right]")
 
 # takes an array of elements and returns array of strings of those elements
 def strConv(arr):
@@ -114,13 +116,10 @@ def strConv(arr):
 
 # helper to convert a matrix/vector to a string
 # specifically the values into proper formatted string
-def aToLHelp(arr,morv):
+def aToLHelp(arr):
     mat = []
     tempArr = []
-    if not morv:
-        mat = linalg.matrix(arr)
-    else:
-        mat = arr
+    mat = arr
     for i in mat:
         tempArr.append(" { "+"} & { ".join(strConv(i)))
     return r"} \\".join(tempArr)+"} \end{bmatrix}"
@@ -129,12 +128,8 @@ def aToLHelp(arr,morv):
 def arrToMathJax(matVec):
     arr = matVec
     ret = r"\begin{bmatrix} "
-    
-    mat = False
-    if isinstance(arr[0],Iterable):
-        mat = True
 
-    ret += aToLHelp(arr,mat)
+    ret += aToLHelp(arr)
     return ret
 
 # converts matrix/vector into formatted string for latex
@@ -153,12 +148,23 @@ def arrToLatex(matVec):
 def processBasic(test):
     try:
         matrixConvert(test)
+        return True
     except:
         return False 
     
 
 def check(cType,input1,input2):
-    return 0
+    if cType in ["v_scalar_mult","m_scalar_mult","req1Vec","req1Mat"]:
+        if not processBasic(input1):
+            return False
+    else:
+        if not processBasic(input1) or not processBasic(input2):
+            return False
+    print "pass"
+
+
+
+check("reqVec",r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]","")
 
 ################################################
 
