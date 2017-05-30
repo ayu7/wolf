@@ -4,6 +4,7 @@ var box= document.getElementById("box");
 var boxy=box.getContext("2d");
 var boxContent=document.getElementById("boxContent");
 var clear=document.getElementById("clear");
+var div=document.getElementById("canvas");
 
 //set2
 var box1= document.getElementById("box1");
@@ -76,6 +77,7 @@ var hide=function(){
   box1.setAttribute("hidden", true);
   clear1.setAttribute("hidden", true);
   clear1.removeAttribute("class");
+  div.setAttribute("class", "col-lg-6 col-lg-offset-3");
   console.log("hide");
 };
 
@@ -84,6 +86,7 @@ var show=function(){
   box1.removeAttribute("hidden");
   clear1.removeAttribute("hidden");
   clear1.setAttribute("class", "btn btn-primary btn-sm"); //class is removed/added because once it is added the hidden attribute doesn't work anymore for some reason??
+  div.setAttribute("class", "col-lg-6");
   console.log("show");
 };
 

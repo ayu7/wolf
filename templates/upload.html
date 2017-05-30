@@ -10,8 +10,7 @@
       <h2> Upload your input below! </h2>
 
       <div class="form-group">
-	<div class="col-lg-5"></div>
-        <select id="operation" class="col-lg-2" onchange="change();">
+        <select id="operation" class="col-lg-4 col-lg-offset-4" onchange="change();">
           <option value="default" class="1">Select Operation</option>
           <option value="v_add" class="2">Add Vectors</option>
           <option value="v_subtract" class="2">Subtract Vectors</option>
@@ -39,9 +38,8 @@
           <option value="is_left_invertible" class="1">Left Invertibility</option>
           <option value="is_right_invertible" class="1">Right Invertibility</option>
           <option value="is_hermitian" class="1">Hermitian Matrix Check</option>
-        </select>
-	<div class="col-lg-5"></div> <!-- HOW TO CENTER WITH LESS JANK?? - alan 2017-05-23 -->
-      </div>
+       </select>
+	
 
       <br><br>
       <input type="file" name="input1">
