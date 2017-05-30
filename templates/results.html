@@ -1,12 +1,25 @@
 {% extends "basic.html" %}
 {% block body %}
 
-{{latex}} 
+<div class="row">
+  <center>
+    <h3> Here is what you inputted: </h3>
+    
+    {{input1}} + {{input2}}
 
+    <br><br>
 
-<button class="btn btn-primary btn-sm" id="button">Show Source Code</button>
-<p hidden id="latexCode"> {{latexCode}} </p>
+    <h3> Here is the result: </h3>
+    
+    {{result}}
 
-<script src="../static/js/results.js"></script>
+    
+    <button class="btn btn-primary btn-sm" id="button">Show Source Code</button>
+    <p hidden id="latexCode"> {{latexCode}} </p>
 
+  </center>
+
+  <script src="../static/js/results.js"></script>
+
+</div>
 {% endblock %}

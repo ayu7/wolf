@@ -1,31 +1,31 @@
 {% extends "basic.html" %}
 {% block body %}
-<div class="row">
-
-  <center>
-    <h3> Please enter LaTeX code into the input fields! </h1> <br>
-
 <form action="/parse" method="post">
 
-  <div class="col-lg-6 col-lg-offset-3" id="col1">
-    <p>First Input:</p>
-    <textarea style="height: 300px; width: 400px" class="form-control input-lg" name="input1"></textarea>
-    <!--<input type="text" class="form-control input-lg" name="input1">-->
-  </div>
+  <div class="row">
 
-  <div class="col-lg-6">
-    <p id="label" hidden>Second Input:</p>
-    <textarea style="height: 300px; width: 400px;" id="input2" name="input2" hidden></textarea>
-    
-  </div>
-  <script src="../static/js/type.js"></script>
-</form>
+    <center>
+      <h3> Please enter LaTeX code into the input fields! </h1> <br>
+
+
+<div class="col-lg-6 col-lg-offset-3" id="col1">
+  <p>First Input:</p>
+  <textarea style="height: 300px; width: 400px" class="form-control input-lg" name="input1"></textarea>
+  <!--<input type="text" class="form-control input-lg" name="input1">-->
+</div>
+
+<div class="col-lg-6">
+  <p id="label" hidden>Second Input:</p>
+  <textarea style="height: 300px; width: 400px;" id="input2" name="input2" hidden></textarea>
+  
+</div>
+<script src="../static/js/type.js"></script>
 </center>
 </div>
 
 <br><br><br>
 <div class="row">
- 
+  
   <div class="col-lg-4 col-lg-offset-4">
     <select id="operation" class="form-control" name="operation" onchange="change();">
       <option value="default" class="1">Select Operation</option>
@@ -61,6 +61,8 @@
     <input type="submit" class="form-control input-sm" value="Submit">
   </div>
 </div>
+</form>
+
 {% endblock %}
 
 <!-- BROKEN BOOTSTRAP DROPDOWN

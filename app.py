@@ -73,6 +73,7 @@ def operations():
 def parse():
     ## Inputs
     print "Inputs"
+    print request.form.get("input1")
     input1 = mathpix.matrixConvert(request.form.get("input1"))
     print input1
     input2 = mathpix.matrixConvert(request.form.get("input2"))
