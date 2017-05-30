@@ -171,5 +171,17 @@ angelaY -- 2017-05-25
 juliusF -- 2017-05-23
 - completed basic checking
 
+angelaY -- 2017-05-26
+- added js for frontend changes of going from one input to two
+
+alanC -- 2017-05-29
+- started basic results.html
+
+juliusF -- 2017-05-23
+- basic checking of functions
+
 stephanieY -- 2017-05-30
 - updated README.txt
+
+angelaY -- 2017-05-30
+- finished js for frontend changes
