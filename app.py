@@ -21,22 +21,26 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            "frobenius": linalg.frobenius, # frobenius: Returns the Frobenius norm of a matrix (number)
            "det": linalg.det, # det: Returns the determinant of a square matrix (number)
            "cofactor_matrix": linalg.cofactor_matrix, # cofactor_matrix: Returns the cofactor matrix of a square matrix (matrix)
-           "adjoint": linalg.adjoint,
-           "inverse": linalg.inverse,
-           "power": linalg.power,
-           "system_solver": linalg.system_solver,
-           "gauss": linalg.gauss,
-           "rank": linalg.rank,
-           "is_left_invertible": linalg.is_left_invertible,
-           "is_right_invertible": linalg.is_right_invertible,
-           "is_hermitian": linalg.is_hermitian
+           "adjoint": linalg.adjoint, # adjoint: Returns the adjoint of a square matrix (matrix)
+           "inverse": linalg.inverse, # inverse: Returns the inverse of a square matrix (matrix)
+           "power": linalg.power, # power: Returns the nth power of a square matrix (matrix)
+           "system_solver": linalg.system_solver, # system_solver:  Returns the solution vector for a system of equations (vector)
+           "gauss": linalg.gauss, # gauss: Gaussian elimination algorithm. Reduces a matrix to row echelon form
+           "rank": linalg.rank, # rank: Given a matrix, returns its rank (the number of non-zero rows in reduce row echelon form) (number)
+           "is_left_invertible": linalg.is_left_invertible, # is_left_invertible: Returns true if a given matrix has a left inverse (boolean)
+           "is_right_invertible": linalg.is_right_invertible, # is_right_invertible: Returns true if a given matrix has a right inverse (boolean)
+           "is_hermitian": linalg.is_hermitian # is_hermitian: Returns true if a given matrix is Hermitian (boolean)
            }
 
-reqScalar = ["v_scalar_mult","m_scalar_mult"]
-req1Vec = ["v_euclidean_norm","v_conjugate"]
-req2Vec = ["v_add","v_subtract","dot"]
-req1Mat = ["trace","transpose","m_conjugate","conjugate_transpose","frobenius","det","cofactor_matrix"]
-req2Mat = ["m_add","m_subtract"]
+requirements = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
+                "req1Vec" : ["v_euclidean_norm","v_conjugate"],
+                "req2Vec" : ["v_add","v_subtract","dot"],
+                "req1Mat" : ["trace","transpose","m_conjugate","conjugate_transpose",
+                             "frobenius","det","cofactor_matrix","adjoint","inverse","gauss",
+                             "rank","is_left_invertible","is_right_invertible","is_hermitian"],
+                "req2Mat" : ["m_add","m_subtract"],
+                "reqBoth" : ["system_solver"]
+                }
 
 @app.route("/")
 @app.route("/home")
@@ -89,20 +93,23 @@ def parse():
     print conv2
     result = None
 
-    if op in reqScalar:
-        if mathpix.check(op,input1,input2):
+    if op in requirements["reqScalar"]:
+        if mathpix.check("reqScalar",input1,input2):
             result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
-    if op in req1Vec:
+    if op in requirements["req1Vec"]:
         if mathpix.check("req1Vec",input1,input2):
             result = mathOps[op](input1)
-    if op in req2Vec:
+    if op in requirements["req2Vec"]:
         if mathpix.check("req2Vec",input1,input2):
             result = mathOps[op](input1,input2)
-    if op in req1Mat:
+    if op in requirements["req1Mat"]:
         if mathpix.check("req1Mat",input1,input2):
             result = mathOps[op](input1)
-    if op in req2Mat:
+    if op in requirements["req2Mat"]:
         if mathpix.check("req2Mat",input1,input2):
+            result = mathOps[op](input1,input2)
+    if op in requirements["reqBoth"]:
+        if mathpix.check("reqBoth",input1,input2):
             result = mathOps[op](input1,input2)
 
     resultMJx = arrToMathJax(result)

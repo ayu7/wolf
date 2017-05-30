@@ -150,14 +150,29 @@ def processBasic(test):
         return True
     except:
         return False 
-    
+
+
+# pass requirements to check then cross reference to be able to check inputs
+# do not filter in app.py rather filter within mathpix.py offload filtering work to mathpix.py
 def check(cType,input1,input2):
-    if cType in ["v_scalar_mult","m_scalar_mult","req1Vec","req1Mat"]:
+    if cType in ["reqScalar","req1Vec","req1Mat"]:
         if not processBasic(input1):
             return False
     else:
         if not processBasic(input1) or not processBasic(input2):
             return False
+    if cType == "reqScalar":
+        pass
+    if cType == "req1Vec":
+        pass
+    if cType == "req1Mat":
+        pass
+    if cType == "req2Vec":
+        pass
+    if cType == "req2Mat":
+        pass
+    if cType == "reqBoth":
+        pass
     return True
 
 
