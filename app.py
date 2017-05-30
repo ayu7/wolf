@@ -16,11 +16,11 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            "transpose" : linalg.transpose,     #     transpose: Returns the transpose of a matrix (matrix)
            "v_euclidean_norm": linalg.v_euclidean_norm,    # v_norm: Euclidean norm of a vector (number)
            "v_conjugate": linalg.v_conjugate,   # v_conjugate: complex conjugate of a vector (vector)
-           "m_conjugate": linalg.m_conjugate,
-           "conjugate_transpose": linalg.conjugate_transpose,
-           "frobenius": linalg.frobenius,
-           "det": linalg.det,
-           "cofactor_matrix": linalg.cofactor_matrix,
+           "m_conjugate": linalg.m_conjugate, # m_conjugate: Returns the conjugate of a matrix (matrix)
+           "conjugate_transpose": linalg.conjugate_transpose, # conjugate_transpose: Returns the conjugate transpose of a matrix (matrix)
+           "frobenius": linalg.frobenius, # frobenius: Returns the Frobenius norm of a matrix (number)
+           "det": linalg.det, # det: Returns the determinant of a square matrix (number)
+           "cofactor_matrix": linalg.cofactor_matrix, # cofactor_matrix: Returns the cofactor matrix of a square matrix (matrix)
            "adjoint": linalg.adjoint,
            "inverse": linalg.inverse,
            "power": linalg.power,
@@ -35,7 +35,7 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
 reqScalar = ["v_scalar_mult","m_scalar_mult"]
 req1Vec = ["v_euclidean_norm","v_conjugate"]
 req2Vec = ["v_add","v_subtract","dot"]
-req1Mat = ["trace","transpose"]
+req1Mat = ["trace","transpose","m_conjugate","conjugate_transpose","frobenius","det","cofactor_matrix"]
 req2Mat = ["m_add","m_subtract"]
 
 @app.route("/")

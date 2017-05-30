@@ -144,7 +144,6 @@ def arrToLatex(matVec):
 
 #print arrToMathJax(matrixConvert(r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"))
 
-# unfinished
 def processBasic(test):
     try:
         matrixConvert(test)
@@ -152,7 +151,6 @@ def processBasic(test):
     except:
         return False 
     
-
 def check(cType,input1,input2):
     if cType in ["v_scalar_mult","m_scalar_mult","req1Vec","req1Mat"]:
         if not processBasic(input1):
@@ -160,11 +158,11 @@ def check(cType,input1,input2):
     else:
         if not processBasic(input1) or not processBasic(input2):
             return False
-    print "pass"
+    return True
 
 
 
-check("reqVec",r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]","")
+#check("reqVec",r"\begin{bmatrix} { l } { 1} \\ { 2} \\ { 3} \end{bmatrix}","")
 
 ################################################
 

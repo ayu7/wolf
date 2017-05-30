@@ -170,3 +170,6 @@ angelaY -- 2017-05-25
 
 juliusF -- 2017-05-23
 - completed basic checking
+
+stephanieY -- 2017-05-30
+- updated README.txt
