@@ -79,9 +79,9 @@ def parse():
     ## Inputs
     print "Inputs"
     print request.form.get("input1")
-    input1 = request.form.get("input1"))
+    input1 = request.form.get("input1")
     print input1
-    input2 = request.form.get("input2")) # if scalar: converts to [num]
+    input2 = request.form.get("input2") # if scalar: converts to [num]
     print input2
     op = request.form.get("operation")
     print op
