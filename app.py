@@ -1,6 +1,11 @@
 from flask import Flask, render_template, url_for, request, redirect
 from utils import mathpix, linalg
+from werkzeug.utils import secure_filename
 import json
+import os
+
+UPLOAD_FOLDER = '/utils/images'
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 app = Flask(__name__)
 
@@ -79,9 +84,9 @@ def parse():
     ## Inputs
     print "Inputs"
     print request.form.get("input1")
-    input1 = request.form.get("input1"))
+    input1 = request.form.get("input1")
     print input1
-    input2 = request.form.get("input2")) # if scalar: converts to [num]
+    input2 = request.form.get("input2") # if scalar: converts to [num]
     print input2
     op = request.form.get("operation")
     print op
@@ -101,24 +106,24 @@ def parse():
 
     
     
-    # if op in requirements["reqScalar"]:
-    #     if mathpix.check("reqScalar",input1,input2):
-    #         result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
-    # if op in requirements["req1Vec"]:
-    #     if mathpix.check("req1Vec",input1,input2):
-    #         result = mathOps[op](input1)
-    # if op in requirements["req2Vec"]:
-    #     if mathpix.check("req2Vec",input1,input2):
-    #         result = mathOps[op](input1,input2)
-    # if op in requirements["req1Mat"]:
-    #     if mathpix.check("req1Mat",input1,input2):
-    #         result = mathOps[op](input1)
-    # if op in requirements["req2Mat"]:
-    #     if mathpix.check("req2Mat",input1,input2):
-    #         result = mathOps[op](input1,input2)
-    # if op in requirements["reqBoth"]:
-    #     if mathpix.check("reqBoth",input1,input2):
-    #         result = mathOps[op](input1,input2)
+    if op in requirements["reqScalar"]:
+        #if mathpix.check("reqScalar",input1,input2):
+        result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
+    if op in requirements["req1Vec"]:
+        #if mathpix.check("req1Vec",input1,input2):
+        result = mathOps[op](input1)
+    if op in requirements["req2Vec"]:
+        #if mathpix.check("req2Vec",input1,input2):
+        result = mathOps[op](input1,input2)
+    if op in requirements["req1Mat"]:
+        #if mathpix.check("req1Mat",input1,input2):
+        result = mathOps[op](input1)
+    if op in requirements["req2Mat"]:
+        #if mathpix.check("req2Mat",input1,input2):
+        result = mathOps[op](input1,input2)
+    if op in requirements["reqBoth"]:
+        #if mathpix.check("reqBoth",input1,input2):
+        result = mathOps[op](input1,input2)
 
     resultMJx = arrToMathJax(result)
     print resultMJx
@@ -142,6 +147,12 @@ def imgProcess():
     #latex = retJSON['latex']
     #result = matrixConvert(latex)
     return render_template("results.html", latex=content)
+
+@app.route("/fileProcess", methods=['POST','GET'])
+def fileProcess():
+    print request.files
+    content = request.files.get("input1")
+    return redirect("/")
 
 # Turn off before release
 if __name__ == "__main__":
