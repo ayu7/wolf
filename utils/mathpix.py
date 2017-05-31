@@ -13,7 +13,7 @@ def queryFPath(image):
     print image_uri
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image_uri}),
-                      headers={"app_id": "efrey", "app_key": "5f578f9e0320da38afcf226cd61b6513",
+                      headers={"app_id": "test", "app_key": "thisisnotourkey",
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
 
@@ -22,7 +22,7 @@ def queryFPath(image):
 def queryURI(image):
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image}),
-                      headers={"app_id": "efrey", "app_key": "5f578f9e0320da38afcf226cd61b6513",
+                      headers={"app_id": "test", "app_key": "thisisnotourkey",
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
 
@@ -149,35 +149,78 @@ def processBasic(test):
         matrixConvert(test)
         return True
     except:
-        return False 
+        return False
+    return False
 
+def vecTest(test):
+    
+    return False
 
+req = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
+                "req1Vec" : ["v_euclidean_norm","v_conjugate","v_scalar_mult"],
+                "req2Vec" : ["v_add","v_subtract","dot"],
+                "req1Mat" : ["trace","transpose","m_conjugate","conjugate_transpose",
+                             "frobenius","det","cofactor_matrix","adjoint","inverse","gauss",
+                             "rank","is_left_invertible","is_right_invertible",
+                             "is_hermitian","m_scalar_mult","power"],
+                "req2Mat" : ["m_add","m_subtract"],
+                "reqBoth" : ["system_solver"]
+                }
 # pass requirements to check then cross reference to be able to check inputs
 # do not filter in app.py rather filter within mathpix.py offload filtering work to mathpix.py
-def check(cType,input1,input2):
-    if cType in ["reqScalar","req1Vec","req1Mat"]:
+def check1(op,input1,input2,reqDict):
+    if op in reqDict["req1Vec"]+reqDict["req1Mat"]:
         if not processBasic(input1):
-            return False
+            return (False,False)
+        if op in reqDict["reqScalar"]:
+            return (True,True)
+        return (True,False)
     else:
         if not processBasic(input1) or not processBasic(input2):
+            return (False,False)
+        return (True,True)
+    raise Exception("Error should not be reached, improper return statements")
+
+def check2(op,input1,input2,reqDict):
+    if op in reqDict["reqScalar"]:
+        if not isInt(input2[0]):
             return False
-    if cType == "reqScalar":
-        pass
-    if cType == "req1Vec":
-        pass
-    if cType == "req1Mat":
-        pass
-    if cType == "req2Vec":
-        pass
-    if cType == "req2Mat":
-        pass
-    if cType == "reqBoth":
-        pass
+    if op in reqDict["req1Vec"]:
+        if not vecTest(input1):
+            pass
+    # if cType in ["reqScalar","req1Vec","req1Mat"]:
+    #     if not processBasic(input1):
+    #         return False
+    # else:
+    #     if not processBasic(input1) or not processBasic(input2):
+    #         return False
+    # if cType == "reqScalar":
+    #     pass
+    # if cType == "req1Vec":
+    #     pass
+    # if cType == "req1Mat":
+    #     pass
+    # if cType == "req2Vec":
+    #     pass
+    # if cType == "req2Mat":
+    #     pass
+    # if cType == "reqBoth":
+    #     pass
     return True
 
+def check(op,input1,input2,reqDict):
+    initT = check1(op,input1,input2,reqDict)
+    if initT[0] or initT[1]:
+        if initT[0]:
+            arr1 = matrixConvert(input1)
+        if initT[1]:
+            arr2 = matrixConvert(input2)
+    else:
+        return False    
+    
+    return True
 
-
-#check("reqVec",r"\begin{bmatrix} { l } { 1} \\ { 2} \\ { 3} \end{bmatrix}","")
+print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
 
 ################################################
 

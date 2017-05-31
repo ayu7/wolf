@@ -33,11 +33,12 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            }
 
 requirements = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
-                "req1Vec" : ["v_euclidean_norm","v_conjugate"],
+                "req1Vec" : ["v_euclidean_norm","v_conjugate","v_scalar_mult"],
                 "req2Vec" : ["v_add","v_subtract","dot"],
                 "req1Mat" : ["trace","transpose","m_conjugate","conjugate_transpose",
                              "frobenius","det","cofactor_matrix","adjoint","inverse","gauss",
-                             "rank","is_left_invertible","is_right_invertible","is_hermitian"],
+                             "rank","is_left_invertible","is_right_invertible",
+                             "is_hermitian","m_scalar_mult","power"],
                 "req2Mat" : ["m_add","m_subtract"],
                 "reqBoth" : ["system_solver"]
                 }
@@ -78,12 +79,17 @@ def parse():
     ## Inputs
     print "Inputs"
     print request.form.get("input1")
-    input1 = mathpix.matrixConvert(request.form.get("input1"))
+    input1 = request.form.get("input1"))
     print input1
-    input2 = mathpix.matrixConvert(request.form.get("input2"))
+    input2 = request.form.get("input2")) # if scalar: converts to [num]
     print input2
     op = request.form.get("operation")
     print op
+
+    
+    #mathpix.check(op,input1,input2,requirements)
+    input1 = mathpix.matrixConvert(input1)
+    input2 = mathpix.matrixConvert(input2)
 
     ## Outputs
     print "Outputs"
@@ -93,24 +99,26 @@ def parse():
     print conv2
     result = None
 
-    if op in requirements["reqScalar"]:
-        if mathpix.check("reqScalar",input1,input2):
-            result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
-    if op in requirements["req1Vec"]:
-        if mathpix.check("req1Vec",input1,input2):
-            result = mathOps[op](input1)
-    if op in requirements["req2Vec"]:
-        if mathpix.check("req2Vec",input1,input2):
-            result = mathOps[op](input1,input2)
-    if op in requirements["req1Mat"]:
-        if mathpix.check("req1Mat",input1,input2):
-            result = mathOps[op](input1)
-    if op in requirements["req2Mat"]:
-        if mathpix.check("req2Mat",input1,input2):
-            result = mathOps[op](input1,input2)
-    if op in requirements["reqBoth"]:
-        if mathpix.check("reqBoth",input1,input2):
-            result = mathOps[op](input1,input2)
+    
+    
+    # if op in requirements["reqScalar"]:
+    #     if mathpix.check("reqScalar",input1,input2):
+    #         result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
+    # if op in requirements["req1Vec"]:
+    #     if mathpix.check("req1Vec",input1,input2):
+    #         result = mathOps[op](input1)
+    # if op in requirements["req2Vec"]:
+    #     if mathpix.check("req2Vec",input1,input2):
+    #         result = mathOps[op](input1,input2)
+    # if op in requirements["req1Mat"]:
+    #     if mathpix.check("req1Mat",input1,input2):
+    #         result = mathOps[op](input1)
+    # if op in requirements["req2Mat"]:
+    #     if mathpix.check("req2Mat",input1,input2):
+    #         result = mathOps[op](input1,input2)
+    # if op in requirements["reqBoth"]:
+    #     if mathpix.check("reqBoth",input1,input2):
+    #         result = mathOps[op](input1,input2)
 
     resultMJx = arrToMathJax(result)
     print resultMJx
