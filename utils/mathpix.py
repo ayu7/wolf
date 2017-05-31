@@ -188,39 +188,24 @@ def check2(op,input1,input2,reqDict):
     if op in reqDict["req1Vec"]:
         if not vecTest(input1):
             pass
-    # if cType in ["reqScalar","req1Vec","req1Mat"]:
-    #     if not processBasic(input1):
-    #         return False
-    # else:
-    #     if not processBasic(input1) or not processBasic(input2):
-    #         return False
-    # if cType == "reqScalar":
-    #     pass
-    # if cType == "req1Vec":
-    #     pass
-    # if cType == "req1Mat":
-    #     pass
-    # if cType == "req2Vec":
-    #     pass
-    # if cType == "req2Mat":
-    #     pass
-    # if cType == "reqBoth":
-    #     pass
     return True
 
 def check(op,input1,input2,reqDict):
     initT = check1(op,input1,input2,reqDict)
+    arr1 = None
+    arr2 = None
     if initT[0] or initT[1]:
         if initT[0]:
             arr1 = matrixConvert(input1)
         if initT[1]:
             arr2 = matrixConvert(input2)
     else:
-        return False    
-    
+        return False
+    if initT[0] and initT[1]:
+        pass
     return True
 
-print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
+#print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
 
 ################################################
 
