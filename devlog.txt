@@ -185,3 +185,6 @@ stephanieY -- 2017-05-30
 
 angelaY -- 2017-05-30
 - finished js for frontend changes
+
+stephanieY -- 2017-05-31
+- updated README.txt
