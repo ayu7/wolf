@@ -115,3 +115,22 @@ var change=function(){
   else
     show();
 };
+
+
+/*
+var dataURL = canvas.toDataURL();
+$(function() {
+    $(form).submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+              type: "POST",
+              url: "script.php",
+              data: { 
+                 imgBase64: dataURL
+              }
+         }).done(function(o) {
+              console.log('saved image'); 
+              $.post(url, form.serialize(), function(data) {
+                     console.log('saved form')
+              };
+    });*/
