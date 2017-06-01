@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import base64
-#import requests
+import requests
 import json
 import linalg
 from collections import Iterable
@@ -10,12 +10,11 @@ from collections import Iterable
 # takes argument image which is a filepath
 def queryFPath(image):
     image_uri = "data:image/jpg;base64," + base64.b64encode(open(image, "rb").read())
-    print image_uri
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image_uri}),
-                      headers={"app_id": "test", "app_key": "thisisnotourkey",
+                      headers={"app_id": "efrey", "app_key": "5f578f9e0320da38afcf226cd61b6513",
                                "Content-type": "application/json"})
-    return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
+    return json.loads(r.text)
 
 #queryFPath("testImages/vec1.jpg")
 
@@ -37,7 +36,7 @@ def isInt(a):
 
 # finds and returns the type of matrix/vector
 def findLType(string):
-    lTypeSet = [(r"\\begin{array}",r"\\end{array}"),
+    lTypeSet = [(r"\begin{array}",r"\end{array}"),
                 (r"\begin{bmatrix}",r"\end{bmatrix}"),
                 (r"\begin{vmatrix}",r"\end{vmatrix}"),
                 (r"\begin{Vmatrix}",r"\end{Vmatrix}")]
@@ -89,20 +88,24 @@ def matrixConvert(string):
     latex = string[lType[0]:lType[1]]
     #print latex
     rLen = findRLen(latex,lType)
-    if "\\begin{array}" in latex:
-        if r"\\\\" not in latex:
-            ret = [[int(x)] for x in latex if isInt(x)]
-        else:
-            split = latex.split(r"\\\\")
-            ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
+
+    # suddenly deprecated, leave this alone for robustness testing if anything changes
+    # if "\begin{array}" in latex:
+    #     if r"\\" not in latex:
+    #         ret = [[int(x)] for x in latex if isInt(x)]
+    #     else:
+    #         split = latex.split(r"\\")
+    #         ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
+    # else:
+        
+    if r"\\\\" in latex:
+        raise Exception('improperly formatted latex, check backslashes/numerical input!')
+    if r"\\" not in latex:
+        ret = [[int(x)] for x in latex if isInt(x)]
     else:
-        if r"\\\\" in latex:
-            raise Exception('improperly formatted latex, check backslashes/numerical input!')
-        if r"\\" not in latex:
-            ret = [[int(x)] for x in latex if isInt(x)]
-        else:
-            split = latex.split(r"\\")
-            ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
+        split = latex.split(r"\\")
+        ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
+            
     if len(ret):
         rLenCheck(rLen,ret)
         return ret
@@ -219,7 +222,7 @@ def check(op,input1,input2,reqDict):
         return False
     return True
 
-print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
+#print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
 # uncomment requests import!!!
 
 ################################################

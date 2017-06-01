@@ -1,14 +1,17 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, send_from_directory
 from utils import mathpix, linalg
 from werkzeug.utils import secure_filename
 import json
 import os
 
-UPLOAD_FOLDER = '/utils/images'
+basedir = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = 'utils/images/'
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+#print os.path.join(basedir, app.config['UPLOAD_FOLDER'])
 
 # will add all math.py ops later
 mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (vector)
@@ -152,23 +155,46 @@ def imgProcess():
 def allowedFile(fname):
     return '.' in fname and fname.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def saveFile(fileT):
+    filename = secure_filename(fileT.filename)
+    fileT.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    return UPLOAD_FOLDER+filename
+
+
 @app.route("/fileProcess", methods=['POST','GET'])
 def fileProcess():
     op = request.form['operation']
     if request.method == 'POST':
         if 'input1' not in request.files or 'input2' not in request.files:
-            return redirect(request.url)
+            return redirect("/")
         file1 = request.files['input1']
         file2 = request.files['input2']
         if op in requirements['req1Vec']+requirements['req1Mat'] and op not in requirements['reqScalar']:
             if file1.filename == '':
-                return redirect(request.url)
+                return redirect("/")
+            if file1 and allowedFile(file1.filename):
+                filename = secure_filename(file1.filename)
+                fromAppFPath = os.path.join(app.config['UPLOAD_FOLDER'],filename)
+                print fromAppFPath
+                fromRootFPath = os.path.join(basedir,fromAppFPath)
+                print fromRootFPath
+                
+                file1.save(fromRootFPath)
+                ret = mathpix.queryFPath(fromAppFPath)
+                os.remove(fromRootFPath)
+
+                print ret['latex']
+                input1 = mathpix.matrixConvert(ret['latex'])
+                print input1
+                result = mathOps[op](input1)
+                print result
+                
         else:
             if file1.filename == '' or file2.filename == '':
-                return redirect(request.url)
+                return redirect("/")
         
 
-    return redirect(request.url)
+    return redirect("/")
 
 # Turn off before release
 if __name__ == "__main__":
