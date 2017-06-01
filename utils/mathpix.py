@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import base64
-import requests
+#import requests
 import json
 import linalg
 from collections import Iterable
@@ -153,8 +153,10 @@ def processBasic(test):
     return False
 
 def vecTest(test):
-    
-    return False
+    return len(test[0]) == 1 # no need to check all rows, matrixConvert has rlenCheck so all rows are equal length
+
+def matTest(test):
+    return len(test[0]) > 1
 
 req = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
                 "req1Vec" : ["v_euclidean_norm","v_conjugate","v_scalar_mult"],
@@ -187,7 +189,19 @@ def check2(op,input1,input2,reqDict):
             return False
     if op in reqDict["req1Vec"]:
         if not vecTest(input1):
-            pass
+            return False
+    if op in reqDict["req2Vec"]:
+        if not vecTest(input1) or not vecTest(input2):
+            return False
+    if op in reqDict["req1Mat"]:
+        if not matTest(input1):
+            return False
+    if op in reqDict["req2Mat"]:
+        if not matTest(input1) or not matTest(input2):
+            return False
+    if op in reqDict["reqBoth"]:
+        if (not matTest(input1) or not vecTest(input2)) and (not vecTest(input1) or not matTest(input2)):
+            return False
     return True
 
 def check(op,input1,input2,reqDict):
@@ -201,74 +215,11 @@ def check(op,input1,input2,reqDict):
             arr2 = matrixConvert(input2)
     else:
         return False
-    if initT[0] and initT[1]:
-        pass
+    if not check2(op,arr1,arr2,reqDict):
+        return False
     return True
 
-#print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
+print check("v_conjugate",r"\begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix}","",req)
+# uncomment requests import!!!
 
 ################################################
-
-
-# ################################################
-# # finds matrix closest to the beginning of the string
-# # returns tuple of strings to look for/slice with
-# def findLType(string):
-#     closestArr = 9999
-#     ret = None
-#     TypeSet = [(r"\\begin{array}",r"\\end{array}"),
-#                 (r"\begin{bmatrix}",r"\end{bmatrix}"),
-#                 (r"\begin{vmatrix}",r"\end{vmatrix}"),
-#                 (r"\begin{Vmatrix}",r"\end{Vmatrix}")]
-
-#     for i in TypeSet:
-#         try:
-#             curInd = string.index(i[0])
-#             if curInd < closestArr and curInd >= 0:
-#                 closestArr = string.index(i[0])
-#                 ret = i
-#                 #print ret
-#         except:
-#             pass
-#     return ret
-
-
-# # all of this is deprecated: get rid of it
-# # Works
-# # problems of note:
-# #  - amount of backslashes is variable, find a way to standardize
-# #  - different latex syntax is given from mathpix than recent update
-# #     - Mathpix: r"\\begin{array} ... \\end{array}"
-# #     - Everyone else: r"\begin{bmatrix} ... \end{bmatrix}"
-# #  - sanitation of content of an array:
-# #     - This is an array:     r"\\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]"
-# #     - This is not an array: r"\\left[ \\begin{array} not correct content \\end{array} \\right]"
-# #     - Current parser cannot tell the difference
-# # possible solutions:
-# #     - Sanitize/standardize then parse
-# #     - Visitor object/function: google this
-# #     - Two different functions for mathpix parsing and everyone else parsing
-
-# # Takes string of LaTex matrix or vector, outputs list of matrices in
-# def matrixFilter(string):
-#     Type = findLType(string) # returns a begin and end string depending on matrix closest to beginning of string
-#     try:
-#         if(len(string)):
-#             return [string[string.index(Type[0]):string.index(Type[1])]] + matrixFilter(string[string.index(Type[1])+len(Type[1]):])
-#         else:
-#             return []
-#     except:
-#         return [] # concatenating a None to a list will nullify the list wtf
-
-# # deprecated
-# def latexConvert(latex):
-#     string = latex
-#     matrices = []
-#     for i in matrixFilter(string):
-#         matrices.append(matrixConvert(i))
-#     # utilize switch for operations
-#     # cases include different combinations of inputs
-#     return matrices
-
-# # string = matrixFilter(r"\\begin{bmatrix}  asdsddgsdfg \\end{bmatrix} \\begin{Vmatrix}  second matrix \\end{Vmatrix}")
-# # print string

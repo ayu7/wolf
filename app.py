@@ -8,6 +8,7 @@ UPLOAD_FOLDER = '/utils/images'
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # will add all math.py ops later
 mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (vector)
@@ -92,7 +93,7 @@ def parse():
     print op
 
     
-    #mathpix.check(op,input1,input2,requirements)
+    mathpix.check(op,input1,input2,requirements)
     input1 = mathpix.matrixConvert(input1)
     input2 = mathpix.matrixConvert(input2)
 
@@ -148,11 +149,26 @@ def imgProcess():
     #result = matrixConvert(latex)
     return render_template("results.html", latex=content)
 
+def allowedFile(fname):
+    return '.' in fname and fname.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route("/fileProcess", methods=['POST','GET'])
 def fileProcess():
-    print request.files
-    content = request.files.get("input1")
-    return redirect("/")
+    op = request.form['operation']
+    if request.method == 'POST':
+        if 'input1' not in request.files or 'input2' not in request.files:
+            return redirect(request.url)
+        file1 = request.files['input1']
+        file2 = request.files['input2']
+        if op in requirements['req1Vec']+requirements['req1Mat'] and op not in requirements['reqScalar']:
+            if file1.filename == '':
+                return redirect(request.url)
+        else:
+            if file1.filename == '' or file2.filename == '':
+                return redirect(request.url)
+        
+
+    return redirect(request.url)
 
 # Turn off before release
 if __name__ == "__main__":
