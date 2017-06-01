@@ -1,8 +1,9 @@
-from flask import Flask, render_template, url_for, request, redirect, send_from_directory
+from flask import Flask, render_template, url_for, request, redirect
 from utils import mathpix, linalg
 from werkzeug.utils import secure_filename
 import json
 import os
+import urllib3
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = 'utils/images/'
@@ -160,9 +161,9 @@ def saveFile(fileT):
     fileT.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return UPLOAD_FOLDER+filename
 
-
 @app.route("/fileProcess", methods=['POST','GET'])
 def fileProcess():
+    urllib3.disable_warnings()
     op = request.form['operation']
     if request.method == 'POST':
         if 'input1' not in request.files or 'input2' not in request.files:
@@ -183,18 +184,53 @@ def fileProcess():
                 ret = mathpix.queryFPath(fromAppFPath)
                 os.remove(fromRootFPath)
 
-                print ret['latex']
+                #print ret['latex']
                 input1 = mathpix.matrixConvert(ret['latex'])
                 if len(input1[0]) == 1:
                     input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker
                 print input1
                 result = mathOps[op](input1)
+                latex = mathpix.arrToLatex(result)
                 print result
-                
+                return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
         else:
             if file1.filename == '' or file2.filename == '':
                 return redirect("/")
-        
+            if file1 and file2 and allowedFile(file1.filename) and allowedFile(file2.filename):
+                # can be a function
+                fname1 = secure_filename(file1.filename)
+                fname2 = secure_filename(file2.filename)
+                fAppFPath1 = os.path.join(app.config['UPLOAD_FOLDER'],fname1)
+                fAppFPath2 = os.path.join(app.config['UPLOAD_FOLDER'],fname2)
+                fRootFPath1 = os.path.join(basedir,fAppFPath1)
+                fRootFPath2 = os.path.join(basedir,fAppFPath2)
+
+                # can be a function
+                file1.save(fRootFPath1)
+                file2.save(fRootFPath2)
+
+                # can be a function
+                json1 = mathpix.queryFPath(fAppFPath1)
+                json2 = mathpix.queryFPath(fAppFPath2)
+
+                # can be a function
+                os.remove(fRootFPath1)
+                if fname1 != fname2:
+                    os.remove(fRootFPath2)
+
+                # can be a function that every math processor uses
+                input1 = mathpix.matrixConvert(json1['latex'])
+                input2 = mathpix.matrixConvert(json2['latex'])
+                if len(input1[0]) == 1:
+                    input1 = linalg.vector(input1)
+                if len(input2[0]) == 1:
+                    input2 = linalg.vector(input2)
+
+                print input1
+                print input2
+                result = mathOps[op](input1,input2)
+                print result
+                
 
     return redirect("/")
 
