@@ -15,11 +15,25 @@ var clear1=document.getElementById("clear1");
 var intervalID;
 var x,y;
 
+var fillBack=function(x){ // 0 fills both canvas, 1 fills first, 2 fills second
+    if (x==0 || x==1){
+	boxy.fillStyle="white";
+	boxy.fillRect(0,0,box.width, box.height);
+}
+    if (x==0 || x==2){
+	boxy1.fillStyle="white";
+	boxy1.fillRect(0,0,box.width, box.height);
+}
+    console.log("fill"+x);
+};
+
+fillBack(0);
+
 //updates mouse position everytime it moves
 var updateMouse=function(e){
     x = e.offsetX;
     y = e.offsetY;
-}
+};
 
 var animate=function(){
 
@@ -53,6 +67,7 @@ var clearIt= function(e){
   e.preventDefault();
   boxy.clearRect(0,0,box.width, box.height);
   boxy.beginPath();
+  fillBack(1);
 };
 
 var clearIt1= function(e){
@@ -60,6 +75,7 @@ var clearIt1= function(e){
   e.preventDefault();
   boxy1.clearRect(0,0,box.width, box.height);
   boxy1.beginPath();
+  fillBack(2);
 };
 
 clear.addEventListener("click", clearIt);
