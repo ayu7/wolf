@@ -3,5 +3,18 @@ body {
 }
 
 .jumbotron {
-    color: #EEEEEE;
+<<<<<<< HEAD
+    background-color: rgba(256, 256, 256, 0.4);
+    color: #000000;
+}
+
+.list-group-item {
+    background-color: rgba(256, 256, 256, 0.9);
+    color: #000000;
+}
+.btn {
+    background-color: #5386E4;
+=======
+    
+>>>>>>> d4b6c344ba55ec73955b942fa79b2688c408766f
 }
