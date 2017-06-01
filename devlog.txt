@@ -188,3 +188,7 @@ angelaY -- 2017-05-30
 
 stephanieY -- 2017-05-31
 - updated README.txt
+
+juliusF -- 2017-05-31
+- Getting image uploading going
+- Nearly finished with checker
