@@ -192,3 +192,4 @@ stephanieY -- 2017-05-31
 juliusF -- 2017-05-31
 - Getting image uploading going
 - Nearly finished with checker
+- Image uploading passes to middleware, need to clean up backend parsing
