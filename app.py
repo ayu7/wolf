@@ -185,6 +185,8 @@ def fileProcess():
 
                 print ret['latex']
                 input1 = mathpix.matrixConvert(ret['latex'])
+                if len(input1[0]) == 1:
+                    input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker
                 print input1
                 result = mathOps[op](input1)
                 print result

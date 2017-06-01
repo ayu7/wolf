@@ -12,7 +12,7 @@ def queryFPath(image):
     image_uri = "data:image/jpg;base64," + base64.b64encode(open(image, "rb").read())
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image_uri}),
-                      headers={"app_id": "efrey", "app_key": "5f578f9e0320da38afcf226cd61b6513",
+                      headers={"app_id": "test", "app_key": "thisisnotourkey",
                                "Content-type": "application/json"})
     return json.loads(r.text)
 
