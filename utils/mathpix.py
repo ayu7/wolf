@@ -84,6 +84,9 @@ def matrixConvert(string):
     # example vector
     # \\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]
 
+    if isInt(string):
+        return int(string)
+    
     lType = findLType(string)
     latex = string[lType[0]:lType[1]]
     #print latex
@@ -97,7 +100,6 @@ def matrixConvert(string):
     #         split = latex.split(r"\\")
     #         ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
     # else:
-        
     if r"\\\\" in latex:
         raise Exception('improperly formatted latex, check backslashes/numerical input!')
     if r"\\" not in latex:
@@ -112,6 +114,7 @@ def matrixConvert(string):
     raise Exception('improperly formatted latex, check backslashes/numerical input!')
 
 #matrixConvert(r"\\left[ \begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix} \\right]")
+#print matrixConvert(r"6")
 
 # takes an array of elements and returns array of strings of those elements
 def strConv(arr):

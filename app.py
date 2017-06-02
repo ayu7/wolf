@@ -74,6 +74,64 @@ def upload():
 def operations():
     return render_template("operations.html")
 
+def makeVec(input):
+            try:
+                if len(input1[0]) == 1:
+                    return linalg.vector(input)
+                else: # separation of matrices and vectors
+                    return input
+            except: # if input is a scalar it is not iterable
+                return input
+
+# try and catch in operateProc filter, kick user to home and implement flash with exception message
+def whichScalar(in1,in2):
+    if mathpix.isInt(in1):
+        return in1
+    if mathpix.isInt(in2):
+        return in2
+    else:
+        raise Exception("neither input is a scalar")
+
+# return dictionary of mathjaxed inputs/outputs/result, result latex code
+def operateProc(op,in1,in2,reqDict):
+    input1 = None
+    input2 = None
+
+    #mathpix.check(op,input1,input2,requirements)
+    
+    if op in reqDict['req1Vec']+reqDict['req1Mat'] and not op in reqDict['reqScalar']:
+        input1 = mathpix.matrixConvert(in1)
+        input2 = ""
+
+        if len(input1[0]) == 1:
+            input1 = linalg.vector(input1)
+    else:
+        input1 = makeVec(mathpix.matrixConvert(in1))
+        input2 = makeVec(mathpix.matrixConvert(in2))
+
+    
+    dIn1 = mathpix.arrToMathJax(input1)
+    dIn2 = mathpix.arrToMathJax(input2)
+
+    result = None
+
+    if op in requirements["reqScalar"]:
+        #scalar = whichScalar(input1,input2)
+        result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
+    if op in requirements["req1Vec"]:
+        result = mathOps[op](input1)
+    if op in requirements["req2Vec"]:
+        result = mathOps[op](input1,input2)
+    if op in requirements["req1Mat"]:
+        result = mathOps[op](input1)
+    if op in requirements["req2Mat"]:
+        result = mathOps[op](input1,input2)
+    if op in requirements["reqBoth"]:
+        vector = whichVector(input1,input2)
+        result = mathOps[op](input1,input2)
+    
+
+
 # working:
 # - addvector
 # - subvector
