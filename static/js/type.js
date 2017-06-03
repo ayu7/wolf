@@ -6,6 +6,7 @@ var div= document.getElementById("col1");
 var hide=function(){
   label.setAttribute("hidden", true);
   input.setAttribute("hidden", true);
+  input.removeAttribute("class");
   div.setAttribute("class", "col-lg-6 col-lg-offset-3");
   console.log("hide");
 };
@@ -14,6 +15,7 @@ var hide=function(){
 var show=function(){
   label.removeAttribute("hidden");
   input.removeAttribute("hidden");
+  input.setAttribute("class", "form-control input-lg")
   div.setAttribute("class", "col-lg-6");
   console.log("show");
 };

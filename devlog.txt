@@ -193,3 +193,6 @@ juliusF -- 2017-05-31
 - Getting image uploading going
 - Nearly finished with checker
 - Image uploading passes to middleware, need to clean up backend parsing
+
+angelaY -- 2017-06-01
+- drew white background for canvases so that image renders properly for mathpix
