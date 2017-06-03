@@ -246,8 +246,8 @@ def fileProcess():
                 file1.save(fromRootFPath)
                 ret = mathpix.queryFPath(fromAppFPath)
                 os.remove(fromRootFPath)
-
-                #print ret['latex']
+                print ret
+                print ret['latex']
                 input1 = mathpix.matrixConvert(ret['latex'])
                 if len(input1[0]) == 1:
                     input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker

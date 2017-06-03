@@ -38,6 +38,14 @@ def isInt(a):
     except:
         return False
 
+# Checks/Returns if 'a' is convertible to float
+def isNum(a):
+    try:
+        float(a)
+        return True
+    except:
+        return False
+
 # finds and returns the type of matrix/vector
 def findLType(string):
     lTypeSet = [(r"\begin{array}",r"\end{array}"),
@@ -152,6 +160,8 @@ def arrToMathJax(matVec):
 
 # converts matrix/vector into formatted string for latex
 def arrToLatex(matVec):
+    if isInt(matVec) or isNum(matVec):
+        return matVec
     arr = matVec
     rlen = len(arr)
     if isinstance(arr[0],Iterable):
