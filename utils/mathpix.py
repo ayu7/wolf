@@ -67,6 +67,10 @@ def findRLen(string,lType):
 # checks if each row matches given row length
 def rLenCheck(rlen,mat):
     rLen = rlen
+    print "rLen below ==="
+    print rLen
+    print "mat below ==="
+    print mat
     if len(mat[0]) == 1: # necessary for horizontal to vertical conversion of vectors
         rLen = 1
     for i in mat:
@@ -78,6 +82,9 @@ def rLenCheck(rlen,mat):
 # - "\\\\" in arrays with "\begin{bmatrix}"
 # - nonnumerical matrix values
 def matrixConvert(string):
+    print "fasdfasdfa matrixconvert"
+    print string
+    print "fasdfasdfad end"
     ret = []
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
@@ -109,6 +116,7 @@ def matrixConvert(string):
         ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
             
     if len(ret):
+        print "checking rlen"
         rLenCheck(rLen,ret)
         return ret
     raise Exception('improperly formatted latex, check backslashes/numerical input!')

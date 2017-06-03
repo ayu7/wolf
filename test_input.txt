@@ -2,10 +2,10 @@ LaTeX Vector:
 
 [1,2,3] =>
 
-\begin{bmatrix}
+\begin{bmatrix} { l }
 {1} \\
 {2} \\
-{3} \\
+{3} 
 \end{bmatrix}
 
 LaTeX Matrix:

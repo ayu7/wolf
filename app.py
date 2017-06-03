@@ -146,10 +146,9 @@ def operateProc(op,in1,in2,reqDict):
 def parse():
     ## Inputs
     print "Inputs"
-    print request.form.get("input1")
     input1 = request.form.get("input1")
     print input1
-    input2 = request.form.get("input2") # if scalar: converts to [num]
+    input2 = request.form.get("input2")
     print input2
     op = request.form.get("operation")
     print op
@@ -157,8 +156,13 @@ def parse():
     
     mathpix.check(op,input1,input2,requirements)
     input1 = mathpix.matrixConvert(input1)
+    print "fDFASDFASD input1 converted"
     input2 = mathpix.matrixConvert(input2)
-
+    print "fadsfasdf input2 converted"
+    print "adfasdfa"
+    print input1
+    "-----"
+    print input2
     ## Outputs
     print "Outputs"
     conv1 = mathpix.arrToMathJax(input1)
@@ -177,6 +181,7 @@ def parse():
         result = mathOps[op](input1)
     if op in requirements["req2Vec"]:
         #if mathpix.check("req2Vec",input1,input2):
+        print "REQ2VEC"
         result = mathOps[op](input1,input2)
     if op in requirements["req1Mat"]:
         #if mathpix.check("req1Mat",input1,input2):
@@ -188,12 +193,12 @@ def parse():
         #if mathpix.check("reqBoth",input1,input2):
         result = mathOps[op](input1,input2)
 
-    resultMJx = arrToMathJax(result)
+    resultMJx = mathpix.arrToMathJax(result)
     print resultMJx
-    resultLtX = arrToLatex(result)
+    resultLtX = mathpix.arrToLatex(result)
     print resultLtX
 
-    return render_template("results.html", latex = result)
+    return render_template("results.html", input1 = input1, input2 = input2, result = resultLtX)
 
     #print data
     #print mathpix.latexConvert(data)
