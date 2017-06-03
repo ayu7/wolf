@@ -198,7 +198,7 @@ def parse():
     resultLtX = mathpix.arrToLatex(result)
     print resultLtX
 
-    return render_template("results.html", input1 = input1, input2 = input2, result = resultLtX)
+    return render_template("results.html", operation = "Julius can you make this happen", input1 = input1, input2 = input2, result = resultLtX)
 
     #print data
     #print mathpix.latexConvert(data)
