@@ -1,16 +1,22 @@
 body { 
-  background-image: url(background.jpg);
+    background-image: url(background.jpg);
 }
 
 .jumbotron {
     background-color: rgba(256, 256, 256, 0.4);
-    color: #000000;
+    color: #FFFFFF;
 }
 
 .list-group-item {
     background-color: rgba(256, 256, 256, 0.9);
     color: #000000;
 }
+
 .btn {
-    background-color: #5386E4;
+    background-color: #FFA500;
+}
+
+.wolfram {
+    font-size: 400%;
+    color: #FFA500;
 }
