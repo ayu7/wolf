@@ -196,3 +196,7 @@ juliusF -- 2017-05-31
 
 angelaY -- 2017-06-01
 - drew white background for canvases so that image renders properly for mathpix
+
+stephanieY -- 2017-06-03
+- added testImages directory with one picture
+- still need to update README
