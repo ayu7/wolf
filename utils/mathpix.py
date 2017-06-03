@@ -6,13 +6,17 @@ import json
 import linalg
 from collections import Iterable
 
+def keyz(x):
+    l = open("keys.txt", "r").read().strip().split("\n")
+    return l[x]
+
 # submits a query to Mathpix
 # takes argument image which is a filepath
 def queryFPath(image):
     image_uri = "data:image/jpg;base64," + base64.b64encode(open(image, "rb").read())
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image_uri}),
-                      headers={"app_id": "test", "app_key": "thisisnotourkey",
+                      headers={"app_id": keyz(0), "app_key": keys[1],
                                "Content-type": "application/json"})
     return json.loads(r.text)
 
@@ -21,7 +25,7 @@ def queryFPath(image):
 def queryURI(image):
     r = requests.post("https://api.mathpix.com/v3/latex",
                       data=json.dumps({'url': image}),
-                      headers={"app_id": "test", "app_key": "thisisnotourkey",
+                      headers={"app_id": keyz(0), "app_key": keys(1),
                                "Content-type": "application/json"})
     return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
 

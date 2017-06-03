@@ -200,3 +200,4 @@ angelaY -- 2017-06-01
 stephanieY -- 2017-06-03
 - added testImages directory with one picture
 - still need to update README
+- made keys.txt and keyz(x) function, updated queryFPath and queryURI functions accordingly
