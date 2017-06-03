@@ -1,27 +1,9 @@
 {% extends "basic.html" %}
 {% block body %}
 <body>
-  
+
 
 <form action="/imgProcess" method="POST">
-
-<div class="row">
-
-    <div id="canvas" class="col-lg-6 col-lg-offset-3">
-      <canvas height="500" width="500" id="box" style="border:1px solid"> </canvas>
-    <input type="text" hidden id="boxContent" name="boxContent" value="">
-    <button class="btn btn-primary btn-sm" id="clear"> Clear </button>
-    </div>
-
-    <div class="col-lg-6">
-      <canvas hidden height="500" width="500" id="box1" style="border:1px solid"> </canvas>
-    <input type="text" hidden id="box1Content" name="box1Content" value="">
-    <button hidden id="clear1"> Clear </button>    
-</div> 
-
-  </div>
-
-<br><br>
 
   <div class="col-lg-4 col-lg-offset-4">
     <select id="operation" onchange="change();">
@@ -56,10 +38,27 @@
 
 <input type="submit" class="btn btn-primary btn-sm" value="Submit">
 
-  </div> 
+  </div>
+
+  <br><br>
+
+  <div class="row">
+
+      <div id="canvas" class="col-lg-6 col-lg-offset-3">
+        <canvas height="500" width="500" id="box" style="border:1px solid"> </canvas>
+      <input type="text" hidden id="boxContent" name="boxContent" value="">
+      <button class="btn btn-primary btn-sm" id="clear"> Clear </button>
+      </div>
+
+      <div class="col-lg-6">
+        <canvas hidden height="500" width="500" id="box1" style="border:1px solid"> </canvas>
+      <input type="text" hidden id="box1Content" name="box1Content" value="">
+      <button hidden id="clear1"> Clear </button>
+  </div>
+
+    </div>
 
 
-  
   <script src="../static/js/draw.js"></script>
 </form>
 </body>
