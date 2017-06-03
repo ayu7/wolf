@@ -202,3 +202,4 @@ stephanieY -- 2017-06-03
 - still need to update README
 - made keys.txt and keyz(x) function, updated queryFPath and queryURI functions accordingly
 - updated functions in mathpix.py to check if output is a float
+- added panels to results.html

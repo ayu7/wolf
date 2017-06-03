@@ -4,18 +4,29 @@
 <div class="row">
   <center>
     <h3> Here is what you inputted: </h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{input1}} + {{input2}}
+      </div>
+    </div>
     
-    {{input1}} + {{input2}}
-
-    <br><br>
+    <br>
 
     <h3> Here is the result: </h3>
-    
-    {{result}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{result}}
+      </div>
+    </div>
 
     
     <button class="btn btn-primary btn-sm" id="button">Show Source Code</button>
-    <p hidden id="latexCode"> {{latexCode}} </p>
+    <br>
+    <div hidden id="latexCode" class="panel panel-default">
+      <div class="panel-body">
+        {{latexCode}}
+      </div>
+    </div>
 
   </center>
 
