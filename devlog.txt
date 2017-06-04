@@ -206,3 +206,4 @@ stephanieY -- 2017-06-03
 - added operation panel to results.html. Julius can you add that to app
 - changed colors of header
 - updated operations.html
+- adding mathml stuff to results
