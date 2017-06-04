@@ -30,3 +30,5 @@
 - upload.html
   -> center dropdown menu with less jank (how to manipulate columns
      so the menu doesnt span the whole width)
+- draw.html
+  -> the mathpix can read the picture but nothing gets passed to results
