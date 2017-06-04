@@ -9,8 +9,8 @@
     <form enctype="multipart/form-data" action="/fileProcess" method="post">
       <h2 id="upload"> Upload your input below! </h2>
 
-      <div class="form-group">
-        <select name="operation" id="operation" class="col-lg-4 col-lg-offset-4" onchange="change();">
+      <div class="form-group col-lg-4 col-lg-offset-4">
+        <select name="operation" id="operation" class="form-control" onchange="change();">
           <option value="default" class="1">Select Operation</option>
           <option value="v_add" class="2">Add Vectors</option>
           <option value="v_subtract" class="2">Subtract Vectors</option>
@@ -47,8 +47,10 @@
       <input type="file" name="input2" id="input2" style="display:none">
       <br>
 
-      <div class="form-group">
+      <div class="row">
+	<center>
 	<input type="submit" class="btn btn-primary btn-lg" value="Submit">
+	</center>
       </div>
     </form>
   </center>

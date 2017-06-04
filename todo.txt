@@ -6,8 +6,6 @@
 
 - some of the operations return true or false. Make sure that those work when rendering results.html
 
-- pass operation as a jinja variable for results.html
-
 - fix font colors
 
 - fix dropdown in upload.html and I think draw.html to make it look like type.html
