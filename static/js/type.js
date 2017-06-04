@@ -1,22 +1,17 @@
-var label= document.getElementById("label");
-var input= document.getElementById("input2");
-var div= document.getElementById("col1");
+var col1= document.getElementById("col1");
+var col2= document.getElementById("col2");
 
 //hides second input field & the text
 var hide=function(){
-  label.setAttribute("hidden", true);
-  input.setAttribute("hidden", true);
-  input.removeAttribute("class");
-  div.setAttribute("class", "col-lg-6 col-lg-offset-3");
+  col2.setAttribute("style", "display:none");
+  col1.setAttribute("class", "col-lg-6 col-lg-offset-3");
   console.log("hide");
 };
 
 //shows second input field & the text
 var show=function(){
-  label.removeAttribute("hidden");
-  input.removeAttribute("hidden");
-  input.setAttribute("class", "form-control input-lg")
-  div.setAttribute("class", "col-lg-6");
+  col2.removeAttribute("style");
+  col1.setAttribute("class", "col-lg-6");
   console.log("show");
 };
 
