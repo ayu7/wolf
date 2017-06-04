@@ -5,9 +5,9 @@
 </head>
 
 <body>
-  <center>
+
     <form enctype="multipart/form-data" action="/fileProcess" method="post">
-      <h2 id="upload"> Upload your input below! </h2>
+      <h2 id="upload"><center> Upload your input below! </center></h2>
 
       <div class="form-group col-lg-4 col-lg-offset-4">
         <select name="operation" id="operation" class="form-control" onchange="change();">
@@ -39,24 +39,30 @@
           <option value="is_right_invertible" class="1">Right Invertibility</option>
           <option value="is_hermitian" class="1">Hermitian Matrix Check</option>
        </select>
-	
+
 
       <br><br>
-      <input type="file" name="input1">
-
-      <input type="file" name="input2" id="input2" style="display:none">
-      <br>
+      <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+          <label class="btn btn-default btn-file">
+            Select File<input type="file" name="input1" style="display: none">
+          </label>
+          <br><br>
+          <label class="btn btn-default btn-file" id="input2" style="display: none">
+            Select File<input type="file" name="input2" style="display:none">
+        </label>
+      </div>
+    </div>
+     <br>
 
       <div class="row">
-	<center>
-	<input type="submit" class="btn btn-primary btn-lg" value="Submit">
-	</center>
+        <div class="col-lg-4 col-lg-offset-4">
+	         <input type="submit" class="btn btn-primary btn-lg" value="Submit">
+         </div>
       </div>
     </form>
-  </center>
 
   <script src="../static/js/upload.js"></script>
 </body>
 
 {% endblock %}
-
