@@ -146,6 +146,7 @@ def operateProc(op,in1,in2,reqDict):
 def parse():
     ## Inputs
     print "Inputs"
+    print request.form
     input1 = request.form.get("input1")
     print input1
     input2 = request.form.get("input2")
