@@ -1,15 +1,5 @@
 ===== TO DO =====
 
-- basic results.html
-  - render input and output
-  - show/hide latex
-
-- jinja for results.html
-  -> how to pass "print mathOps()" to html
-     -> how to parse passed data and make pretty
-
-- custom.css needed
-
 - submit button for draw.html needs to pass form input to backend properly
 
 - mathpix.py needs to parse complex numbers. in python, they are represented as follows: 1+3j
@@ -26,9 +16,5 @@
 
 - update README (include packages to pip install)
 
+- update operations.html to include all functions
 ===== FIXES NEEDED =====
-- upload.html
-  -> center dropdown menu with less jank (how to manipulate columns
-     so the menu doesnt span the whole width)
-- draw.html
-  -> the mathpix can read the picture but nothing gets passed to results
