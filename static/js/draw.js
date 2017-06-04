@@ -88,20 +88,18 @@ box1.addEventListener("mousedown", animate);
 box1.addEventListener("mouseup", stopIt);
 box1.addEventListener("mousemove", updateMouse);
 
+var canvas1=document.getElementById("canvas1");
+
 //hides second canvas
 var hide=function(){
-  box1.setAttribute("hidden", true);
-  clear1.setAttribute("hidden", true);
-  clear1.removeAttribute("class");
+  canvas1.setAttribute("style","display:none");
   div.setAttribute("class", "col-lg-6 col-lg-offset-3");
   console.log("hide");
 };
 
 //shows second canvas
 var show=function(){
-  box1.removeAttribute("hidden");
-  clear1.removeAttribute("hidden");
-  clear1.setAttribute("class", "btn btn-primary btn-sm"); //class is removed/added because once it is added the hidden attribute doesn't work anymore for some reason??
+  canvas1.removeAttribute("style");
   div.setAttribute("class", "col-lg-6");
   console.log("show");
 };
@@ -125,11 +123,11 @@ $(function() {
           $.ajax({
               type: "POST",
               url: "script.php",
-              data: { 
+              data: {
                  imgBase64: dataURL
               }
          }).done(function(o) {
-              console.log('saved image'); 
+              console.log('saved image');
               $.post(url, form.serialize(), function(data) {
                      console.log('saved form')
               };

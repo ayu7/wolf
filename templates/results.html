@@ -1,5 +1,7 @@
 {% extends "basic.html" %}
 {% block body %}
+<script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
 <div class="row">
   <center>
     <h3 id="latex"> Here is the operation you chose: </h3>
@@ -15,7 +17,9 @@
     <h3 id="latex"> Here is your first input: </h3>
     <div class="panel panel-default">
       <div class="panel-body">
+        <math display="block">
         {{input1}}
+        </math>
       </div>
     </div>
   </center>
@@ -26,7 +30,9 @@
     <h3 id="latex"> Here is your second input: </h3>
     <div class="panel panel-default">
       <div class="panel-body">
+        <math display="block">
         {{input2}}
+        </math>
       </div>
     </div>
   </center>
@@ -37,7 +43,9 @@
     <h3 id="latex"> Here is the result: </h3>
     <div class="panel panel-default">
       <div class="panel-body">
+        <math display="block">
         {{result}}
+        </math>
       </div>
     </div>
   </center>

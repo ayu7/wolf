@@ -199,9 +199,12 @@ angelaY -- 2017-06-01
 
 stephanieY -- 2017-06-03
 - added testImages directory with one picture
-- still need to update README
+- update README
 - made keys.txt and keyz(x) function, updated queryFPath and queryURI functions accordingly
 - updated functions in mathpix.py to check if output is a float
 - added panels to results.html
 - added operation panel to results.html. Julius can you add that to app
 - changed colors of header
+- updated operations.html
+- adding mathml stuff to results
+- wrote mathml.py

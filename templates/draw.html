@@ -4,7 +4,7 @@
 
 
   <form action="/imgProcess" method="POST">
-
+<div class="row">
     <div class="col-lg-4 col-lg-offset-4">
       <select name="operation" id="operation" class="form-control" onchange="change();">
 	<option value="default" class="1">Select Operation</option>
@@ -35,29 +35,30 @@
 	<option value="is_right_invertible" class="1">Right Invertibility</option>
 	<option value="is_hermitian" class="1">Hermitian Matrix Check</option>
       </select>
-
-      <input type="submit" class="btn btn-primary btn-sm" value="Submit">
-
     </div>
-
-    <br><br>
+</div>
+    <br>
 
     <div class="row">
-
       <div id="canvas" class="col-lg-6 col-lg-offset-3">
-        <canvas height="500" width="500" id="box" style="border:1px solid"> </canvas>
+        <canvas height="350" width="550" id="box" style="border:1px solid"> </canvas> <br>
 	<input type="text" hidden id="boxContent" name="boxContent" value="">
 	<button class="btn btn-primary btn-sm" id="clear"> Clear </button>
       </div>
 
-      <div class="col-lg-6">
-        <canvas hidden height="500" width="500" id="box1" style="border:1px solid"> </canvas>
+      <div class="col-lg-6" id="canvas1" style="display:none">
+        <canvas height="350" width="550" id="box1" style="border:1px solid"> </canvas> <br>
 	<input type="text" hidden id="box1Content" name="box1Content" value="">
-	<button hidden id="clear1"> Clear </button>
+	<button class="btn btn-primary btn-sm" id="clear1"> Clear </button>
       </div>
 
     </div>
 
+    <div class="row">
+      <div class="col-lg-2 col-lg-offset-5">
+        <input type="submit" class="btn btn-primary btn-lg" value="Submit">
+      </div>
+    </div>
 
     <script src="../static/js/draw.js"></script>
   </form>
