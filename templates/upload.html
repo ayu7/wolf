@@ -7,7 +7,7 @@
 <body>
   <center>
     <form enctype="multipart/form-data" action="/fileProcess" method="post">
-      <h2> Upload your input below! </h2>
+      <h2 id="upload"> Upload your input below! </h2>
 
       <div class="form-group">
         <select name="operation" id="operation" class="col-lg-4 col-lg-offset-4" onchange="change();">
@@ -47,7 +47,7 @@
       <input type="file" name="input2" id="input2" style="display:none">
 
       <div class="form-group">
-	<input type="submit" class="btn btn-primary btn-sm" value="Submit">
+	<input type="submit" class="btn btn-primary btn-lg" value="Submit">
       </div>
     </form>
   </center>
