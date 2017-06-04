@@ -180,7 +180,9 @@ def cofactor(i, j, A):
 
 # det: Returns the determinant of a square matrix (number).
 def det(A):
-    if len(A) != len(A[0]):
+    if len(A) == 1:
+        return A[0]
+    elif len(A) != len(A[0]):
         return "Matrix isn't square."
     elif len(A) == 2:
         return A[0][0] * A[1][1] - A[0][1] * A[1][0]
@@ -282,7 +284,9 @@ def is_hermitian(A):
     return A == conjugate_transpose(A) if num_rows(A) == num_cols(A) else "Matrix not square"
 
 #################### TESTING FUNCTIONS ####################
-
+a = [[1,2],[3,4]]
+print first_minor(0,0,a)
+#print cofactor_matrix(a)
 '''
 x1 = 2+1j
 x2 = 2-1j
