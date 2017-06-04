@@ -205,3 +205,4 @@ stephanieY -- 2017-06-03
 - added panels to results.html
 - added operation panel to results.html. Julius can you add that to app
 - changed colors of header
+- updated operations.html
