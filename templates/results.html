@@ -18,9 +18,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <math display="block">
-        {% raw %}
-        {{input1}}
-        {% endraw %}
+        {{input1|safe}}
         </math>
       </div>
     </div>
@@ -33,9 +31,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <math display="block">
-        {% raw %}
-        {{input2}}
-        {% endraw %}
+        {{input2|safe}}
         </math>
       </div>
     </div>
@@ -48,9 +44,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <math display="block">
-        {% raw %}
-        {{result}}
-        {% endraw %}
+        {{result|safe}}
         </math>
       </div>
     </div>
