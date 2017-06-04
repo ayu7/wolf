@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-from utils import mathpix, linalg
+from utils import mathpix, linalg, mathML
 from werkzeug.utils import secure_filename
 import json
 import os
@@ -157,8 +157,8 @@ def operateProc(op,in1,in2,reqDict):
     # print input1
     # print input2
         
-    dIn1 = mathpix.arrToMathJax(makeMat(input1))
-    dIn2 = mathpix.arrToMathJax(makeMat(input2))
+    dIn1 = mathML.render(makeMat(input1))
+    dIn2 = mathML.render(makeMat(input2))
 
     result = None
 
@@ -189,7 +189,8 @@ def operateProc(op,in1,in2,reqDict):
     result = simpleCheck(result)
     print result
     
-    dResultM = mathpix.arrToMathJax(result)
+    dResultM = mathML.render(result)
+    print dResultM
     dResultL = mathpix.arrToLatex(result)
 
     retDict = {"op"     : opTranslation[op],
@@ -233,7 +234,6 @@ def parse():
     else:
         return redirect("/")
 
-    print retDict
     # input1 = mathpix.matrixConvert(input1)
     # print "fDFASDFASD input1 converted"
     # input2 = mathpix.matrixConvert(input2)
@@ -244,9 +244,9 @@ def parse():
     # print input2
     # ## Outputs
     # print "Outputs"
-    # conv1 = mathpix.arrToMathJax(input1)
+    # conv1 = mathML.render(input1)
     # print conv1
-    # conv2 = mathpix.arrToMathJax(input2)
+    # conv2 = mathML.render(input2)
     # print conv2
     # result = None
 
@@ -272,7 +272,7 @@ def parse():
     #     #if mathpix.check("reqBoth",input1,input2):
     #     result = mathOps[op](input1,input2)
 
-    # resultMJx = mathpix.arrToMathJax(result)
+    # resultMJx = mathML.render(result)
     # print resultMJx
     # resultLtX = mathpix.arrToLatex(result)
     # print resultLtX
