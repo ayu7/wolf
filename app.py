@@ -286,7 +286,7 @@ def fileProcess():
                     result = mathOps[op](input1)
                     latex = mathpix.arrToLatex(result)
                     print result
-                return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
+                    return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
         else:
             if file1.filename == '' or file2.filename == '':
                 return redirect("/")
