@@ -1,4 +1,4 @@
-var input=document.getElementById("input2");
+var input=document.getElementById("label2");
 
 //hides second upload button
 var hide=function(){
@@ -20,4 +20,16 @@ var change=function(){
     hide();
   else
     show();
+};
+
+var file1=function(fileName){
+  var label=document.getElementById("label1");
+  label.innerText=fileName;
+
+};
+
+var file2=function(fileName){
+  var label=document.getElementById("label2");
+  label.innerText=fileName;
+
 };
