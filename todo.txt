@@ -12,13 +12,17 @@
 
 - submit button for draw.html needs to pass form input to backend properly
 
-- draw.html and upload.html need to hide elements correctly
-
 - mathpix.py needs to parse complex numbers. in python, they are represented as follows: 1+3j
 
-- some of the operations return true or false. Make sure that those work wend rendering results.html
+- some of the operations return true or false. Make sure that those work when rendering results.html
 
-- test the operations
+- pass operation as a jinja variable for results.html
+
+- fix font colors
+
+- fix dropdown in upload.html and I think draw.html to make it look like type.html
+
+- make dropdown at the top instead of bottom
 
 - update README (include packages to pip install)
 
