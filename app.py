@@ -39,7 +39,8 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            "rank": linalg.rank, # rank: Given a matrix, returns its rank (the number of non-zero rows in reduce row echelon form) (number)
            "is_left_invertible": linalg.is_left_invertible, # is_left_invertible: Returns true if a given matrix has a left inverse (boolean)
            "is_right_invertible": linalg.is_right_invertible, # is_right_invertible: Returns true if a given matrix has a right inverse (boolean)
-           "is_hermitian": linalg.is_hermitian # is_hermitian: Returns true if a given matrix is Hermitian (boolean)
+           "is_hermitian": linalg.is_hermitian, # is_hermitian: Returns true if a given matrix is Hermitian (boolean)
+           "m_multiplication" : linalg.m_mult, # m_mult: Returns the product of two matrices (matrix)
 }
 
 opTranslation = {"v_add" : "Vector Addition",
@@ -49,6 +50,7 @@ opTranslation = {"v_add" : "Vector Addition",
                 "dot"       : "Dot Product",
                 "v_scalar_mult": "Scalar Multiplication Of A Vector",
                 "m_scalar_mult": "Scalar Multiplication Of A Matrix",
+                 "m_multiplication" : "Matrix Multiplication",
                 "trace"     : "Matrix Trace",
                 "transpose" : "Matrix Transpose",
                 "v_euclidean_norm": "Vector Euclidean Norm",
@@ -76,7 +78,7 @@ requirements = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
                              "frobenius","det","cofactor_matrix","adjoint","inverse","gauss",
                              "rank","is_left_invertible","is_right_invertible",
                              "is_hermitian","m_scalar_mult","power"],
-                "req2Mat" : ["m_add","m_subtract"],
+                "req2Mat" : ["m_add","m_subtract","m_multiplication"],
                 "reqBoth" : ["system_solver"]
 }
 
@@ -101,23 +103,41 @@ def upload():
 def operations():
     return render_template("operations.html")
 
-def makeVec(input):
-            try:
-                if len(input1[0]) == 1:
-                    return linalg.vector(input)
-                else: # separation of matrices and vectors
-                    return input
-            except: # if input is a scalar it is not iterable
-                return input
+def makeVec(input1):
+    try:
+        if len(input1[0]) == 1:
+            return linalg.vector(input1)
+        else: # separation of matrices and vectors
+            return input1
+    except: # if input is a scalar it is not iterable
+        return input1
+
+def makeMat(input1):
+    try: 
+        return linalg.matrix(input1)
+    except:
+        return input1
+    return input1
 
 # try and catch in operateProc filter, kick user to home and implement flash with exception message
 def whichScalar(in1,in2):
-    if mathpix.isInt(in1):
-        return in1
-    if mathpix.isInt(in2):
-        return in2
+    if mathpix.isNum(in1):
+        return (in1,in2)
+    if mathpix.isNum(in2):
+        return (in2,in1)
     else:
         raise Exception("neither input is a scalar")
+
+def whichVector(in1,in2):
+    try:
+        if len(in1[0]) == 1 and len(in2[0]) != 1:
+            return (in1,in2)
+        elif len(in1[0]) != 1 and len(in2[0]) == 1:
+            return (in2,in1)
+        else:
+            raise Exception("input fields invalid: one must be vec, one must be mat")
+    except:
+        raise Exception("input fields invalid: one must be vec, one must be mat")
 
 # return dictionary of mathjaxed inputs/outputs/result, result latex code
 def operateProc(op,in1,in2,reqDict):
@@ -127,37 +147,60 @@ def operateProc(op,in1,in2,reqDict):
     #mathpix.check(op,input1,input2,requirements)
     
     if op in reqDict['req1Vec']+reqDict['req1Mat'] and not op in reqDict['reqScalar']:
-        input1 = mathpix.matrixConvert(in1)
+        input1 = makeVec(mathpix.matrixConvert(in1))
         input2 = ""
 
-        if len(input1[0]) == 1:
-            input1 = linalg.vector(input1)
     else:
         input1 = makeVec(mathpix.matrixConvert(in1))
         input2 = makeVec(mathpix.matrixConvert(in2))
 
-    
-    dIn1 = mathpix.arrToMathJax(input1)
-    dIn2 = mathpix.arrToMathJax(input2)
+    # print input1
+    # print input2
+        
+    dIn1 = mathpix.arrToMathJax(makeMat(input1))
+    dIn2 = mathpix.arrToMathJax(makeMat(input2))
 
     result = None
 
-    if op in requirements["reqScalar"]:
-        #scalar = whichScalar(input1,input2)
-        result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
-    if op in requirements["req1Vec"]:
+    if op in reqDict["reqScalar"]:
+        scalar = whichScalar(input1,input2)
+        result = mathOps[op](scalar[0],scalar[1]) # should specify order of inputs (scalar,matrix/vector)
+    if op in reqDict["req1Vec"] and op not in reqDict["reqScalar"]:
         result = mathOps[op](input1)
-    if op in requirements["req2Vec"]:
+    if op in reqDict["req2Vec"]:
         result = mathOps[op](input1,input2)
-    if op in requirements["req1Mat"]:
+    if op in reqDict["req1Mat"] and op not in reqDict["reqScalar"]:
         result = mathOps[op](input1)
-    if op in requirements["req2Mat"]:
+    if op in reqDict["req2Mat"]:
         result = mathOps[op](input1,input2)
-    if op in requirements["reqBoth"]:
+    if op in reqDict["reqBoth"]:
         vector = whichVector(input1,input2)
         result = mathOps[op](input1,input2)
         
+    def simpleCheck(result):
+        try:
+            if mathpix.isNum(result[0]):
+                return makeMat(result)
+        except:
+            return result
+        return result
 
+    print result
+    result = simpleCheck(result)
+    print result
+    
+    dResultM = mathpix.arrToMathJax(result)
+    dResultL = mathpix.arrToLatex(result)
+
+    retDict = {"op"     : opTranslation[op],
+               "input1" : dIn1,
+               "input2" : dIn2,
+               "resMJx" : dResultM,
+               "resLat" : dResultL
+               }
+
+    return retDict
+    
 
 # working:
 # - addvector
@@ -184,52 +227,57 @@ def parse():
     op = request.form.get("operation")
     print op
 
-    
-    mathpix.check(op,input1,input2,requirements)
-    input1 = mathpix.matrixConvert(input1)
-    print "fDFASDFASD input1 converted"
-    input2 = mathpix.matrixConvert(input2)
-    print "fadsfasdf input2 converted"
-    print "adfasdfa"
-    print input1
-    "-----"
-    print input2
-    ## Outputs
-    print "Outputs"
-    conv1 = mathpix.arrToMathJax(input1)
-    print conv1
-    conv2 = mathpix.arrToMathJax(input2)
-    print conv2
-    result = None
+    retDict = {}
+    if mathpix.check(op,input1,input2,requirements):
+        retDict = operateProc(op,input1,input2,requirements)
+    else:
+        return redirect("/")
+
+    print retDict
+    # input1 = mathpix.matrixConvert(input1)
+    # print "fDFASDFASD input1 converted"
+    # input2 = mathpix.matrixConvert(input2)
+    # print "fadsfasdf input2 converted"
+    # print "adfasdfa"
+    # print input1
+    # "-----"
+    # print input2
+    # ## Outputs
+    # print "Outputs"
+    # conv1 = mathpix.arrToMathJax(input1)
+    # print conv1
+    # conv2 = mathpix.arrToMathJax(input2)
+    # print conv2
+    # result = None
 
     
     
-    if op in requirements["reqScalar"]:
-        #if mathpix.check("reqScalar",input1,input2):
-        result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
-    if op in requirements["req1Vec"]:
-        #if mathpix.check("req1Vec",input1,input2):
-        result = mathOps[op](input1)
-    if op in requirements["req2Vec"]:
-        #if mathpix.check("req2Vec",input1,input2):
-        print "REQ2VEC"
-        result = mathOps[op](input1,input2)
-    if op in requirements["req1Mat"]:
-        #if mathpix.check("req1Mat",input1,input2):
-        result = mathOps[op](input1)
-    if op in requirements["req2Mat"]:
-        #if mathpix.check("req2Mat",input1,input2):
-        result = mathOps[op](input1,input2)
-    if op in requirements["reqBoth"]:
-        #if mathpix.check("reqBoth",input1,input2):
-        result = mathOps[op](input1,input2)
+    # if op in requirements["reqScalar"]:
+    #     #if mathpix.check("reqScalar",input1,input2):
+    #     result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
+    # if op in requirements["req1Vec"]:
+    #     #if mathpix.check("req1Vec",input1,input2):
+    #     result = mathOps[op](input1)
+    # if op in requirements["req2Vec"]:
+    #     #if mathpix.check("req2Vec",input1,input2):
+    #     print "REQ2VEC"
+    #     result = mathOps[op](input1,input2)
+    # if op in requirements["req1Mat"]:
+    #     #if mathpix.check("req1Mat",input1,input2):
+    #     result = mathOps[op](input1)
+    # if op in requirements["req2Mat"]:
+    #     #if mathpix.check("req2Mat",input1,input2):
+    #     result = mathOps[op](input1,input2)
+    # if op in requirements["reqBoth"]:
+    #     #if mathpix.check("reqBoth",input1,input2):
+    #     result = mathOps[op](input1,input2)
 
-    resultMJx = mathpix.arrToMathJax(result)
-    print resultMJx
-    resultLtX = mathpix.arrToLatex(result)
-    print resultLtX
+    # resultMJx = mathpix.arrToMathJax(result)
+    # print resultMJx
+    # resultLtX = mathpix.arrToLatex(result)
+    # print resultLtX
 
-    return render_template("results.html", operation = opTranslation[op], input1 = input1, input2 = input2, result = resultLtX)
+    return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
     #print data
     #print mathpix.latexConvert(data)
@@ -283,9 +331,9 @@ def fileProcess():
                 if len(input1[0]) == 1:
                     input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker
                     print input1
-                    result = mathOps[op](input1)
-                    latex = mathpix.arrToLatex(result)
-                    print result
+                result = mathOps[op](input1)
+                latex = mathpix.arrToLatex(result)
+                print result
                 return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
         else:
             if file1.filename == '' or file2.filename == '':

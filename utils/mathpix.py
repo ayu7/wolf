@@ -79,10 +79,10 @@ def findRLen(string,lType):
 # checks if each row matches given row length
 def rLenCheck(rlen,mat):
     rLen = rlen
-    print "rLen below ==="
-    print rLen
-    print "mat below ==="
-    print mat
+    # print "rLen below ==="
+    # print rLen
+    # print "mat below ==="
+    # print mat
     if len(mat[0]) == 1: # necessary for horizontal to vertical conversion of vectors
         rLen = 1
     for i in mat:
@@ -93,10 +93,12 @@ def rLenCheck(rlen,mat):
 # should work with incorrect input
 # - "\\\\" in arrays with "\begin{bmatrix}"
 # - nonnumerical matrix values
-def matrixConvert(string):
-    print "fasdfasdfa matrixconvert"
-    print string
-    print "fasdfasdfad end"
+def matrixConvert(s):
+    string = s.replace("\n"," ").replace("\r","")
+    #print string
+    # print "fasdfasdfa matrixconvert"
+    # print string
+    # print "fasdfasdfad end"
     ret = []
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
@@ -128,7 +130,7 @@ def matrixConvert(string):
         ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
             
     if len(ret):
-        print "checking rlen"
+        # print "checking rlen"
         rLenCheck(rLen,ret)
         return ret
     raise Exception('improperly formatted latex, check backslashes/numerical input!')
@@ -152,6 +154,10 @@ def aToLHelp(arr):
 
 # converts matrix/vector into formatted string for mathjax input
 def arrToMathJax(matVec):
+    if matVec == []:
+        return matVec
+    if isNum(matVec):
+        return matVec
     arr = matVec
     ret = r"\begin{bmatrix} "
 
@@ -160,7 +166,9 @@ def arrToMathJax(matVec):
 
 # converts matrix/vector into formatted string for latex
 def arrToLatex(matVec):
-    if isInt(matVec) or isNum(matVec):
+    if matVec == []:
+        return matVec
+    if isNum(matVec):
         return matVec
     arr = matVec
     rlen = len(arr)
@@ -213,7 +221,7 @@ def check1(op,input1,input2,reqDict):
 
 def check2(op,input1,input2,reqDict):
     if op in reqDict["reqScalar"]:
-        if not isInt(input2[0]):
+        if not isNum(input2) and not isNum(input1):
             return False
     if op in reqDict["req1Vec"]:
         if not vecTest(input1):
