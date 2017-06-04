@@ -40,7 +40,34 @@ mathOps = {"v_add" : linalg.v_add,         #         v_add: sum of two vectors (
            "is_left_invertible": linalg.is_left_invertible, # is_left_invertible: Returns true if a given matrix has a left inverse (boolean)
            "is_right_invertible": linalg.is_right_invertible, # is_right_invertible: Returns true if a given matrix has a right inverse (boolean)
            "is_hermitian": linalg.is_hermitian # is_hermitian: Returns true if a given matrix is Hermitian (boolean)
-           }
+}
+
+opTranslation = {"v_add" : "Vector Addition",
+                "v_subtract" : "Vector Subtraction",
+                "m_add" : "Matrix Addition",
+                "m_subtract" : "Matrix Subtraction",
+                "dot"       : "Dot Product",
+                "v_scalar_mult": "Scalar Multiplication Of A Vector",
+                "m_scalar_mult": "Scalar Multiplication Of A Matrix",
+                "trace"     : "Matrix Trace",
+                "transpose" : "Matrix Transpose",
+                "v_euclidean_norm": "Vector Euclidean Norm",
+                "v_conjugate": "Vector Conjugate",
+                "m_conjugate": "Matrix Conjugate",
+                "conjugate_transpose": "Conjugate Transpose",
+                "frobenius": "Frobenius Norm",
+                "det": "Determinant",
+                "cofactor_matrix": "Cofactor Matrix",
+                "adjoint": "Adjoint",
+                "inverse": "Inverse",
+                "power": "Power",
+                "system_solver": "Solve System",
+                "gauss": "Gaussian Elimination",
+                "rank": "Rank Of A Matrix",
+                "is_left_invertible": "Left Invertible",
+                "is_right_invertible": "Right Invertible",
+                "is_hermitian": "Is Hermitian"
+}
 
 requirements = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
                 "req1Vec" : ["v_euclidean_norm","v_conjugate","v_scalar_mult"],
@@ -51,7 +78,7 @@ requirements = {"reqScalar" : ["v_scalar_mult","m_scalar_mult","power"],
                              "is_hermitian","m_scalar_mult","power"],
                 "req2Mat" : ["m_add","m_subtract"],
                 "reqBoth" : ["system_solver"]
-                }
+}
 
 @app.route("/")
 @app.route("/home")
@@ -129,7 +156,7 @@ def operateProc(op,in1,in2,reqDict):
     if op in requirements["reqBoth"]:
         vector = whichVector(input1,input2)
         result = mathOps[op](input1,input2)
-    
+        
 
 
 # working:
@@ -142,10 +169,14 @@ def operateProc(op,in1,in2,reqDict):
 # - scalmatrix
 # - trace
 # - transpose
+
 @app.route("/parse", methods=['POST'])
 def parse():
+    
+
     ## Inputs
     print "Inputs"
+    print request.form
     input1 = request.form.get("input1")
     print input1
     input2 = request.form.get("input2")
@@ -198,7 +229,7 @@ def parse():
     resultLtX = mathpix.arrToLatex(result)
     print resultLtX
 
-    return render_template("results.html", operation = "Julius can you make this happen", input1 = input1, input2 = input2, result = resultLtX)
+    return render_template("results.html", operation = opTranslation[op], input1 = input1, input2 = input2, result = resultLtX)
 
     #print data
     #print mathpix.latexConvert(data)
@@ -251,10 +282,10 @@ def fileProcess():
                 input1 = mathpix.matrixConvert(ret['latex'])
                 if len(input1[0]) == 1:
                     input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker
-                print input1
-                result = mathOps[op](input1)
-                latex = mathpix.arrToLatex(result)
-                print result
+                    print input1
+                    result = mathOps[op](input1)
+                    latex = mathpix.arrToLatex(result)
+                    print result
                 return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
         else:
             if file1.filename == '' or file2.filename == '':

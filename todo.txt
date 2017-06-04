@@ -1,28 +1,18 @@
 ===== TO DO =====
 
-- basic results.html
-  - render input and output
-  - show/hide latex
-
-- jinja for results.html
-  -> how to pass "print mathOps()" to html
-     -> how to parse passed data and make pretty
-
-- custom.css needed
-
 - submit button for draw.html needs to pass form input to backend properly
-
-- draw.html and upload.html need to hide elements correctly
 
 - mathpix.py needs to parse complex numbers. in python, they are represented as follows: 1+3j
 
-- some of the operations return true or false. Make sure that those work wend rendering results.html
+- some of the operations return true or false. Make sure that those work when rendering results.html
 
-- test the operations
+- fix font colors
+
+- fix dropdown in upload.html and I think draw.html to make it look like type.html
+
+- make dropdown at the top instead of bottom
 
 - update README (include packages to pip install)
 
+- update operations.html to include all functions
 ===== FIXES NEEDED =====
-- upload.html
-  -> center dropdown menu with less jank (how to manipulate columns
-     so the menu doesnt span the whole width)

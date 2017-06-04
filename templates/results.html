@@ -2,7 +2,7 @@
 {% block body %}
 <div class="row">
   <center>
-    <h3> Here is the operation you chose: </h3>
+    <h3 id="latex"> Here is the operation you chose: </h3>
     <div class="panel panel-default">
       <div class="panel-body">
         {{operation}}
@@ -12,17 +12,29 @@
 </div>
 <div class="row">
   <center>
-    <h3> Here is what you inputted: </h3>
+    <h3 id="latex"> Here is your first input: </h3>
     <div class="panel panel-default">
       <div class="panel-body">
-        {{input1}} + {{input2}}
+        {{input1}}
       </div>
     </div>
   </center>
 </div>
+{% if input2 %}
 <div class="row">
   <center>
-    <h3> Here is the result: </h3>
+    <h3 id="latex"> Here is your second input: </h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{input2}}
+      </div>
+    </div>
+  </center>
+</div>
+{% endif %}
+<div class="row">
+  <center>
+    <h3 id="latex"> Here is the result: </h3>
     <div class="panel panel-default">
       <div class="panel-body">
         {{result}}

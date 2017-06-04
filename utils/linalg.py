@@ -78,6 +78,11 @@ def v_scalar_mult(c, v):
 
 # v_subtract: Returns the difference between two vectors (vector).
 def v_subtract(u, v):
+    print "DFASDFASDF LINALG SUBTRACT VECTORS"
+    print u
+    print v
+    print v_add(u, v_scalar_mult(-1,v))
+    print "DSFASDFASDF END"
     return v_add(u, v_scalar_mult(-1, v))
 
 # v_norm: Returns the Euclidean norm of a vector (number).
