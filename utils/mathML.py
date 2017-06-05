@@ -24,7 +24,10 @@ def generateMatrix(x):
         for c in r:
             #print c
             col = "<mtd>"
-            col += "<mn>" + str(c) + "</mn>"
+            if isinstance(c, complex):
+                col += "<mn>" + str(c.real)+ "+" +str(c.imag)+"i" + "</mn>"
+            else:
+                col += "<mn>" + str(c) + "</mn>"
             col += "</mtd>"
             #print col
             row += col
