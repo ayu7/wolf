@@ -113,8 +113,9 @@ def makeVec(input1):
         return input1
 
 def makeMat(input1):
-    try: 
-        return linalg.matrix(input1)
+    try:
+        if mathpix.isNum(input1[0]):
+            return linalg.matrix(input1)
     except:
         return input1
     return input1
@@ -154,12 +155,17 @@ def operateProc(op,in1,in2,reqDict):
         input1 = makeVec(mathpix.matrixConvert(in1))
         input2 = makeVec(mathpix.matrixConvert(in2))
 
-    # print input1
-    # print input2
-        
+    print input1
+    print input2
+    
     dIn1 = mathML.render(makeMat(input1))
     dIn2 = mathML.render(makeMat(input2))
 
+    if input1 == "":
+        dIn1 = ""
+    if input2 == "":
+        dIn2 = ""
+        
     result = None
 
     if op in reqDict["reqScalar"]:
@@ -217,7 +223,6 @@ def operateProc(op,in1,in2,reqDict):
 @app.route("/parse", methods=['POST'])
 def parse():
     
-
     ## Inputs
     print "Inputs"
     print request.form
@@ -234,66 +239,36 @@ def parse():
     else:
         return redirect("/")
 
-    # input1 = mathpix.matrixConvert(input1)
-    # print "fDFASDFASD input1 converted"
-    # input2 = mathpix.matrixConvert(input2)
-    # print "fadsfasdf input2 converted"
-    # print "adfasdfa"
-    # print input1
-    # "-----"
-    # print input2
-    # ## Outputs
-    # print "Outputs"
-    # conv1 = mathML.render(input1)
-    # print conv1
-    # conv2 = mathML.render(input2)
-    # print conv2
-    # result = None
-
-    
-    
-    # if op in requirements["reqScalar"]:
-    #     #if mathpix.check("reqScalar",input1,input2):
-    #     result = mathOps[op](input2[0],input1) # should specify order of inputs (scalar,matrix/vector)
-    # if op in requirements["req1Vec"]:
-    #     #if mathpix.check("req1Vec",input1,input2):
-    #     result = mathOps[op](input1)
-    # if op in requirements["req2Vec"]:
-    #     #if mathpix.check("req2Vec",input1,input2):
-    #     print "REQ2VEC"
-    #     result = mathOps[op](input1,input2)
-    # if op in requirements["req1Mat"]:
-    #     #if mathpix.check("req1Mat",input1,input2):
-    #     result = mathOps[op](input1)
-    # if op in requirements["req2Mat"]:
-    #     #if mathpix.check("req2Mat",input1,input2):
-    #     result = mathOps[op](input1,input2)
-    # if op in requirements["reqBoth"]:
-    #     #if mathpix.check("reqBoth",input1,input2):
-    #     result = mathOps[op](input1,input2)
-
-    # resultMJx = mathML.render(result)
-    # print resultMJx
-    # resultLtX = mathpix.arrToLatex(result)
-    # print resultLtX
-
     return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
-    #print data
-    #print mathpix.latexConvert(data)
-    return redirect("/")
 
 # not working, must convert into jpg not png
 # mathpix cant read this?
 @app.route("/imgProcess", methods=['POST', 'GET'])
 def imgProcess():
-    content= request.form.get("boxContent")
-    content =  content.replace("png","jpg",1)
-    retJSON = mathpix.queryURI(content)
-    print retJSON
-    #latex = retJSON['latex']
-    #result = matrixConvert(latex)
-    return render_template("results.html", latex=content)
+    content1 = request.form.get("boxContent")
+    content2 = request.form.get("box1Content")
+    op = request.form.get("operation")
+    # API only takes jpgs
+    content1 =  content1.replace("png","jpg",1)
+    content1 =  content1.replace("png","jpg",1)
+    
+    retJSON1 = mathpix.queryURI(content1)
+    retJSON2 = mathpix.queryURI(content2)
+
+    print retJSON1
+    print retJSON2
+
+    input1 = retJSON1['latex']
+    input2 = retJSON2['latex']
+
+    retDict = {}
+    if mathpix.check(op,input1,input2,requirements):
+        retDict = operateProc(op,input1,input2,requirements)
+    else:
+        return redirect("/")
+
+    return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
 def allowedFile(fname):
     return '.' in fname and fname.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -307,13 +282,20 @@ def saveFile(fileT):
 def fileProcess():
     urllib3.disable_warnings()
     op = request.form['operation']
+    print "Form: \n"
+    print request.form
+    print "Files: \n"
+    print request.files
     if request.method == 'POST':
-        if 'input1' not in request.files or 'input2' not in request.files:
+        if 'input1' not in request.files and 'input2' not in request.files:
+            print "did not receive file(s)"
             return redirect("/")
         file1 = request.files['input1']
         file2 = request.files['input2']
+        print "entered"
         if op in requirements['req1Vec']+requirements['req1Mat'] and op not in requirements['reqScalar']:
             if file1.filename == '':
+                print "empty file"
                 return redirect("/")
             if file1 and allowedFile(file1.filename):
                 filename = secure_filename(file1.filename)
@@ -325,18 +307,36 @@ def fileProcess():
                 file1.save(fromRootFPath)
                 ret = mathpix.queryFPath(fromAppFPath)
                 os.remove(fromRootFPath)
-                print ret
-                print ret['latex']
-                input1 = mathpix.matrixConvert(ret['latex'])
-                if len(input1[0]) == 1:
-                    input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker
-                    print input1
-                result = mathOps[op](input1)
-                latex = mathpix.arrToLatex(result)
-                print result
-                return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
+
+                input1 = ret['latex']
+                input2 = ''
+                
+                retDict = {}
+                if mathpix.check(op,input1,input2,requirements):
+                    retDict = operateProc(op,input1,input2,requirements)
+                else:
+                    print "invalid"
+                    return redirect("/")
+
+                return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
+                
+                # print ret
+                # print ret['latex']
+                # input1 = mathpix.matrixConvert(ret['latex'])
+                # if len(input1[0]) == 1:
+                #     input1 = linalg.vector(input1) # quick and dirty fix, must restructure to make more modular, should go into checker
+                #     print input1
+                # result = mathOps[op](input1)
+                # latex = mathpix.arrToLatex(result)
+                # print result
+                # return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
+            else:
+                print "invalid: No file1"
+                return redirect("/")
+            
         else:
             if file1.filename == '' or file2.filename == '':
+                print "empty files"
                 return redirect("/")
             if file1 and file2 and allowedFile(file1.filename) and allowedFile(file2.filename):
                 # can be a function
@@ -373,7 +373,7 @@ def fileProcess():
                 result = mathOps[op](input1,input2)
                 print result
                 
-
+    print "invalid: get request"
     return redirect("/")
 
 # Turn off before release

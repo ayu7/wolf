@@ -19,17 +19,17 @@ def isMat(x):
 def generateMatrix(x):
     ret = '<mfenced open="[" close="]"> <mtable>'
     for r in x:
-        print r
+        #print r
         row = "<mtr>"
         for c in r:
-            print c
+            #print c
             col = "<mtd>"
             col += "<mn>" + str(c) + "</mn>"
             col += "</mtd>"
-            print col
+            #print col
             row += col
         row += "</mtr>"
-        print row
+        #print row
         ret += row
     ret += "</mtable></mfenced>"
     return ret
