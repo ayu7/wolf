@@ -27,7 +27,7 @@ def queryURI(image):
                       data=json.dumps({'url': image}),
                       headers={"app_id": keyz(0), "app_key": keyz(1),
                                "Content-type": "application/json"})
-    return json.dumps(json.loads(r.text), indent=4, sort_keys=True)
+    return json.loads(r.text)
 
 ################################################
 # Checks/Returns if 'a' is convertible to int
