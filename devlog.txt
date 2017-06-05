@@ -197,6 +197,12 @@ juliusF -- 2017-05-31
 angelaY -- 2017-06-01
 - drew white background for canvases so that image renders properly for mathpix
 
+alanC -- 2017-06-03
+- update dropdown menu aesthetics
+- change font/button colors
+- add conditional second input panel in results
+- add instructions to operation.html
+
 stephanieY -- 2017-06-03
 - added testImages directory with one picture
 - update README
