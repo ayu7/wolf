@@ -364,8 +364,12 @@ def fileProcess():
                 if fname1 != fname2:
                     os.remove(fRootFPath2)
 
+                print input1
+                print input2
+                    
                 retDict = {}
                 if mathpix.check(op,input1,input2,requirements):
+                    print "entered"
                     retDict = operateProc(op,input1,input2,requirements)
                 else:
                     print "invalid"

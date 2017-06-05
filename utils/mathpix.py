@@ -135,9 +135,9 @@ def elemList(string):
 
 def addElem(string):
     if isNum(string):
-        return [float(string)]
+        return float(string)
     elif isComplex(string):
-        return [makeComplex(string)]
+        return makeComplex(string)
 
 # must be flexible enough to parse other input types
 # should work with incorrect input
@@ -285,6 +285,7 @@ def check2(op,input1,input2,reqDict):
 
 def check(op,input1,input2,reqDict):
     initT = check1(op,input1,input2,reqDict)
+    print "pass check1"
     arr1 = None
     arr2 = None
     if initT[0] or initT[1]:
