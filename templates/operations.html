@@ -45,6 +45,33 @@
   </div>
 </div>
 <div class="row">
-  <br><center><p><a class="btn btn-primary btn-lg" href="/home" role="button">Back to Home</a></p></center>
+  <center>
+    <h1 id="latex"> To properly type in inputs... </h1>
+  </center>
 </div>
-{% endblock %}
+<div class="row">
+  <h3 id="latex">Please format vectors in the following format</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      \begin{bmatrix} {l * len of first row}
+      {elem} & {elem}
+      \end{bmatrix}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <h3 id="latex">Please format matrices in the following format</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      \begin{bmatrix} {l * len of first row} 
+      {elem} & 
+      {elem} \\
+      {elem} &
+      {elem}
+      \end{bmatrix}
+    </div>
+  </div>
+  <div class="row">
+    <br><center><p><a class="btn btn-primary btn-lg" href="/home" role="button">Back to Home</a></p></center>
+  </div>
+  {% endblock %}
