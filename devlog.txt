@@ -208,3 +208,9 @@ stephanieY -- 2017-06-03
 - updated operations.html
 - adding mathml stuff to results
 - wrote mathml.py
+
+juliusF -- 2017-06-05
+- finalized standardization of operation procedure
+- linked frontend to backend completely
+- finalized checker
+- changed matrix converter to convert floats, numbers larger than 9, and complex numbers
