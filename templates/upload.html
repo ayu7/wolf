@@ -6,7 +6,7 @@
 
 <body>
 
-    <form enctype="multipart/form-data" action="/fileProcess" method="post">
+    <form enctype="multipart/form-data" action="/fileProcess" method="post" id="form1">
       <h2 id="upload"><center> Upload your input below! </center></h2>
 
       <div class="form-group col-lg-4 col-lg-offset-4">
@@ -43,18 +43,22 @@
 
       <br><br>
       <center>
-          <label id="label1" class="btn btn-default btn-file">
-            Select File <input type="file" name="input1" id="input1" style="display:none" onchange="file1(this.files[0]['name']);">
-          </label>
-          <br><br>
-          <label id="label2" class="btn btn-default btn-file" style="display:none">
-            Select File<input type="file" name="input2" id="input2" style="display: none" onchange="file2(this.files[0]['name']);">
+        <input type="file" name="input1" id="input1" style="display:none" onchange="file1(this.files[0]['name']);">
+        <input type="file" name="input2" id="input2" style="display: none" onchange="file2(this.files[0]['name']);">
+
+        <label name ="input1" id="label1" class="btn btn-default btn-file" for="input1" form="form1">
+          Select File
+        </label>
+        <br><br>
+        <label name ="input2" id="label2" class="btn btn-default btn-file" style="display:none" for="input2" form="form1">
+          Select File
         </label>
 
      <br><br>
 	         <input type="submit" class="btn btn-primary btn-lg" value="Submit">
         </center>
     </form>
+
 
   <script src="../static/js/upload.js"></script>
 </body>
