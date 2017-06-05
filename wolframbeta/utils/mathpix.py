@@ -7,7 +7,7 @@ import linalg
 from collections import Iterable
 
 def keyz(x):
-    l = open("utils/keys.txt", "r").read().strip().split("\n")
+    l = open("wolframbeta/utils/keys.txt", "r").read().strip().split("\n")
     return l[x]
 
 # submits a query to Mathpix
