@@ -4,39 +4,42 @@
 
 
   <form action="/imgProcess" method="POST">
-<div class="row">
-    <div class="col-lg-4 col-lg-offset-4">
-      <select name="operation" id="operation" class="form-control" onchange="change();">
-	<option value="default" class="1">Select Operation</option>
-	<option value="v_add" class="2">Add Vectors</option>
-	<option value="v_subtract" class="2">Subtract Vectors</option>
-	<option value="m_add" class="2">Add Matrices</option>
-	<option value="m_subtract" class="2">Subtract Matrices</option>
-	<option value="m_multiplication" class="2">Multiply Matrices</option>
-	<option value="dot" class="2">Dot Product</option>
-	<option value="v_scalar_mult" class="2">Multiply Vector By A Scalar</option>
-	<option value="m_scalar_mult" class="2">Multiply Matrix By A Scalar</option>
-	<option value="trace" class="1">Trace</option>
-	<option value="transpose" class="1">Transpose</option>
-	<option value="v_euclidean_norm" class="1">Vector Euclidean Norm </option>
-	<option value="v_conjugate" class="1">Complex Conjugate of A Vector</option>
-	<option value="m_conjugate" class="1">Complex Conjugate of A Matrix </option>
-	<option value="conjugate_transpose" class="1">Conjugate Transpose</option>
-	<option value="frobenius" class="1">Frobenius Norm</option>
-	<option value="det" class="1">Determinant of Square Matrix</option>
-	<option value="cofactor_matrix" class="1">Matrix Cofactor</option>
-	<option value="adjoint" class="1">Adjoint of Square Matrix</option>
-	<option value="inverse" class="1">Inverse of Square Matrix</option>
-	<option value="power" class="2">Power of Matrix</option>
-	<option value="system_solver" class="2">Systems of Linear Equations Solver</option>
-	<option value="gauss" class="1">Gaussian Elimination</option>
-	<option value="rank" class="1">Rank</option>
-	<option value="is_left_invertible" class="1">Left Invertibility</option>
-	<option value="is_right_invertible" class="1">Right Invertibility</option>
-	<option value="is_hermitian" class="1">Hermitian Matrix Check</option>
-      </select>
+    <center>
+      <h1 id="msg"> {{message}} </h1>
+    </center>
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+	<select name="operation" id="operation" class="form-control" onchange="change();">
+	  <option value="default" class="1">Select Operation</option>
+	  <option value="v_add" class="2">Add Vectors</option>
+	  <option value="v_subtract" class="2">Subtract Vectors</option>
+	  <option value="m_add" class="2">Add Matrices</option>
+	  <option value="m_subtract" class="2">Subtract Matrices</option>
+	  <option value="m_multiplication" class="2">Multiply Matrices</option>
+	  <option value="dot" class="2">Dot Product</option>
+	  <option value="v_scalar_mult" class="2">Multiply Vector By A Scalar</option>
+	  <option value="m_scalar_mult" class="2">Multiply Matrix By A Scalar</option>
+	  <option value="trace" class="1">Trace</option>
+	  <option value="transpose" class="1">Transpose</option>
+	  <option value="v_euclidean_norm" class="1">Vector Euclidean Norm </option>
+	  <option value="v_conjugate" class="1">Complex Conjugate of A Vector</option>
+	  <option value="m_conjugate" class="1">Complex Conjugate of A Matrix </option>
+	  <option value="conjugate_transpose" class="1">Conjugate Transpose</option>
+	  <option value="frobenius" class="1">Frobenius Norm</option>
+	  <option value="det" class="1">Determinant of Square Matrix</option>
+	  <option value="cofactor_matrix" class="1">Matrix Cofactor</option>
+	  <option value="adjoint" class="1">Adjoint of Square Matrix</option>
+	  <option value="inverse" class="1">Inverse of Square Matrix</option>
+	  <option value="power" class="2">Power of Matrix</option>
+	  <option value="system_solver" class="2">Systems of Linear Equations Solver</option>
+	  <option value="gauss" class="1">Gaussian Elimination</option>
+	  <option value="rank" class="1">Rank</option>
+	  <option value="is_left_invertible" class="1">Left Invertibility</option>
+	  <option value="is_right_invertible" class="1">Right Invertibility</option>
+	  <option value="is_hermitian" class="1">Hermitian Matrix Check</option>
+	</select>
+      </div>
     </div>
-</div>
     <br>
 
     <div class="row">
