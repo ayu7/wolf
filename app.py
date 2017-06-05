@@ -266,6 +266,7 @@ def imgProcess():
     if mathpix.check(op,input1,input2,requirements):
         retDict = operateProc(op,input1,input2,requirements)
     else:
+        print "redirected"
         return redirect("/")
 
     return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
@@ -286,13 +287,13 @@ def fileProcess():
     print request.form
     print "Files: \n"
     print request.files
+    print request.method
     if request.method == 'POST':
         if 'input1' not in request.files and 'input2' not in request.files:
             print "did not receive file(s)"
             return redirect("/")
         file1 = request.files['input1']
         file2 = request.files['input2']
-        print "entered"
         if op in requirements['req1Vec']+requirements['req1Mat'] and op not in requirements['reqScalar']:
             if file1.filename == '':
                 print "empty file"
@@ -355,25 +356,24 @@ def fileProcess():
                 json1 = mathpix.queryFPath(fAppFPath1)
                 json2 = mathpix.queryFPath(fAppFPath2)
 
+                input1 = json1['latex']
+                input2 = json2['latex']
+                
                 # can be a function
                 os.remove(fRootFPath1)
                 if fname1 != fname2:
                     os.remove(fRootFPath2)
 
-                # can be a function that every math processor uses
-                input1 = mathpix.matrixConvert(json1['latex'])
-                input2 = mathpix.matrixConvert(json2['latex'])
-                if len(input1[0]) == 1:
-                    input1 = linalg.vector(input1)
-                if len(input2[0]) == 1:
-                    input2 = linalg.vector(input2)
+                retDict = {}
+                if mathpix.check(op,input1,input2,requirements):
+                    retDict = operateProc(op,input1,input2,requirements)
+                else:
+                    print "invalid"
+                    return redirect("/")
 
-                print input1
-                print input2
-                result = mathOps[op](input1,input2)
-                print result
+                return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
                 
-    print "invalid: get request"
+    #print "invalid: get request"
     return redirect("/")
 
 # Turn off before release

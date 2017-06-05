@@ -30,14 +30,6 @@ def queryURI(image):
     return json.loads(r.text)
 
 ################################################
-# Checks/Returns if 'a' is convertible to int
-def isInt(a):
-    try:
-        int(a)
-        return True
-    except:
-        return False
-
 # Checks/Returns if 'a' is convertible to float
 def isNum(a):
     try:
@@ -45,7 +37,42 @@ def isNum(a):
         return True
     except:
         return False
+    
+def isComplex(string):
+    try:
+        if ("+" in string or "-" in string) and "i" in string:
+            s = string.replace("i","")
+            if "+" in string:
+                s = s.split("+")
+            elif "-" in string:
+                s = s.split("-")
+            else:
+                return False
+            for i in s:
+                if not isNum(i):
+                    return False
+            return True
+    except:
+        return False
 
+def makeComplex(string):
+    int1 = None
+    int2 = None
+    s = string
+    if "+" in string:
+        s = s.split("+")
+    elif "-" in string:
+        s = s.split("-")
+    else:
+        raise Exception("passed string is not a complex number")
+    for i in s:
+        if "i" in i:
+            temp = i.replace("i","")
+            int2 = float(temp)
+        else:
+            int1 = float(i)
+    return complex(int1,int2)
+        
 # finds and returns the type of matrix/vector
 def findLType(string):
     lTypeSet = [(r"\begin{array}",r"\end{array}"),
@@ -88,7 +115,30 @@ def rLenCheck(rlen,mat):
     for i in mat:
         if not len(i) == rLen:
             raise Exception("improper row length, one of inputs is not numerical or row length indicator is incorrect")
-    
+
+def elemList(string):
+    print string
+    bracketCase = False
+    elemList = []
+    elem = ""
+    for i in string:
+        if bracketCase and i != "}":
+            elem += i
+        if i == "{":
+            bracketCase = True
+            elem = ""
+        if i == "}":
+            bracketCase = False
+            elemList.append(elem.strip())
+            elem = ""
+    return elemList
+
+def addElem(string):
+    if isNum(string):
+        return [float(string)]
+    elif isComplex(string):
+        return [makeComplex(string)]
+
 # must be flexible enough to parse other input types
 # should work with incorrect input
 # - "\\\\" in arrays with "\begin{bmatrix}"
@@ -98,44 +148,37 @@ def matrixConvert(s):
     #print string
     # print "fasdfasdfa matrixconvert"
     # print string
-    # print "fasdfasdfad end"
+     # print "fasdfasdfad end"
     ret = []
     # example matrix
     # \\left[ \\begin{array} { l l } { 1} & { 0} \\\\ { 0} & { 1} \\end{array} \\right]
     # example vector
     # \\left[ \\begin{array} { l l l } { 1} & { 2} & { 3} \\end{array} \\right]
 
-    if isInt(string):
-        return int(string)
+    if isNum(string):
+        return float(string)
     
     lType = findLType(string)
     latex = string[lType[0]:lType[1]]
     #print latex
     rLen = findRLen(latex,lType)
 
-    # suddenly deprecated, leave this alone for robustness testing if anything changes
-    # if "\begin{array}" in latex:
-    #     if r"\\" not in latex:
-    #         ret = [[int(x)] for x in latex if isInt(x)]
-    #     else:
-    #         split = latex.split(r"\\")
-    #         ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\\\")]
-    # else:
     if r"\\\\" in latex:
         raise Exception('improperly formatted latex, check backslashes/numerical input!')
     if r"\\" not in latex:
-        ret = [[int(x)] for x in latex if isInt(x)]
+        ret = [addElem(x) for x in elemList(latex) if isNum(x) or isComplex(x)]
     else:
         split = latex.split(r"\\")
-        ret = [[int(x) for x in i if isInt(x)] for i in latex.split(r"\\")]
-            
+        ret = [[addElem(x) for x in elemList(i) if isNum(x) or isComplex(x)] for i in latex.split(r"\\")]
+
     if len(ret):
         # print "checking rlen"
         rLenCheck(rLen,ret)
         return ret
     raise Exception('improperly formatted latex, check backslashes/numerical input!')
 
-#matrixConvert(r"\\left[ \begin{bmatrix} { lll } { 1} & { 2} & { 3} \end{bmatrix} \\right]")
+#print "1+3i".split("-")
+#print matrixConvert(r"\\left[ \begin{bmatrix} { lll } {1+3i} & { 2} & { 3} \\ { 1.55} & { 2} & { 3} \end{bmatrix} \\right]")
 #print matrixConvert(r"6")
 
 # takes an array of elements and returns array of strings of those elements
