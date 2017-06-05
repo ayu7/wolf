@@ -66,7 +66,7 @@ def basis_nullspace(A):
 
 # complex_conjugate: Returns the complex conjugate of a number (number).
 def complex_conjugate(z):
-    return z.real - z.imag*1j if z.imag != 0 else z.real
+    return z.real - z.imag*1j if isinstance(z, complex) else z
 
 # v_add: Returns the sum of two vectors (vector).
 def v_add(u, v):
