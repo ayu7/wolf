@@ -8,11 +8,10 @@ import os
 from collections import Iterable
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-fromRootFPath = os.path.join(basedir,"utils/keys.txt")
-
+fromRootFPath = os.path.join(basedir,"keys.txt")
 
 def keyz(x):
-    l = open("utils/keys.txt", "r").read().strip().split("\n")
+    l = open(fromRootFPath, "r").read().strip().split("\n")
     return l[x]
 
 # submits a query to Mathpix
