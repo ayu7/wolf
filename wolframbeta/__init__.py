@@ -237,7 +237,7 @@ def parse():
     if mathpix.check(op,input1,input2,requirements):
         retDict = operateProc(op,input1,input2,requirements)
     else:
-        return redirect("/")
+        return render_template("upload.html",message="Invalid Input")
 
     return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
@@ -267,7 +267,7 @@ def imgProcess():
         retDict = operateProc(op,input1,input2,requirements)
     else:
         print "redirected"
-        return redirect("/")
+        return render_template("upload.html",message="Invalid Input")
 
     return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
@@ -291,13 +291,13 @@ def fileProcess():
     if request.method == 'POST':
         if 'input1' not in request.files and 'input2' not in request.files:
             print "did not receive file(s)"
-            return redirect("/")
+            return render_template("upload.html",message="Did not receive files")
         file1 = request.files['input1']
         file2 = request.files['input2']
         if op in requirements['req1Vec']+requirements['req1Mat'] and op not in requirements['reqScalar']:
             if file1.filename == '':
                 print "empty file"
-                return redirect("/")
+                render_template("upload.html",message="Empty File")
             if file1 and allowedFile(file1.filename):
                 filename = secure_filename(file1.filename)
                 fromAppFPath = os.path.join(app.config['UPLOAD_FOLDER'],filename)
@@ -306,7 +306,7 @@ def fileProcess():
                 print fromRootFPath
                 
                 file1.save(fromRootFPath)
-                ret = mathpix.queryFPath(fromAppFPath)
+                ret = mathpix.queryFPath(fromRootFPath)
                 os.remove(fromRootFPath)
 
                 input1 = ret['latex']
@@ -316,8 +316,8 @@ def fileProcess():
                 if mathpix.check(op,input1,input2,requirements):
                     retDict = operateProc(op,input1,input2,requirements)
                 else:
-                    print "invalid"
-                    return redirect("/")
+                    print "invalid input"
+                    return render_template("upload.html",message="Invalid Input")
 
                 return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
                 
@@ -333,12 +333,12 @@ def fileProcess():
                 # return render_template("results.html",input1=input1,input2="",result=result,latexCode=latex)
             else:
                 print "invalid: No file1"
-                return redirect("/")
+                return render_template("upload.html",message="No File1")
             
         else:
             if file1.filename == '' or file2.filename == '':
-                print "empty files"
-                return redirect("/")
+                print "invalid: No files"
+                return render_template("upload.html",message="No Files")
             if file1 and file2 and allowedFile(file1.filename) and allowedFile(file2.filename):
                 # can be a function
                 fname1 = secure_filename(file1.filename)
@@ -353,8 +353,8 @@ def fileProcess():
                 file2.save(fRootFPath2)
 
                 # can be a function
-                json1 = mathpix.queryFPath(fAppFPath1)
-                json2 = mathpix.queryFPath(fAppFPath2)
+                json1 = mathpix.queryFPath(fRootFPath1)
+                json2 = mathpix.queryFPath(fRootFPath2)
 
                 input1 = json1['latex']
                 input2 = json2['latex']
@@ -372,13 +372,13 @@ def fileProcess():
                     print "entered"
                     retDict = operateProc(op,input1,input2,requirements)
                 else:
-                    print "invalid"
-                    return redirect("/")
+                    print "invalid input"
+                    return render_template("upload.html",message="Invalid Input")
 
                 return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
                 
     #print "invalid: get request"
-    return redirect("/")
+    return render_template("upload.html",message="Invalid POST")
 
 # Turn off before release
 if __name__ == "__main__":

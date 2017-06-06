@@ -4,10 +4,15 @@ import base64
 import requests
 import json
 import linalg
+import os
 from collections import Iterable
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+fromRootFPath = os.path.join(basedir,"utils/keys.txt")
+
+
 def keyz(x):
-    l = open("wolframbeta/utils/keys.txt", "r").read().strip().split("\n")
+    l = open("utils/keys.txt", "r").read().strip().split("\n")
     return l[x]
 
 # submits a query to Mathpix
