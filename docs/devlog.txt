@@ -220,3 +220,8 @@ juliusF -- 2017-06-05
 - linked frontend to backend completely
 - finalized checker
 - changed matrix converter to convert floats, numbers larger than 9, and complex numbers
+
+juliusF -- 2017-06-06
+- changed relative paths to absolute ones
+  - key parser might be an issue, could not change to absolute path
+- implemented client end error messages
