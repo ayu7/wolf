@@ -237,7 +237,7 @@ def parse():
     if mathpix.check(op,input1,input2,requirements):
         retDict = operateProc(op,input1,input2,requirements)
     else:
-        return render_template("upload.html",message="Invalid Input")
+        return render_template("type.html",message="Invalid Input")
 
     return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
@@ -267,7 +267,7 @@ def imgProcess():
         retDict = operateProc(op,input1,input2,requirements)
     else:
         print "redirected"
-        return render_template("upload.html",message="Invalid Input")
+        return render_template("draw.html",message="Invalid Input")
 
     return render_template("results.html", operation = retDict["op"], input1 = retDict["input1"], input2 = retDict["input2"], result = retDict["resMJx"], latexCode = retDict["resLat"])
 
